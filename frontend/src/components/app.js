@@ -7,6 +7,7 @@ import MainPage from "./main/main_page";
 import LoginFormContainer from './session/login_form_container';
 import SignupForm1Container from './session/signup_form_container';
 
+import "./reset.css"
 
 const App = () => (
   <div>
