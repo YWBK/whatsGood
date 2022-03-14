@@ -4,7 +4,7 @@ import { Switch } from 'react-router-dom';
 
 const App = () => (
   <div>
-      This is the App component of whatsGood
+    This is the App component of whatsGood
   </div>
 );
 
