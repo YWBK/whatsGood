@@ -5,6 +5,6 @@
 
 
 // ETHAN PLEASE EDIT HERE
-
+console.log("Hello, World!");
 
 // BILLY PLEASE EDIT HERE
