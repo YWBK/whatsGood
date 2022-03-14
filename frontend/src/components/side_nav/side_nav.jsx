@@ -1,17 +1,11 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import AppBar from "@mui/material/AppBar";
-import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import ListSubheader from "@mui/material/ListSubheader";
 
 const drawerWidth = 240;
@@ -27,13 +21,15 @@ export default function SideNav() {
           width: drawerWidth,
           boxSizing: "border-box",
           zIndex: -1,
-          overflow: "auto"
+          overflow: "hidden",
         },
       }}
     >
       <Toolbar />
-      <Box>
-        <List sx={{ maxHeight: 240, overflow: "auto", paddingTop: 0 }}>
+      <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+        <List
+          sx={{ maxHeight: "max-content", overflow: "auto", paddingTop: 0 }}
+        >
           <ListSubheader>My Lists</ListSubheader>
           {[0, 1, 2, 3, 4, 5, 6, 7].map((text) => (
             <ListItem button key={text}>
@@ -42,7 +38,7 @@ export default function SideNav() {
           ))}
         </List>
         <Divider />
-        <List sx={{ maxHeight: 250, overflow: "auto", paddingTop: 0 }}>
+        <List sx={{ height: 380, overflow: "auto", paddingTop: 0 }}>
           <ListSubheader>Following Lists</ListSubheader>
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((text) => (
             <ListItem button key={text}>
@@ -50,7 +46,10 @@ export default function SideNav() {
             </ListItem>
           ))}
         </List>
-        <List sx={{ maxHeight: 250, overflow: "auto", paddingTop: 0 }}>
+        <Divider />
+        <List
+          sx={{ height: 450, overflow: "auto", paddingTop: 0 }}
+        >
           <ListSubheader>Following Users</ListSubheader>
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((text) => (
             <ListItem button key={text}>
