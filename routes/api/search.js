@@ -1,15 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const apiKey = require("../../config/google_api_key")
+const apiKey = require("../../config/google_api_key").key
+const axio = require("axios")
 
-
-router.get("/", (req, res) => {
-  // const searchParams = req.body.split(" ").join("+");
-  const searchParams = "Harry+Potter";
-  debugger
-  return res.json({msg: "receive"})
-  // fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchParams}Type=books&orderBy=newest&key=${apiKey}`)  
-  //   .then(data=> res.json(data));
+router.post("/", (req, res, next) => {
+  debugger 
+  const searchParams = !req.body ?  res.send('searchQuary is blank') : req.body.searchString.split(" ").join("+");
+  axio.get(`https://www.googleapis.com/books/v1/volumes?q=${searchParams}Type=books&key=${apiKey}`)
+      .then(response=> {
+        res.json(response.data.items)
+      })
+      .catch(err => next(err))
+    
 })
 
 module.exports = router
