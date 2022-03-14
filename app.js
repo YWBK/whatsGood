@@ -1,9 +1,10 @@
+const path = require('path');
 const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 const db = require('./config/keys').mongoURI;
-const bodyParser = require('body-parser');
 const users = require("./routes/api/users");
+const bodyParser = require('body-parser');
 
 mongoose
 .connect(db, { useNewUrlParser: true })
