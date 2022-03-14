@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
 const keys = require('../../config/keys');
 const validateSignupInput = require('../../validation/signup');
+const validateLoginInput = require('../../validation/login');
 
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
@@ -57,16 +58,30 @@ router.post('/signup', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-    const email = req.body.email;
-    // const username = req.body.username;
+    const { errors, isEmail, isValid } = validateLoginInput(req.body);
+    if (!isValid) {
+        return res.status(400).json(errors);
+    }
+    let email, username = null;
+    if (isEmail) {
+        email = req.body.emailOrUsername;
+    } else {
+        username = req.body.emailOrUsername;
+    }
     const password = req.body.password;
 
-    User.find({ $or:[{email: req.body.email}, {username: req.body.username }]})
-        .then(user => {
-            if (!user) {
-                return res.status(404).json({email: 'User not found'});
+    User.find({ $or:[{email}, {username}]})
+        .then(users => {
+            if (users.length < 1) {
+                if (email) {
+                    errors.email = 'No user with that email found'
+                } else {
+                    errors.username = 'No user with that username found'
+                }
+                return res.status(404).json(errors);
             }
 
+            const user = users[0]
             bcrypt
                 .compare(password, user.password)
                 .then(isMatch => {
