@@ -27,13 +27,13 @@ export default function SideNav() {
           width: drawerWidth,
           boxSizing: "border-box",
           zIndex: -1,
-          overflow: "hidden"
+          overflow: "auto"
         },
       }}
     >
       <Toolbar />
       <Box>
-        <List sx={{ maxHeight: 240, overflow: "auto" }}>
+        <List sx={{ maxHeight: 240, overflow: "auto", paddingTop: 0 }}>
           <ListSubheader>My Lists</ListSubheader>
           {[0, 1, 2, 3, 4, 5, 6, 7].map((text) => (
             <ListItem button key={text}>
