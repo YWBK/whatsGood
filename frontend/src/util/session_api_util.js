@@ -10,7 +10,7 @@ export const setAuthToken = token => {
 
 // to be updated once I have the modol for userauth on browser
 export const signup = (userData) => {
-    return axios.post('/api/users/register', userData);
+    return axios.post('/api/users/signup', userData);
 };
 
 // to be updated once I have the modol for userauth on browser

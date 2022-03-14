@@ -60,7 +60,7 @@ const TopNavMain = () => {
         <AppBar position="static">
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <div style={{ display: "flex", alignItems: "center" }}>
-              <Link to="/home">
+              <Link to="/">
                 <IconButton
                   size="large"
                   edge="start"
