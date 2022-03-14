@@ -22,7 +22,7 @@ class SignupForm1 extends React.Component {
             // to be changed once done with login modol
             this.props.history.push('/login');
         }
-
+        // debugger;
         this.setState({ errors: nextProps.errors })
     }
 
@@ -45,6 +45,7 @@ class SignupForm1 extends React.Component {
     }
 
     renderErrors() {
+        // debugger;
         return (
             <ul>
                 {Object.keys(this.state.errors).map((error, i) => (
