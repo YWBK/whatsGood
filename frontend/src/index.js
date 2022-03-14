@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
+import { fetchBooks } from "./util/search_util"
 
 import Root from './components/root';
 import configureStore from './store/store';
@@ -30,3 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ReactDOM.render(<Root store={store} />, root);
 });
+
+window.axios = axios
+window.searchbar = fetchBooks
