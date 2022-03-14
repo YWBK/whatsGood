@@ -24,7 +24,7 @@ router.post('/signup', (req, res) => {
     User.findOne({ email: req.body.email })
         .then(user => {
             if (user) {
-                res.status(400).json({email: 'Email is taken'})
+                res.status(400).json({ email: 'Email is taken' })
             } else {
                 const newUser = new User({
                     username: req.body.username,
