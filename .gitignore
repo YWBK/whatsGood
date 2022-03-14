@@ -1,7 +1,7 @@
 /config/keys.js
-/config/keys_dev.js
+/config/keys_development.js
 /config/keys.js
-/config/googleBook_api_key.js
+/config/google_api_key.js
 /node_modules
 /frontend/node_modules
 

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const googleApi = require('../../utils/google_api')
-const apiKey = require("../../config/keys")
+const apiKey = require("../../config/google_api_key")
 
 
 router.get("/", (req, res) => {
