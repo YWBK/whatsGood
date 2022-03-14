@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
-import "./top_nav_auth.css";
+import "./top_nav.css";
 
 const TopNavAuth = () => {
   return (
@@ -14,20 +14,20 @@ const TopNavAuth = () => {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar sx={{ justifyContent: "space-between" }}>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <Link to="/home">
+            <Link to="/home">
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+              >
                 <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
                   {/* logo pending */}
                   wG
                 </Typography>
-              </Link>
-            </IconButton>
+              </IconButton>
+            </Link>
             <Link to="/signup">
               <Button color="inherit">Login / Sign Up</Button>
             </Link>
