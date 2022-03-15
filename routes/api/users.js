@@ -118,7 +118,13 @@ router.post('/login', (req, res) => {
                 .compare(password, user.password)
                 .then(isMatch => {
                     if (isMatch) {
-                        const payload = { id: user.id, username: user.username, followingLists: user.followingLists };
+                        const payload = { 
+                            id: user.id, 
+                            username: user.username, 
+                            myLists: user.myLists, 
+                            followingLists: user.followingLists,
+                            followingUsers: user.followingUser
+                        };
 
                         jwt.sign(
                             payload,
