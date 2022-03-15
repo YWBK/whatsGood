@@ -22,6 +22,23 @@ router.get('/current', passport
     }
 )
 
+router.get('/:id', async (req, res) => {
+    try{
+        const userId = req.params.id;
+        const user = await User.findById(userId).populate("followingLists");
+        res.json(user)
+    } catch (e) {
+        res.status(404).json({ user: 'No user found' })
+    }
+    
+    // User.findById(req.params.id)
+    //     .then(user => res.json({
+    //         _id: user.id,
+    //         username: user.username,
+    //         email: user.email
+    //     }))
+        // .catch(err => )
+})
 
 router.post('/signup', (req, res) => {
     const { errors, isValid } = validateSignupInput(req.body);
@@ -117,14 +134,6 @@ router.post('/login', (req, res) => {
                     }
                 })
         })
-})
-
-
-
-router.get("/:id/lists", async (req, res) =>{
-    const userId = req.params.id;
-    const user = await User.findById(userId).populate("followingLists");
-    res.json(user)
 })
 
 

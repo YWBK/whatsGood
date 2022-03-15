@@ -1,5 +1,14 @@
 import axios from 'axios';
 
+export const createList = (data) =>{
+  return axios({
+    method: "POST",
+    url: "api/lists",
+    data
+  })
+}
+
+
 // export const getListItems = () => {
 //     return axios.get('/api/lists')
 // };
