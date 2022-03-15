@@ -12,5 +12,18 @@ export const fetchBooks  = (str) => {
 }
 
 
+export const fetchSingleBook = (volumnId) => {
+  return axios({
+    method: 'post',
+    url: '/api/search/book',
+    data: {
+      searchString: volumnId
+    }
+  })
+  
+}
+
+
+
 
 
