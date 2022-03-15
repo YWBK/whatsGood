@@ -1,35 +1,34 @@
-// import { getTweets, getUserTweets, writeTweet } from '../util/tweet_api_util';
+import { getUserList } from '../util/list_api_util';
 
-// export const RECEIVE_TWEETS = "RECEIVE_TWEETS";
-// export const RECEIVE_USER_TWEETS = "RECEIVE_USER_TWEETS";
-// export const RECEIVE_NEW_TWEET = "RECEIVE_NEW_TWEET";
+export const RECEIVE_USER_LIST = "RECEIVE_USER_LIST";
+// export const RECEIVE_LISTS = "RECEIVE_LISTS";
+// export const RECEIVE_NEW_LIST = "RECEIVE_NEW_LIST";
+
+export const receiveUserList = list => ({
+    type: RECEIVE_USER_LIST,
+    list
+});
+
+export const fetchUserList = listId => dispatch => (
+    getUserList(listId)
+        .then(list => dispatch(receiveUserList(list)))
+        .catch(err => console.log(err))
+);
 
 // export const receiveTweets = tweets => ({
 //     type: RECEIVE_TWEETS,
 //     tweets
 // });
-
-// export const receiveUserTweets = tweets => ({
-//     type: RECEIVE_USER_TWEETS,
-//     tweets
-// });
-
 // export const receiveNewTweet = tweet => ({
 //     type: RECEIVE_NEW_TWEET,
 //     tweet
 // })
-
 // export const fetchTweets = () => dispatch => (
 //     getTweets()
 //         .then(tweets => dispatch(receiveTweets(tweets)))
 //         .catch(err => console.log(err))
 // );
 
-// export const fetchUserTweets = id => dispatch => (
-//     getUserTweets(id)
-//         .then(tweets => dispatch(receiveUserTweets(tweets)))
-//         .catch(err => console.log(err))
-// );
 
 // export const composeTweet = data => dispatch => (
 //     writeTweet(data)
