@@ -12,7 +12,7 @@ import ModalForm from '../modal/modal';
 
 const drawerWidth = 240;
 
-export default function SideNav({ loggedIn, followingLists }) {
+export default function SideNav({ loggedIn, userLists, followingLists, followingUsers }) {
   if (!loggedIn) return <div></div>
 
   return (
@@ -38,9 +38,9 @@ export default function SideNav({ loggedIn, followingLists }) {
             <span>My Lists</span>
             <ModalForm />
           </ListSubheader>
-          {[0, 1, 2, 3, 4, 5, 6, 7].map((text) => (
+          {userLists.map((text) => (
             <ListItem button key={text}>
-              <ListItemText primary={`My List ${text}`} />
+              <ListItemText primary={`${text}`} />
             </ListItem>
           ))}
         </List>
@@ -56,9 +56,9 @@ export default function SideNav({ loggedIn, followingLists }) {
         <Divider />
         <List sx={{ height: 450, overflow: "auto", paddingTop: 0 }}>
           <ListSubheader>Following Users</ListSubheader>
-          {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((text) => (
+          {followingUsers.map((text) => (
             <ListItem button key={text}>
-              <ListItemText primary={`Following User ${text}`} />
+              <ListItemText primary={`${text}`} />
             </ListItem>
           ))}
         </List>

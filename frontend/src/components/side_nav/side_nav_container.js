@@ -1,17 +1,20 @@
 import { connect } from "react-redux";
 import SideNav from "./side_nav";
+import { fetchUser } from '../../actions/user_actions'
 
 const mSTP = (state) => {
   // debugger
   return ({
     loggedIn: state.session.isAuthenticated,
-    followingLists: state.session.user.followingLists
+    userLists: state.session.user.myLists,
+    followingLists: state.session.user.followingLists,
+    followingUsers: state.session.user.followingUsers
   })
 };
 
 const mDTP = (dispatch) => {
   return ({
-    // need to add fetchLists here
+    fetchUser: userId => dispatch(fetchUser(userId))
   })
 };
 
