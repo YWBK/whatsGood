@@ -39,7 +39,6 @@ const ListsReducer = (
         // debugger;
       }
 
-      debugger;
       return newState;
     default:
       return state;

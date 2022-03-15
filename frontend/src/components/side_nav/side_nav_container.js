@@ -6,6 +6,7 @@ const mSTP = (state) => {
   // debugger
   return ({
     loggedIn: state.session.isAuthenticated,
+    currentUserId: state.session.user.id,
     userLists: state.session.user.myLists,
     followingLists: state.session.user.followingLists,
     followingUsers: state.session.user.followingUsers

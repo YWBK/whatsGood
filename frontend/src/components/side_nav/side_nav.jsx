@@ -12,7 +12,9 @@ import ModalForm from '../modal/modal';
 
 const drawerWidth = 240;
 
-export default function SideNav({ loggedIn, userLists, followingLists, followingUsers }) {
+export default function SideNav({ loggedIn, currentUserId, userLists, followingLists, followingUsers, fetchUser }) {
+  React.useEffect(() => fetchUser(currentUserId), []);
+  
   if (!loggedIn) return <div></div>
 
   return (
