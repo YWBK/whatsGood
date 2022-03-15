@@ -1,5 +1,6 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { TextField, Button } from "@mui/material";
+import { Link, withRouter } from 'react-router-dom';
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -33,13 +34,16 @@ class LoginForm extends React.Component {
     }
 
     // Handle form submission
-    handleSubmit(e) {
+    handleSubmit(e, isDemoUser) {
         e.preventDefault();
 
-        let user = {
+        const user = isDemoUser ? {
+            emailOrUsername: 'katie@gmail.com',
+            password: '123456'
+        } : {
             emailOrUsername: this.state.emailOrUsername,
             password: this.state.password
-        };
+        }
 
         this.props.login(user);
     }
@@ -59,25 +63,66 @@ class LoginForm extends React.Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <input type="text"
-                            value={this.state.emailOrUsername}
-                            onChange={this.update('emailOrUsername')}
-                            placeholder="Email or Username"
-                        />
-                        <br />
-                        <input type="password"
-                            value={this.state.password}
-                            onChange={this.update('password')}
-                            placeholder="Password"
-                        />
-                        <br />
-                        <input type="submit" value="Submit" />
-                        {this.renderErrors()}
+            <div className="signup-form-container">
+                <div className="signup-form__content">
+                    <h1>Welcome back to WhatsGood!</h1>
+                    <form onSubmit={(e) => this.handleSubmit(e, false)}>
+                        <div className="signup-form">
+                            <TextField
+                                type="text"
+                                value={this.state.emailOrUsername}
+                                onChange={this.update("emailOrUsername")}
+                                label={
+                                    this.state.errors.emailOrUsername ? this.state.errors.emailOrUsername : "Email or Username"
+                                }
+                                variant="outlined"
+                                size="small"
+                                error={this.state.errors.emailOrUsername ? true : false}
+                            />
+                            <TextField
+                                type="password"
+                                value={this.state.password}
+                                onChange={this.update("password")}
+                                label={
+                                    this.state.errors.password
+                                        ? "Password must be at least 6 characters"
+                                        : "Password"
+                                }
+                                variant="outlined"
+                                size="small"
+                                error={this.state.errors.password ? true : false}
+                            />
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                sx={{ marginTop: "0.5em" }}
+                            >
+                                Log in
+                            </Button>
+                            {/* {this.renderErrors()} */}
+                        </div>
+                    </form>
+                    <div className="signup-form__demo-login">
+                        <div>
+                            <p>Or sign in as a </p>
+                            <Button
+                                onClick={
+                                    (e) => this.handleSubmit(e, true)}
+                                variant="contained" sx={{ margin: "0.5em 0" }}>
+
+                                Demo User
+                            </Button>
+                        </div>
+                        <div>
+                            <p>Don't have an account?</p>
+                            <Link to="/signup">
+                                <Button variant="contained" sx={{ margin: "0.5em 0" }}>
+                                    Signup Instead
+                                </Button>
+                            </Link>
+                        </div>
                     </div>
-                </form>
+                </div>
             </div>
         );
     }

@@ -38,7 +38,7 @@ const TopNavMain = () => {
               </Link>
               <SearchBar />
             </div>
-            <SettingsBtn />
+            <SettingsBtn logout={logout} />
           </Toolbar>
         </AppBar>
       </Box>
