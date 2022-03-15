@@ -12,15 +12,14 @@ export const fetchBooks  = (str) => {
 }
 
 
-export const fetchSingleBook = (volumnId) => {
+export const fetchSingleBook = (volumeId) => {
   return axios({
     method: 'post',
     url: '/api/search/book',
     data: {
-      searchString: volumnId
+      searchString: volumeId
     }
   })
-  
 }
 
 
