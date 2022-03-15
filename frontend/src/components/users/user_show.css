@@ -1,5 +1,3 @@
 .user-show__container {
-  height: 100vh;
-  border: 1px solid black;
   width: -webkit-fill-available;
 }
