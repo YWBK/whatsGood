@@ -13,7 +13,11 @@ const UserSchema = new Schema({
     password: {
       type: String,
       required: true
-    }
+    },
+    followingLists:[{
+      type: Schema.Types.ObjectId,
+      ref: 'List' 
+    }]
   }, {
     timestamps: true
   })
