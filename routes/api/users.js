@@ -20,6 +20,15 @@ router.get('/current', passport
     }
 )
 
+router.get('/:id', (req, res) => {
+    User.findById(req.params.id)
+        .then(user => res.json({
+            _id: user.id,
+            username: user.username,
+            email: user.email
+        }))
+        .catch(err => res.status(404).json({ user: 'No user found' }))
+})
 
 router.post('/signup', (req, res) => {
     const { errors, isValid } = validateSignupInput(req.body);
