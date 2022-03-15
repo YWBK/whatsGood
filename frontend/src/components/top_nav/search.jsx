@@ -2,27 +2,18 @@ import * as React from "react";
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from "@mui/icons-material/Search";
 import { Box } from '@mui/system';
 import { fetchBooks } from '../../util/search_util';
 
-import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-// import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
-import SettingsBtn from "./settings_btn";
-import { Link } from "react-router-dom";
-
 function SearchBar () {
     const [ jsonResults, setJsonResults ] = React.useState([]);
-    const [ searchStr, updateSearchStr ] = React.useState('potter');
+    const [ inputValue, setInputValue ] = React.useState('harry potter');
+    const [ searchTimeout, setSearchTimeout ] = React.useState(0);
 
     React.useEffect(() => {
-        // debugger
-        fetchBooks(searchStr)
+        fetchBooks(inputValue)
             .then(json => {
                 return setJsonResults(Object
                     .values(json.data)
@@ -34,36 +25,72 @@ function SearchBar () {
                     })
                 )
             });
-    }, []);
+    }, [inputValue]);
+
+    const handleInput = e => {
+
+        if (searchTimeout) {
+            clearTimeout(searchTimeout)
+        }
+
+        setSearchTimeout( setTimeout( () => {
+            setInputValue(e.target.value);
+        }, 1000))
+
+    };
+
+    const authors = (authors) => {
+        let authorsResult = '';
+        if (!authors) return null;
+        authors.map((author, i) => {
+            if (i === 0) {
+                authorsResult += ' by ' + author;
+            } else if (i === authors.length - 1) {
+                authorsResult += ', & ' + author;
+            } else {
+                authorsResult += ', ' + author;
+            }
+        });
+        return authorsResult;
+    } 
 
     return (
         <Stack sx={{width: 300}}>
             <Autocomplete 
                 id='search'
+                sx={{width: 300}}
                 getOptionLabel={(jsonResults) => `${jsonResults.volumeInfo.title}`}
                 options={jsonResults}
-                sx={{width: 300}}
-                isOptionEqualToValue={(option, value) => 
-                    option.volumeInfo.title === value.volumeInfo.title
+                isOptionEqualToValue={(option, value) => option.id === value.id
                 }
-                onChange={ e => {
-                    debugger
-                    updateSearchStr(e.target.value)} }
                 noOptionsText={'None found'}
                 renderOption={(props, jsonResults) => (
                     <Box component='li' {...props} key={jsonResults.id}>
-                        {jsonResults.volumeInfo.title}
+                        {jsonResults.volumeInfo.title} 
+                        {authors(jsonResults.volumeInfo.authors)}
                     </Box>
                 )}
-                renderInput={(params) => {
-                    // debugger
-                    return (<TextField {...params} label='Search for a Book'/>)
-                }
-                }
+                renderInput={(params) => (
+                    <TextField 
+                        {...params} 
+                        InputProps={{
+                            ...params.InputProps,
+                            startAdornment: (
+                                <InputAdornment position='start'>
+                                    <SearchIcon />
+                                </InputAdornment>
+                            )
+                        }}
+                        label='Search for a Book'
+                        variant='standard' 
+                        onChange={handleInput}
+                    />
+                )}
             />
         </Stack>
     )
-    // console.log(json.esult)
 }
 
 export default SearchBar;
+
+
