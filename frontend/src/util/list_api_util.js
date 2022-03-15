@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 export const createList = (data) =>{
   return axios({
     method: "POST",
@@ -17,7 +16,6 @@ export const createList = (data) =>{
 // export const getUserListItems = id => {
 //     return axios.get(`/api/user/${id}/lists`)
 // };
-
 
 // // to confirm with backend
 // export const writeListItem = data => {
