@@ -23,10 +23,11 @@
   margin-top: 1em;
 }
 
-/* .signup-form__content {
-    border: 1px solid #275FC7;
+.signup-form__content {
     border-radius: 12px;
-} */
+    width: 35%;
+    text-align: center;
+}
 
 .signup-form {
   justify-content: center;

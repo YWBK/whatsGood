@@ -69,33 +69,51 @@ class SignupForm1 extends React.Component {
                 type="text"
                 value={this.state.email}
                 onChange={this.update("email")}
-                label="Email"
+                label={
+                  this.state.errors.email ? this.state.errors.email : "Email"
+                }
                 variant="outlined"
                 size="small"
+                error={this.state.errors.email ? true : false}
               />
               <TextField
                 type="text"
                 value={this.state.username}
                 onChange={this.update("username")}
-                label="Username"
+                label={
+                  this.state.errors.username
+                    ? this.state.errors.username
+                    : "Username"
+                }
                 variant="outlined"
                 size="small"
+                error={this.state.errors.username ? true : false}
               />
               <TextField
                 type="password"
                 value={this.state.password}
                 onChange={this.update("password")}
-                label="Password"
+                label={
+                  this.state.errors.password
+                    ? "Password must be at least 6 characters"
+                    : "Password"
+                }
                 variant="outlined"
                 size="small"
+                error={this.state.errors.password ? true : false}
               />
               <TextField
                 type="password"
                 value={this.state.password2}
                 onChange={this.update("password2")}
-                label="Confirm Password"
+                label={
+                  this.state.errors.password2
+                    ? "Must confirm password"
+                    : "Confirm Password"
+                }
                 variant="outlined"
                 size="small"
+                error={this.state.errors.password2 ? true : false}
               />
               <Button
                 type="submit"
@@ -104,7 +122,7 @@ class SignupForm1 extends React.Component {
               >
                 Submit
               </Button>
-              {this.renderErrors()}
+              {/* {this.renderErrors()} */}
             </div>
           </form>
           <div className="signup-form__demo-login">
