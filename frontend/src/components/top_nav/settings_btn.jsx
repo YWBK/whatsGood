@@ -8,6 +8,7 @@ import Divider from "@mui/material/Divider";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+// import { logoutUser } from "../../actions/session_actions";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -52,7 +53,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-export default function SettingsBtn() {
+export default function SettingsBtn(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -60,6 +61,10 @@ export default function SettingsBtn() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const logoutUser = (event) => {
+    event.preventDefault();
+    props.logout();
   };
 
   return (
@@ -96,7 +101,7 @@ export default function SettingsBtn() {
         <Divider sx={{ my: 0.5 }} />
         <MenuItem onClick={handleClose} disableRipple>
           <LogoutIcon />
-          Logout
+          <div onClick={logoutUser}>Logout</div>
         </MenuItem>
       </StyledMenu>
     </div>
