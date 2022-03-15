@@ -15,6 +15,7 @@ class SignupForm1 extends React.Component {
       errors: {},
     };
 
+    this.handleDemoLogin = this.handleDemoLogin.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearedErrors = false;
   }
@@ -33,6 +34,17 @@ class SignupForm1 extends React.Component {
       this.setState({
         [field]: e.currentTarget.value,
       });
+  }
+
+  handleDemoLogin(e) {
+    e.preventDefault();
+
+    const demoUser = {
+      emailOrUsername: 'katie@gmail.com',
+      password: '123456'
+    };
+
+    this.props.login(demoUser);
   }
 
   handleSubmit(e) {
@@ -128,7 +140,7 @@ class SignupForm1 extends React.Component {
           <div className="signup-form__demo-login">
             <div>
               <p>Or sign in as a </p>
-              <Button variant="contained" sx={{ margin: "0.5em 0" }}>
+              <Button onClick={this.handleDemoLogin} variant="contained" sx={{ margin: "0.5em 0" }}>
                 Demo User
               </Button>
             </div>
