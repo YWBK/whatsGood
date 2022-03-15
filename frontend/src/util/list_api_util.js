@@ -18,6 +18,6 @@ export const createList = (data) =>{
 // };
 
 // // to confirm with backend
-// export const writeTweet = data => {
+// export const writeListItem = data => {
 //     return axios.post('/api/lists/', data)
 // }

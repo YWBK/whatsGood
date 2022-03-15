@@ -7,7 +7,8 @@ import Typography from "@mui/material/Typography";
 import SettingsBtn from "./settings_btn";
 import { Link } from "react-router-dom";
 import "./top_nav.css";
-import SearchBar from './search';
+// import SearchBar from './search';
+import SearchBar2 from './search_copy';
 
 const TopNavMain = ({ loggedIn, logout, currUserId }) => {
   return (
@@ -35,7 +36,8 @@ const TopNavMain = ({ loggedIn, logout, currUserId }) => {
                   </Typography>
                 </IconButton>
               </Link>
-              <SearchBar />
+              {/* <SearchBar /> */}
+              <SearchBar2 />
             </div>
             <SettingsBtn logout={logout} currUserId={currUserId} />
           </Toolbar>
