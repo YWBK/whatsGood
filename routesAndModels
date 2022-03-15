@@ -1,0 +1,26 @@
+/*
+
+--------------------- Google Books API ----------------
+/search                     - fetch books from Google Books API
+
+
+--------------------- Models --------------------------
+/users                      - model to store users with embedded data such as 'followingLists', 'followingUsers' 
+/lists                      - model to store lists with embedded data such as 'bookItems' and 'followers'
+/books                      - model to store books with embedded data such as 'userFollowed', 'listFollowed'
+
+
+--------------------- BACKEND --------------------------
+api/users/:id/lists            - fetch all the lists for a given user 
+api/users/:id/books            - fetch all the books for a given user
+
+
+/users                      - fetch users (Will we fetch books only?)
+/books                      -fetch books  (Will we fetch books only?)   
+/lists                      -fetch lists  (Will we fetch lists only?)   
+
+
+*/
+
+
+
