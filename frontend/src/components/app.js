@@ -12,7 +12,6 @@ import "./reset.css";
 
 const App = () => (
   <div>
-    This is the App component of whatsGood
     <TopNavContainer />
     <Switch>
       <AuthRoute exact path="/" component={MainPage} />
