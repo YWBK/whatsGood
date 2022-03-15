@@ -7,8 +7,6 @@ const mapStateToProps = state => ({
     loggedIn: state.session.isAuthenticated
 });
 
-console.log(logout);
-
 export default connect(
     mapStateToProps,
     { logout }

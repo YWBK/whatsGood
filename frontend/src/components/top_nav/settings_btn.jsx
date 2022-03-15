@@ -53,7 +53,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-export default function SettingsBtn({ logout }) {
+export default function SettingsBtn(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -64,8 +64,7 @@ export default function SettingsBtn({ logout }) {
   };
   const logoutUser = (event) => {
     event.preventDefault();
-    console.log(logout);
-    logout();
+    props.logout();
   };
 
   return (
