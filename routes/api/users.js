@@ -26,6 +26,7 @@ router.get('/:id', async (req, res) => {
     try{
         const userId = req.params.id;
         const user = await User.findById(userId).populate("followingLists");
+        debugger
         res.json(user)
     } catch (e) {
         res.status(404).json({ user: 'No user found' })
@@ -117,7 +118,7 @@ router.post('/login', (req, res) => {
                 .compare(password, user.password)
                 .then(isMatch => {
                     if (isMatch) {
-                        const payload = { id: user.id, username: user.username };
+                        const payload = { id: user.id, username: user.username, followingLists: user.followingLists };
 
                         jwt.sign(
                             payload,

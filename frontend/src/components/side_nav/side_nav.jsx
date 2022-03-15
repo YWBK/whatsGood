@@ -7,10 +7,12 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
+import ModalForm from '../modal/modal';
+
 
 const drawerWidth = 240;
 
-export default function SideNav({ loggedIn }) {
+export default function SideNav({ loggedIn, followingLists }) {
   if (!loggedIn) return <div></div>
 
   return (
@@ -32,7 +34,10 @@ export default function SideNav({ loggedIn }) {
         <List
           sx={{ maxHeight: "max-content", overflow: "auto", paddingTop: 0 }}
         >
-          <ListSubheader>My Lists</ListSubheader>
+          <ListSubheader sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <span>My Lists</span>
+            <ModalForm />
+          </ListSubheader>
           {[0, 1, 2, 3, 4, 5, 6, 7].map((text) => (
             <ListItem button key={text}>
               <ListItemText primary={`My List ${text}`} />
@@ -42,9 +47,9 @@ export default function SideNav({ loggedIn }) {
         <Divider />
         <List sx={{ height: 380, overflow: "auto", paddingTop: 0 }}>
           <ListSubheader>Following Lists</ListSubheader>
-          {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((text) => (
-            <ListItem button key={text}>
-              <ListItemText primary={`Following List ${text}`} />
+          {followingLists.map((list) => (
+            <ListItem button key={list}>
+              <ListItemText primary={`${list}`} /> {/* will need to update to present list Name and owne*/}
             </ListItem>
           ))}
         </List>
