@@ -13,9 +13,19 @@ const UsersReducer = (oldState = {}, action) => {
       newUser.username = action.user.data.username;
       newUser.email = action.user.data.email;
       newUser.followingLists = [];
+      newUser.followingUsers = [];
+      newUser.myLists = [];
 
       for (let list of action.user.data.followingLists) {
         newUser.followingLists.push(list._id);
+      }
+
+      for (let list of action.user.data.followingUsers) {
+        newUser.followingUsers.push(list._id);
+      }
+
+      for (let list of action.user.data.myLists) {
+        newUser.myLists.push(list._id);
       }
 
       newState[newUser.id] = newUser;
