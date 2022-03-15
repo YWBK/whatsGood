@@ -7,10 +7,17 @@ const UsersReducer = (oldState = {}, action) => {
   switch (action.type) {
     case RECEIVE_USER:
       // debugger;
-      const newUser = action.user.data;
+      const newUser = {};
 
       newUser.id = action.user.data._id;
-      delete newUser._id;
+      newUser.username = action.user.data.username;
+      newUser.email = action.user.data.email;
+      newUser.followingLists = [];
+
+      for (let list of action.user.data.followingLists) {
+        newUser.followingLists.push(list._id);
+      }
+
       newState[newUser.id] = newUser;
 
       // debugger;
