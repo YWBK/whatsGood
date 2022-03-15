@@ -10,6 +10,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import SettingsBtn from "./settings_btn";
 import { Link } from "react-router-dom";
 import "./top_nav.css";
+import SearchBar from './search';
 
 const TopNavMain = () => {
   const Search = styled("div")(({ theme }) => ({
@@ -79,7 +80,8 @@ const TopNavMain = () => {
                   </Typography>
                 </IconButton>
               </Link>
-              <Search>
+              <SearchBar />
+              {/* <Search>
                 <SearchIconWrapper>
                   <SearchIcon />
                 </SearchIconWrapper>
@@ -87,7 +89,7 @@ const TopNavMain = () => {
                   placeholder="Search…"
                   inputProps={{ "aria-label": "search" }}
                 />
-              </Search>
+              </Search> */}
             </div>
             <SettingsBtn />
           </Toolbar>
