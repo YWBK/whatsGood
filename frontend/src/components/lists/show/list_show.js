@@ -5,7 +5,7 @@ class ListShow extends React.Component {
         super(props);
 
         this.state = {
-            userList: []
+            myList: []
         }
     }
 
@@ -14,7 +14,7 @@ class ListShow extends React.Component {
     }
 
     componentWillReceiveProps(newState) {
-        this.setState({ userList: newState.userList });
+        this.setState({ myList: newState.myList });
     }
 
     render() {
