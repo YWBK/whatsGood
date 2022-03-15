@@ -15,17 +15,23 @@ import "./reset.css";
 const App = () => (
   <div>
     <TopNavContainer />
-    <SideNavContainer />
-    <Switch>
-      <AuthRoute exact path="/" component={MainPage} />
-      <AuthRoute exact path="/login" component={LoginFormContainer} />
-      <AuthRoute exact path="/signup" component={SignupForm1Container} />
+    <div style={{display: "flex"}}>
+      <SideNavContainer />
+      <Switch>
+        <AuthRoute exact path="/" component={MainPage} />
+        <AuthRoute exact path="/login" component={LoginFormContainer} />
+        <AuthRoute exact path="/signup" component={SignupForm1Container} />
 
-      {/* <ProtectedRoute exact path="/tweets" component={TweetsContainer} />
+        {/* <ProtectedRoute exact path="/tweets" component={TweetsContainer} />
       <ProtectedRoute exact path="/profile" component={ProfileContainer} />
       <ProtectedRoute exact path="/new_tweet" component={TweetComposeContainer} /> */}
-      <ProtectedRoute exact path="/users/:userId" component={UserShowContainer} />
-    </Switch>
+        <ProtectedRoute
+          exact
+          path="/users/:userId"
+          component={UserShowContainer}
+        />
+      </Switch>
+    </div>
   </div>
 );
 
