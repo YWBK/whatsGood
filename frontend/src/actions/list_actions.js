@@ -1,4 +1,4 @@
-import { getUserList } from '../util/list_api_util';
+// import { getUserList } from '../util/list_api_util';
 
 export const RECEIVE_USER_LIST = "RECEIVE_USER_LIST";
 // export const RECEIVE_LISTS = "RECEIVE_LISTS";
@@ -9,11 +9,11 @@ export const receiveUserList = list => ({
     list
 });
 
-export const fetchUserList = listId => dispatch => (
-    getUserList(listId)
-        .then(list => dispatch(receiveUserList(list)))
-        .catch(err => console.log(err))
-);
+// export const fetchUserList = listId => dispatch => (
+//     getUserList(listId)
+//         .then(list => dispatch(receiveUserList(list)))
+//         .catch(err => console.log(err))
+// );
 
 // export const receiveTweets = tweets => ({
 //     type: RECEIVE_TWEETS,
