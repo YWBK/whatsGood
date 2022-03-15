@@ -8,6 +8,7 @@ import SideNavContainer from "./side_nav/side_nav_container";
 import MainPage from "./main/main_page";
 import LoginFormContainer from "./session/login_form_container";
 import SignupForm1Container from "./session/signup_form_container";
+import UserShowContainer from './users/user_show_container';
 
 import "./reset.css";
 
@@ -23,6 +24,7 @@ const App = () => (
       {/* <ProtectedRoute exact path="/tweets" component={TweetsContainer} />
       <ProtectedRoute exact path="/profile" component={ProfileContainer} />
       <ProtectedRoute exact path="/new_tweet" component={TweetComposeContainer} /> */}
+      <ProtectedRoute exact path="/users/:userId" component={UserShowContainer} />
     </Switch>
   </div>
 );

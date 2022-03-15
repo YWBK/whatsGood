@@ -1,13 +1,13 @@
-import { connect } from 'react-redux';
-import { logout } from '../../actions/session_actions';
+import { connect } from "react-redux";
+import { logout } from "../../actions/session_actions";
 
-import TopNav from './top_nav';
+import TopNav from "./top_nav";
 
-const mapStateToProps = state => ({
-    loggedIn: state.session.isAuthenticated
-});
+const mapStateToProps = (state) => {
+  return {
+    currUserId: state.session.user.id,
+    loggedIn: state.session.isAuthenticated,
+  };
+};
 
-export default connect(
-    mapStateToProps,
-    { logout }
-)(TopNav);
+export default connect(mapStateToProps, { logout })(TopNav);
