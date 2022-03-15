@@ -4,7 +4,7 @@ import UserShow from "./user_show";
 
 const mSTP = (state, prevProps) => {
   return {
-    currUserId: state.users[prevProps.match.params.userId],
+    currUser: state.users[prevProps.match.params.userId],
   };
 };
 

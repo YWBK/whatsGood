@@ -12,6 +12,7 @@ const UsersReducer = (oldState = {}, action) => {
       delete newUser._id;
       newState[newUser.id] = newUser;
 
+      // debugger;
       return newState;
     default:
       return oldState;
