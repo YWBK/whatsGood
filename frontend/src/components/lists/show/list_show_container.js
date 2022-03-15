@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchUserList } from '../../../actions/list_actions';
+// import { fetchUserList } from '../../../actions/list_actions';
 import ListShow from './list_show';
 
 
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchUserList: listId => dispatch(fetchUserList(listId))
+        // fetchUserList: listId => dispatch(fetchUserList(listId))
     };
 };
 
