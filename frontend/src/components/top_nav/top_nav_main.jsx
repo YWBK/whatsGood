@@ -11,7 +11,7 @@ import SettingsBtn from "./settings_btn";
 import { Link } from "react-router-dom";
 import "./top_nav.css";
 
-const TopNavMain = () => {
+const TopNavMain = ({ loggedIn, logout }) => {
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -89,7 +89,7 @@ const TopNavMain = () => {
                 />
               </Search>
             </div>
-            <SettingsBtn />
+            <SettingsBtn logout={logout} />
           </Toolbar>
         </AppBar>
       </Box>
