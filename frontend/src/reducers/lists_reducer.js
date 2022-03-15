@@ -32,14 +32,14 @@ const ListsReducer = (
         newList.description = list.description;
         newList.followers = list.followers.map((user) => user._id);
         newList.name = list.name;
-        newList.owner = list.owner;
+        newList.owner = list.owner.id;
         newList.id = list._id;
 
         if(!newState.list[newList.id]) newState.list[newList.id] = newList; 
         // debugger;
       }
 
-      debugger;
+      // debugger;
       return newState;
     default:
       return state;

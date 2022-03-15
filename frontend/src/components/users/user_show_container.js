@@ -6,6 +6,7 @@ const mSTP = (state, prevProps) => {
   return {
     currentUser: state.entities.users[state.session.user.id],
     user: state.entities.users[prevProps.match.params.userId],
+    // userLists: state.entities.lists.list[]
   };
 };
 

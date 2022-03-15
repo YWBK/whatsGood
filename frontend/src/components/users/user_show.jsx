@@ -3,7 +3,9 @@ import "./user_show.css";
 
 const UserShow = (props) => {
   useEffect(() => props.fetchUser(props.match.params.userId), []);
-  // fetch lists based on user and change otherUserView and loggedInUserView to populate data
+  
+  // const userLists = 
+
   // adjust following constants to account for fetched data
 
   // const userLists =
