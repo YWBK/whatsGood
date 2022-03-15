@@ -5,7 +5,7 @@ import TopNav from "./top_nav";
 
 const mapStateToProps = (state) => {
   return {
-    currUserId: state.session.user.id,
+    currUserId: state.session.user ? state.session.user.id : null,
     loggedIn: state.session.isAuthenticated,
   };
 };
