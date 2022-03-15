@@ -8,6 +8,8 @@ const keys = require('../../config/keys');
 const validateSignupInput = require('../../validation/signup');
 const validateLoginInput = require('../../validation/login');
 
+
+
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
 router.get('/current', passport
@@ -20,14 +22,22 @@ router.get('/current', passport
     }
 )
 
-router.get('/:id', (req, res) => {
-    User.findById(req.params.id)
-        .then(user => res.json({
-            _id: user.id,
-            username: user.username,
-            email: user.email
-        }))
-        .catch(err => res.status(404).json({ user: 'No user found' }))
+router.get('/:id', async (req, res) => {
+    try{
+        const userId = req.params.id;
+        const user = await User.findById(userId).populate("followingLists");
+        res.json(user)
+    } catch (e) {
+        res.status(404).json({ user: 'No user found' })
+    }
+    
+    // User.findById(req.params.id)
+    //     .then(user => res.json({
+    //         _id: user.id,
+    //         username: user.username,
+    //         email: user.email
+    //     }))
+        // .catch(err => )
 })
 
 router.post('/signup', (req, res) => {
@@ -125,5 +135,6 @@ router.post('/login', (req, res) => {
                 })
         })
 })
+
 
 module.exports = router;
