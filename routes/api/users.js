@@ -22,24 +22,6 @@ router.get('/current', passport
     }
 )
 
-router.get('/:id', async (req, res) => {
-    try{
-        const userId = req.params.id;
-        const user = await User.findById(userId).populate("followingLists");
-        debugger
-        res.json(user)
-    } catch (e) {
-        res.status(404).json({ user: 'No user found' })
-    }
-    
-    // User.findById(req.params.id)
-    //     .then(user => res.json({
-    //         _id: user.id,
-    //         username: user.username,
-    //         email: user.email
-    //     }))
-        // .catch(err => )
-})
 
 router.post('/signup', (req, res) => {
     const { errors, isValid } = validateSignupInput(req.body);
@@ -141,6 +123,79 @@ router.post('/login', (req, res) => {
                     }
                 })
         })
+})
+
+
+//user show that contains myList, followingLists and followerUsers
+router.get('/:id', async (req, res) => {
+    try{
+        const userId = req.params.id;
+        const user = await User.findById(userId)
+            .populate({
+                path: "followingLists",
+                model: "List",
+                populate:{
+                    path: "bookItems",
+                    model: "Book"
+                },  
+            })
+            .populate({
+                path: "followingLists",
+                model: "List",
+                populate:{
+                    path: "followers",
+                    model: "User"
+                },  
+            })
+
+            .populate({
+                path: "myLists",
+                model: "List",
+                populate:{
+                    path: "followers",
+                    model: "User"
+                },                        
+            })    
+            .populate({
+                path: "myLists",
+                model: "List",
+                populate:{
+                    path: "bookItems",
+                    model: "Book"
+                },
+               
+            })    
+
+            .populate({
+                path: "followingUsers",
+                model: "User",
+                populate:{
+                    path: "myLists",
+                    model: "User"
+                },
+            })    
+            .populate({
+                path: "followingUsers",
+                model: "User",
+                populate:{
+                    path: "followingLists",
+                    model: "List"
+                },
+            })    
+            .populate({
+                path: "followingUsers",
+                model: "User",
+                populate:{
+                    path: "followingUsers",
+                    model: "User"
+                },
+            })    
+        
+        res.json(user)
+    } catch (e) {
+        res.status(404).json({ user: 'No user found' })
+    }
+    
 })
 
 
