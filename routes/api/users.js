@@ -119,7 +119,7 @@ router.post('/login', (req, res) => {
         })
 })
 
-
+// http://localhost:5000/api/users/6230e58ee8ace707b68fee77
 //user show that contains myList, followingLists and followerUsers
 router.get('/:id', async (req, res) => {
     try{
@@ -138,6 +138,14 @@ router.get('/:id', async (req, res) => {
                 model: "List",
                 populate:{
                     path: "followers",
+                    model: "User"
+                },  
+            })
+            .populate({
+                path: "followingLists",
+                model: "List",
+                populate:{
+                    path: "owner",
                     model: "User"
                 },  
             })
