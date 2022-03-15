@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
@@ -92,7 +93,7 @@ export default function SettingsBtn(props) {
       >
         <MenuItem onClick={handleClose} disableRipple>
           <PersonIcon />
-          My Profile
+          <Link to={`/users/${props.currUserId}`}>My Profile</Link>
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
           <SettingsIcon />

@@ -27,10 +27,13 @@ const App = () => (
         path="/users/:userId"
         component={UserShowContainer}
       />
-      {/* <ProtectedRoute exact path="/tweets" component={TweetsContainer} />
-      <ProtectedRoute exact path="/profile" component={ProfileContainer} />
-      <ProtectedRoute exact path="/new_tweet" component={TweetComposeContainer} /> */}
-    </Switch>
+        <ProtectedRoute
+          exact
+          path="/users/:userId"
+          component={UserShowContainer}
+        />
+      </Switch>
+    </div>
   </div>
 );
 
