@@ -6,13 +6,14 @@ const UsersReducer = (oldState = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_USER:
+      debugger;
       const newUser = action.user.data;
 
       newUser.id = action.user.data._id;
       delete newUser._id;
       newState[newUser.id] = newUser;
 
-      // debugger;
+      debugger;
       return newState;
     default:
       return oldState;

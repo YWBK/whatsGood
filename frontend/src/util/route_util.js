@@ -21,7 +21,6 @@ const Protected = ({ component: Component, loggedIn, ...rest }) => (
             loggedIn ? (
                 <Component {...props} />
             ) : (
-                // to be update once we have the modol
                 <Redirect to="/login" />
             )
         }
