@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
-import "./user_show.css"
+import "./user_show.css";
 
-export default function UserShow() {
-  return <div className="user-show__container">UserShow</div>;
-}
+const UserShow = (props) => {
+  const [currUser, setCurrUser] = useState({
+    id: "",
+    username: "",
+    email: "",
+  });
+
+  // useEffect(() => {
+  //   props.fetchUser(props.match.params.userId).then((user) => {
+  //     return setCurrUser(user.user);
+  //   });
+  // }, []);
+
+  return (
+    <div className="user-show__container">
+      <div></div>
+    </div>
+  );
+};
+
+export default UserShow;
