@@ -8,6 +8,8 @@ const keys = require('../../config/keys');
 const validateSignupInput = require('../../validation/signup');
 const validateLoginInput = require('../../validation/login');
 
+
+
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
 router.get('/current', passport
@@ -117,6 +119,13 @@ router.post('/login', (req, res) => {
         })
 })
 
+
+
+router.get("/:id/lists", async (req, res) =>{
+    const userId = req.params.id;
+    const user = await User.findById(userId).populate("followingLists");
+    res.json(user)
+})
 
 
 module.exports = router;

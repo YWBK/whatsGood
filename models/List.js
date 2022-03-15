@@ -18,15 +18,15 @@ const ListSchema = new Schema({
     ref: 'User'   
   },
 
-  // bookItems:{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'books' 
-  // },
+  bookItems:[{
+    type: Schema.Types.ObjectId,
+    ref: 'Book' 
+  }],
 
-  // followers:{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'users' 
-  // },
+  followers:[{
+    type: Schema.Types.ObjectId,
+    ref: 'User' 
+  }],
    
 },{
   timestamps: true

@@ -59,16 +59,27 @@ app.get("/test_new_user", (req, res) => {
   res.send("created")
 })
 
-//test route to get a user along with followinglists
-app.get("/test_user_lists", async (req, res) =>{
-    const user = await User.findById("6230b8304cac293c0eb48a3f").populate("followingLists");
+// //test route to get a user along with followinglists
+// app.get("/test_user_lists", async (req, res) =>{
+//     const user = await User.findById("6230b8304cac293c0eb48a3f").populate("followingLists");
 
-    res.json(user)
-})
+//     res.json(user)
+// })
 
 
 //test route to update a user's followingList
+app.get("/test_user_lists_update", async (req, res) =>{
+  await User.updateOne(
+    {},
+    { "$pull": { "followingLists":{ "_id": "6230acf4ef1e34a8bcd986a2" } } },
+    false, // Upsert
+    true, // Multi
+  );
+            
+ res.json("done!@") 
+//  res.catch(err=>res.send(err))
 
+})
 
 
 
