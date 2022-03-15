@@ -9,8 +9,7 @@ import { Link } from "react-router-dom";
 import "./top_nav.css";
 import SearchBar from './search';
 
-const TopNavMain = () => {
-
+const TopNavMain = ({ loggedIn, logout }) => {
   return (
     <div className="top-nav-main__container">
       <Box sx={{ flexGrow: 1 }}>
