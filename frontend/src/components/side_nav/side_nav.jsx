@@ -10,7 +10,9 @@ import ListSubheader from "@mui/material/ListSubheader";
 
 const drawerWidth = 240;
 
-export default function SideNav() {
+export default function SideNav({ loggedIn }) {
+  if (!loggedIn) return <div></div>
+
   return (
     <Drawer
       variant="permanent"
@@ -47,9 +49,7 @@ export default function SideNav() {
           ))}
         </List>
         <Divider />
-        <List
-          sx={{ height: 450, overflow: "auto", paddingTop: 0 }}
-        >
+        <List sx={{ height: 450, overflow: "auto", paddingTop: 0 }}>
           <ListSubheader>Following Users</ListSubheader>
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((text) => (
             <ListItem button key={text}>
