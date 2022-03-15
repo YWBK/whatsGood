@@ -1,13 +1,15 @@
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
 
-import TopNavMain from './top_nav_main';
+import TopNav from './top_nav';
 
 const mapStateToProps = state => ({
     loggedIn: state.session.isAuthenticated
 });
 
+console.log(logout);
+
 export default connect(
     mapStateToProps,
     { logout }
-)(TopNavMain);
+)(TopNav);
