@@ -10,11 +10,11 @@ const UserShow = (props) => {
     email: "",
   });
 
-  useEffect(() => {
-    props.fetchUser(props.match.params.userId).then((user) => {
-      return setCurrUser(user.user);
-    });
-  }, []);
+  // useEffect(() => {
+  //   props.fetchUser(props.match.params.userId).then((user) => {
+  //     return setCurrUser(user.user);
+  //   });
+  // }, []);
 
   return (
     <div className="user-show__container">
