@@ -8,6 +8,7 @@ import SideNavContainer from "./side_nav/side_nav_container";
 import MainPage from "./main/main_page";
 import LoginFormContainer from "./session/login_form_container";
 import SignupForm1Container from "./session/signup_form_container";
+import ListShowContainer from "./lists/show/list_show_container";
 
 import "./reset.css";
 
@@ -19,7 +20,7 @@ const App = () => (
       <AuthRoute exact path="/" component={MainPage} />
       <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupForm1Container} />
-
+      <ProtectedRoute exact path="/lists/:listId" component={ListShowContainer} />
       {/* <ProtectedRoute exact path="/tweets" component={TweetsContainer} />
       <ProtectedRoute exact path="/profile" component={ProfileContainer} />
       <ProtectedRoute exact path="/new_tweet" component={TweetComposeContainer} /> */}
