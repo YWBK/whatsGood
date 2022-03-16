@@ -21,9 +21,10 @@ class ListShow extends React.Component {
     }
 
     // Called when component propos changes.
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
+        const isLocationChanged = prevProps.match.params.listId !== this.props.match.params.listId;
         const listId = this.props.match.params.listId;
-        if (!this.state.list) {
+        if (!this.state.list || isLocationChanged) {
             this.setState({ list: this.props.allLists[listId] });
         }
     }
