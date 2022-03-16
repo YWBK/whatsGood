@@ -228,8 +228,10 @@ router.get('/:id', async (req, res) => {
 
 //user follows a list
 router.post('/followlist', async (req, res) =>{
+    debugger
     const listId = req.body.listId
     const userId = req.body.userId
+    debugger
   try {
     await User.findOneAndUpdate({
         _id: userId
@@ -307,7 +309,6 @@ router.post('/unfollowlist', async (req, res) =>{
 router.post('/followuser', async (req, res) =>{
     const userIdBeingFollowed = req.body.userIdBeingFollowed
     const userId = req.body.userId
-    
   try {
     await User.findOneAndUpdate({
         _id: userId

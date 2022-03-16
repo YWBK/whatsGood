@@ -10,7 +10,7 @@ const User = require('../../models/User');
 const List = require("../../models/List")
 const Activity = require("../../models/Activity")
 
-
+//user creates a list
 router.post("/", async (req, res) => {
   const { errors, isValid } = validateCreateListInput(req.body);
   if (!isValid) {
