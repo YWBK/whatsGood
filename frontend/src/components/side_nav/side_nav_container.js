@@ -1,10 +1,52 @@
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 import SideNav from "./side_nav";
+import { fetchUser } from '../../actions/user_actions'
 
-const mSTP = (state) => ({
-  loggedIn: state.session.isAuthenticated,
+const mSTP = (state) => {
+  if (!state.session.isAuthenticated) return ({loggedIn: state.session.isAuthenticated})
+  const currentUserId = state.session.user.id
+  if (Object.keys(state.entities.users).length < 1) return (
+    {loggedIn: state.session.isAuthenticated, currentUserId: currentUserId})
+
+  const followingLists = Object.values(state.entities.lists.all).map(list => {
+    // debugger
+    if (state.session.user.followingLists.includes(list.id)) return ({
+        id: list.id,
+        name: list.name,
+        ownerName: list.ownerName
+    });
+  })
+const myLists = Object.values(state.entities.lists.all).map(list => {
+  // debugger
+  if (list.ownerId === currentUserId) return ({
+    id: list.id,
+    name: list.name 
+  })
 });
 
-const mDTP = (dispatch) => ({});
+const followingUsers = Object.values(state.entities.users[currentUserId].followingUsers).map(user => {
+  // debugger
+  if (user.id !== currentUserId) return ({
+    id: user.id,
+    username: user.username 
+  })
+});
+// debugger
+   
+  return ({
+    loggedIn: state.session.isAuthenticated,
+    currentUserId: currentUserId,
+    myLists: myLists,
+    followingLists: followingLists,
+    followingUsers: followingUsers,
+  })
+};
 
-export default connect(mSTP, mDTP)(SideNav);
+const mDTP = (dispatch) => {
+  return ({
+    fetchUser: userId => dispatch(fetchUser(userId))
+  })
+};
+
+export default withRouter(connect(mSTP, mDTP)(SideNav));

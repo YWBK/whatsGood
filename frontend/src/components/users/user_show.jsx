@@ -5,7 +5,8 @@ import "./user_show.css";
 const UserShow = (props) => {
   useEffect(() => {
     // props.fetchUser("623163debe6f6b61d32195c7");
-    props.fetchUser(props.match.params.id);
+    // debugger
+    props.fetchUser(props.match.params.userId);
     props.fetchUser(props.currentUserId);
   }, [props.match.params.userId]);
   // useEffect(() => props.fetchUser(props.currentUserId), []);
