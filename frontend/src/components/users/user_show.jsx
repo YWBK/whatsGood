@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./user_show.css";
 
 const UserShow = (props) => {
@@ -7,19 +8,21 @@ const UserShow = (props) => {
   const userLists = props.userLists ? (
     props.userLists.map((list) => {
       return (
-        <li key={list.id}>
-          <p>{list.followers.length}</p>
-          <p>{list.name}</p>
-          {props.user.id !== props.currentUser.id ? (
-            props.currentUser.followingLists.includes(list.id) ? (
-              <button>Unfollow</button>
+        <Link key={list.id} to={`/lists/${list.id}`}>
+          <li className="user-show__li">
+            <p>{list.followers.length} follows</p>
+            <p>{list.name}</p>
+            {props.user.id !== props.currentUser.id ? (
+              props.currentUser.followingLists.includes(list.id) ? (
+                <button>Unfollow</button>
+              ) : (
+                <button>Follow</button>
+              )
             ) : (
-              <button>Follow</button>
-            )
-          ) : (
-            ""
-          )}
-        </li>
+              ""
+            )}
+          </li>
+        </Link>
       );
     })
   ) : (
@@ -34,16 +37,16 @@ const UserShow = (props) => {
         <button>Follow {props.user.username}</button>
       )}
       <div>{props.user.username}'s lists</div>
-      <ul>{userLists}</ul>
+      <ul className="user-show__list-container">{userLists}</ul>
     </div>
   ) : (
-    console.log("no user")
+    console.log("no other user")
   );
 
   const loggedInUserView = props.user ? (
     <div>
-      <p>{props.user.username}'s lists</p>
-      <ul>{userLists}</ul>
+      <h1>{props.user.username}'s lists</h1>
+      <ul className="user-show__list-container">{userLists}</ul>
     </div>
   ) : (
     <div></div>
