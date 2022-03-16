@@ -12,16 +12,12 @@ import ModalForm from '../modal/modal';
 
 const drawerWidth = 240;
 
-export default function SideNav({ history, loggedIn, currentUserId, userListIds, followingListIds, Lists, followingUsers, fetchUser }) {
+export default function SideNav({ history, loggedIn, currentUserId, myLists, followingLists, lists, followingUsers, fetchUser }) {
   React.useEffect(() => fetchUser(currentUserId), []);
   
   if (!loggedIn) return <div></div>
-  const followingLists = (ids, lists) => {
-    debugger
-    return lists.map(list => (
-      ids.includes(list.id)
-    ))
-  }
+  if (!myLists) return <div></div>
+
   const handleClick = (id, type, e) => {
       e.preventDefault();
       switch(type) {
@@ -59,29 +55,40 @@ export default function SideNav({ history, loggedIn, currentUserId, userListIds,
             <span>My Lists</span>
             <ModalForm />
           </ListSubheader>
-          {userListIds.map((id) => (
-            <ListItem button onClick={e => handleClick(id, 'list', e)} key={id}>
-              <ListItemText primary={`${id}`} />
-            </ListItem>
-          ))}
+          {myLists.map((list) => {
+            if (!list) return null;
+            return (
+              <ListItem button onClick={e => handleClick(list.id, 'list', e)} key={list.id}>
+                <ListItemText primary={`${list.name}`} />
+              </ListItem>
+            )
+          }
+          )}
         </List>
         <Divider />
         <List sx={{ height: 380, overflow: "auto", paddingTop: 0 }}>
           <ListSubheader>Following Lists</ListSubheader>
-          {followingListIds.map((id) => (
-            <ListItem button onClick={e => handleClick(id, 'list', e)} key={id}>
-              <ListItemText primary={`${id}`} /> {/* will need to update to present list Name and owne*/}
-            </ListItem>
-          ))}
+          {followingLists.map((list) => {
+            if (!list) return null;
+            return ( 
+              <ListItem button onClick={e => handleClick(list.id, 'list', e)} key={list.id}>
+                <ListItemText primary={`${list.name}`} secondary={`by ${list.ownerName}`} />
+              </ListItem>
+            )
+          }
+          )}
         </List>
         <Divider />
         <List sx={{ height: 450, overflow: "auto", paddingTop: 0 }}>
           <ListSubheader>Following Users</ListSubheader>
-          {followingUsers.map((id) => (
-            <ListItem button onClick={e => handleClick(id, 'user', e)} key={id}>
-              <ListItemText primary={`${id}`} />
-            </ListItem>
-          ))}
+          {followingUsers.map((user) => {
+            return (
+              <ListItem button onClick={e => handleClick(user.id, 'user', e)} key={user.id}>
+                <ListItemText primary={`${user.username}`} />
+              </ListItem>
+            )
+          }
+          )}
         </List>
       </Box>
     </Drawer>
