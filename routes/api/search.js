@@ -13,4 +13,13 @@ router.post("/", (req, res, next) => {
     
 })
 
+router.post("/book", (req, res, next) =>{
+  axio.get(`https://www.googleapis.com/books/v1/volumes/${req.body.searchString}?key=${keys.googleApiKey}`)
+      .then(response=> {
+        res.json(response.data)
+      })
+      .catch(err => next(err))
+})
+
+
 module.exports = router

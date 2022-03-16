@@ -160,6 +160,14 @@ router.get('/:id', async (req, res) => {
                     model: "User"
                 },  
             })
+            .populate({
+                path: "followingLists",
+                model: "List",
+                populate:{
+                    path: "owner",
+                    model: "User"
+                },  
+            })
 
             .populate({
                 path: "myLists",

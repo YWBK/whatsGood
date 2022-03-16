@@ -40,7 +40,7 @@ class SignupForm1 extends React.Component {
     e.preventDefault();
 
     const demoUser = {
-      emailOrUsername: 'katie@gmail.com',
+      emailOrUsername: 'steven4',
       password: '123456'
     };
 

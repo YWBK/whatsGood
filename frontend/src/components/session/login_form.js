@@ -38,7 +38,7 @@ class LoginForm extends React.Component {
         e.preventDefault();
 
         const user = isDemoUser ? {
-            emailOrUsername: 'katie@gmail.com',
+            emailOrUsername: 'steven4',
             password: '123456'
         } : {
             emailOrUsername: this.state.emailOrUsername,
