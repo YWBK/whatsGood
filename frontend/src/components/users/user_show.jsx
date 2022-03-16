@@ -4,7 +4,8 @@ import "./user_show.css";
 
 const UserShow = (props) => {
   useEffect(() => {
-    props.fetchUser("623163debe6f6b61d32195c7");
+    // props.fetchUser("623163debe6f6b61d32195c7");
+    props.fetchUser(props.match.params.id);
     props.fetchUser(props.currentUserId);
   }, [props.match.params.userId]);
   // useEffect(() => props.fetchUser(props.currentUserId), []);
@@ -19,6 +20,7 @@ const UserShow = (props) => {
   const followListHandler = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    console.log("clicked")
   };
 
   const userLists =

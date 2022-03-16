@@ -16,8 +16,8 @@
 }
 
 .user-show__container h1 {
-  font-size: 1.6rem;
-  margin: 0.3em 0 0.9em;
+  font-size: 1.75rem;
+  margin: 0.5em 0 0.9em;
 }
 
 .user-show__li {
@@ -34,7 +34,8 @@
   transition: all 0.25s ease-in-out;
 }
 
-.user-show__li:hover {
+.user-show__li:hover,
+.user-show__follow-unfollow:hover {
   border: 1px solid #2561b6;
   background-color: #2561b6;
 }
@@ -48,21 +49,19 @@
   border-radius: 3px;
   font-family: "Roboto";
   cursor: pointer;
-  transition: .2s all ease-in-out;
+  transition: 0.25s all ease-in-out;
 }
 
 .user-show__follow-unfollow {
   border: 1px solid #3a77cf;
   background-color: #3a77cf;
   color: #fff;
+  font-size: 0.75rem;
   padding: 0.65em;
+  margin-bottom: 0.55em;
 }
 
 .user-show__li button:hover {
   background-color: rgb(230, 230, 230);
   border-color: rgb(230, 230, 230);
-}
-
-.user-show__follow-unfollow:hover {
-
 }
