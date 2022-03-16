@@ -1,4 +1,15 @@
-.user-show__container {
+.user-show__container-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   width: -webkit-fill-available;
-  /* border: 1px solid black; */
+  margin: 0 auto;
+  border: 1px solid black;
 }
+
+/* .user-show__container {
+  width: -webkit-fill-available;
+  border: 1px solid black;
+  margin: 0 auto;
+} */

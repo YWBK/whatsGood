@@ -22,7 +22,7 @@ export default function SideNav({ loggedIn }) {
         [`& .MuiDrawer-paper`]: {
           width: drawerWidth,
           boxSizing: "border-box",
-          zIndex: -1,
+          // zIndex: -1,
           overflow: "hidden",
         },
       }}
