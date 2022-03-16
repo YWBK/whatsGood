@@ -42,7 +42,9 @@ class ListShow extends React.Component {
                                 {this.state.list.description}
                             </div>
                             <div>
-                                created by: {this.state.list.owner}
+                                {(this.state.list.owner && this.state.list.owner.username) ? `by ${this.state.list.owner.username}` : ""
+                                }
+
                             </div>
                             <div>
                                 last updated time: {

@@ -66,11 +66,13 @@ function AlignItemsList(props) {
                             </Typography>
                             <br />
                             {`by ${props.book.authors.map(author => `${author} `)}`}
-                            <BasicRating book={props.book} />
+
                         </React.Fragment>
                     }
                 />
+                <BasicRating book={props.book} />
             </ListItem>
+
             <Divider variant="inset" component="li" />
 
         </List>

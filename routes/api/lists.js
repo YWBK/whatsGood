@@ -28,6 +28,9 @@ router.get("/:id", async (req, res) => {
   const list = await List.findById(listId).populate({
     path: "bookItems",
     model: "Book",
+  }).populate({
+    path: "owner",
+    model: "User",
   });
   res.json(list)
 })
