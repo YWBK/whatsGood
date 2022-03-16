@@ -25,7 +25,7 @@ class ListShow extends React.Component {
         }
     }
 
-    // Called when component propos changes.
+    // Called when component props changes.
     componentDidUpdate(prevProps) {
         // debugger
 
