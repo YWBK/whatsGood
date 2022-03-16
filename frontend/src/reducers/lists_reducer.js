@@ -1,44 +1,45 @@
 import { RECEIVE_LIST } from "../actions/list_actions";
-import { RECEIVE_USER } from '../actions/user_actions';
+import { RECEIVE_USER } from "../actions/user_actions";
 
 const ListsReducer = (
-    state = { all: {}, list: {}, new: undefined },
-    action
+  state = { all: {}, list: {}, new: undefined },
+  action
 ) => {
-    Object.freeze(state);
-    let newState = Object.assign({}, state);
-    switch (action.type) {
-        case RECEIVE_LIST:
-            const list = action.list.data;
-            newState.all[list._id] = list;
-            return newState;
-        case RECEIVE_USER:
-            //   debugger;
+  Object.freeze(state);
+  let newState = Object.assign({}, state);
+  switch (action.type) {
+    case RECEIVE_LIST:
+      const list = action.list.data;
+      newState.all[list._id] = list;
+      return newState;
+    case RECEIVE_USER:
+      //   debugger;
 
-            const combinedLists = [
-                ...action.user.data.myLists,
-                ...action.user.data.followingLists,
-            ];
+      const combinedLists = [
+        ...action.user.data.myLists,
+        ...action.user.data.followingLists,
+      ];
 
-            for (let list of combinedLists) {
-                const newList = {};
+      for (let list of combinedLists) {
+        const newList = {};
 
-                newList.bookItems = list.bookItems.map((book) => book._id);
-                newList.description = list.description;
-                newList.followers = list.followers.map((user) => user._id);
-                newList.name = list.name;
-                newList.owner = list.owner;
-                newList.id = list._id;
+        newList.bookItems = list.bookItems.map((book) => book._id);
+        newList.description = list.description;
+        newList.followers = list.followers.map((user) => user._id);
+        newList.name = list.name;
+        newList.ownerId = list.owner._id ? list.owner._id : list.owner;
+        newList.ownerName = list.owner.username ? list.owner.username : null;
+        newList.id = list._id;
 
-                if (!newState.list[newList.id]) newState.list[newList.id] = newList;
-                // debugger;
-            }
+        if (!newState.all[newList.id]) newState.all[newList.id] = newList;
+        // debugger;
+      }
 
-            debugger;
-            return newState;
-        default:
-            return state;
-    }
+      // debugger;
+      return newState;
+    default:
+      return state;
+  }
 };
 
 export default ListsReducer;
