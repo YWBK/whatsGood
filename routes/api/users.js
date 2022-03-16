@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const User = require('../../models/User');
 const keys = require('../../config/keys');
+const Activity = require("../../models/Activity")
 const validateSignupInput = require('../../validation/signup');
 const validateLoginInput = require('../../validation/login');
 
@@ -229,7 +230,6 @@ router.get('/:id', async (req, res) => {
 router.post('/followlist', async (req, res) =>{
     const listId = req.body.listId
     const userId = req.body.userId
-    debugger
   try {
     await User.findOneAndUpdate({
         _id: userId
@@ -238,7 +238,6 @@ router.post('/followlist', async (req, res) =>{
             followingLists: listId
         }
     })
-    debugger
     await List.findOneAndUpdate({
         _id: listId
     },{
@@ -246,6 +245,18 @@ router.post('/followlist', async (req, res) =>{
             followers: userId
         }
     })
+
+    //add to activity model      
+    const newActivity = await new Activity({
+            activityName: "FOLLOW_LIST",
+            actionType: "followed",
+            userId: userId,
+            listId: listId,
+    })
+
+    await newActivity.save()
+
+
     res.send("Successfully followed the list")
   } catch (error) {
       res.json(error.message)
@@ -257,7 +268,6 @@ router.post('/followlist', async (req, res) =>{
 router.post('/unfollowlist', async (req, res) =>{
     const listId = req.body.listId
     const userId = req.body.userId
-    debugger
   try {
     await User.findOneAndUpdate({
         _id: userId
@@ -266,7 +276,6 @@ router.post('/unfollowlist', async (req, res) =>{
             followingLists: listId
         }
     })
-    debugger
     await List.findOneAndUpdate({
         _id: listId
     },{
@@ -274,6 +283,17 @@ router.post('/unfollowlist', async (req, res) =>{
             followers: userId
         }
     })
+
+    //add to activity model      
+    const newActivity = await new Activity({
+            activityName: "UNFOLLOW_LIST",
+            actionType: "unfollowed",
+            userId: userId,
+            listId: listId,
+    })
+
+    await newActivity.save()
+
     res.send("Successfully unfollowed the list")
   } catch (error) {
       res.json(error.message)
