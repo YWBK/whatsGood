@@ -132,13 +132,13 @@ export default function SearchBar2() {
       renderOption={(props, option) => {
         return (
           <li {...props} key={option.id}>
-            <Grid container alignItems="center">
-              <Grid item>
+            <Grid container alignItems="center" >
+              <Grid item >
                 <Box
                   sx={{ color: 'text.primary', mr: 2 }}
                 />
               </Grid>
-              <Grid item xs>
+              <Grid item xs >
                 <Typography variant="body3" color="text.primary">
                   {option.volumeInfo.title}
                   {/* {authors(option.volumeInfo.authors)} */}
