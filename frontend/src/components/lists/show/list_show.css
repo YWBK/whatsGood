@@ -1,0 +1,11 @@
+.list-outer-box {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.list-inner-box {
+  margin-top: 100px;
+}
