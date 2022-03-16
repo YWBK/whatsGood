@@ -8,6 +8,8 @@ const users = require("./routes/api/users");
 const lists = require("./routes/api/lists")
 const books = require("./routes/api/books")
 const activities = require("./routes/api/activities")
+const ratings = require("./routes/api/ratings")
+
 const bodyParser = require('body-parser');
 const { application } = require('express');
 const search = require('./routes/api/search')
@@ -37,6 +39,7 @@ app.use("/api/users", users);
 app.use("/api/lists", lists);
 app.use("/api/books", books);
 app.use("/api/activities", activities);
+app.use("/api/ratings", ratings);
 
 
 

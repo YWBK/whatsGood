@@ -30,6 +30,10 @@ const UserSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'User' 
     }],
+    bookRatings:[{
+      type: Schema.Types.ObjectId,
+      ref: 'Rating' 
+    }],
 
   }, {
     timestamps: true
