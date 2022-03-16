@@ -6,7 +6,8 @@ import ListSubheader from "@mui/material/ListSubheader";
 import ModalForm from '../modal/modal';
 import { withRouter } from "react-router-dom";
 
-function SideNavList({ history, formType, list}) {
+function SideNavList({ history, formType, currentUserId, list, listIds, fetch }) {
+
 
     const handleClick = (id, type, e) => {
         e.preventDefault();
