@@ -8,6 +8,7 @@ import configureStore from './store/store';
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
 import { logout } from './actions/session_actions';
+import { followList } from "./util/user_api_util"
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;
@@ -35,3 +36,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 window.axios = axios
 window.searchbar = fetchBooks
+window.followList = followList

@@ -1,33 +1,37 @@
 import axios from "axios";
 
 export const fetchUser = (userId) => {
-  // debugger;
   return axios.get(`/api/users/${userId}`);
 };
 
 
-export const followList = (data) =>{
-  return axios({
-    method: "POST",
-    url: "api/users/followinglist",
-    data
+export const followList = (listId, userId) =>{
+  return axios.post("api/users/followlist", {
+      listId: listId,
+      userId: userId
+    })
+}
+
+
+export const unfollowList = (listId, userId) =>{
+  return axios.post("api/users/unfollowlist",{
+     listId: listId,
+     userId: userId
   })
 }
 
 
-export const unfollowList = (data) =>{
-  return axios({
-    method: "POST",
-    url: "api/users/unfollowlist",
-    data
+export const followUser = (userIdBeingFollowed, userId ) =>{
+  return axios.post("api/users/followuser", {
+    userIdBeingFollowed:userIdBeingFollowed,
+    userId: userId
   })
 }
 
 
-export const followUser = (data) =>{
-  return axios({
-    method: "POST",
-    url: "api/users/followuser",
-    data
+export const unfollowUser = (userIdBeingFollowed, userId) =>{
+  return axios.post("api/users/unfollowuser", {
+    userIdBeingFollowed:userIdBeingFollowed,
+    userId: userId
   })
 }
