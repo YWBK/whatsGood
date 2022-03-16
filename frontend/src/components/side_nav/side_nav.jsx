@@ -45,7 +45,7 @@ export default function SideNav({ history, loggedIn, currentUserId, userListIds,
         [`& .MuiDrawer-paper`]: {
           width: drawerWidth,
           boxSizing: "border-box",
-          zIndex: -1,
+          // zIndex: -1,
           overflow: "hidden",
         },
       }}

@@ -4,4 +4,9 @@
   color: white;
 }
 
-
+.top-nav-main__container,
+.top-nav-auth__container {
+  position: absolute;
+  z-index: 10000;
+  width: -webkit-fill-available;
+}

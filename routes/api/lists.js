@@ -11,9 +11,9 @@ const User = require('../../models/User');
 const List = require("../../models/List")
 
 
-router.post("/", async(req, res)=>{
-  // debugger
-    const list = await new List({
+router.post("/", async (req, res) => {
+  debugger
+  const list = await new List({
     name: req.body.name,
     description: req.body.description,
     owner: req.body.owner,
@@ -21,6 +21,15 @@ router.post("/", async(req, res)=>{
 
   const createdList = await list.save()
   res.json(createdList)
+})
+
+router.get("/:id", async (req, res) => {
+  const listId = req.params.id;
+  const list = await List.findById(listId).populate({
+    path: "bookItems",
+    model: "Book",
+  });
+  res.json(list)
 })
 
 module.exports = router
