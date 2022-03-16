@@ -4,15 +4,18 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const keys = require('../../config/keys');
-const validateSignupInput = require('../../validation/signup');
-const validateLoginInput = require('../../validation/login');
+const validateCreateListInput = require("../../validation/list")
 const { route } = require('./users');
 const User = require('../../models/User');
 const List = require("../../models/List")
 
 
 router.post("/", async (req, res) => {
-  debugger
+    const { errors, isValid } = validateCreateListInput(req.body);
+    if (!isValid) {
+        return res.status(400).json(errors);
+    }
+  
   const list = await new List({
     name: req.body.name,
     description: req.body.description,
@@ -20,8 +23,17 @@ router.post("/", async (req, res) => {
   })
 
   const createdList = await list.save()
+  await User.findOneAndUpdate({
+          _id: "6230e58ee8ace707b68fee77",
+        },{
+            $addToSet: {
+                myLists: createdList._id,
+            },
+        })
   res.json(createdList)
 })
+
+
 
 router.get("/:id", async (req, res) => {
   const listId = req.params.id;
