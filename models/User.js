@@ -14,6 +14,10 @@ const UserSchema = new Schema({
       type: String,
       required: true
     },    
+    favCategories:{
+      type: [String]
+    },
+
     myLists:[{
       type: Schema.Types.ObjectId,
       ref: 'List' 

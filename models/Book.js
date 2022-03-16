@@ -7,6 +7,11 @@ const BookSchema = new Schema({
     type: String,
     required: true
   },
+
+  rating:[{
+    Type: Number,
+    default: 0
+  }],
   
   inLists:[{
     type: Schema.Types.ObjectId,

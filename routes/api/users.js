@@ -12,6 +12,25 @@ const validateLoginInput = require('../../validation/login');
 
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
+//test to add/push items to []
+router.get('/add_to_my_lists', async (req, res) =>{
+        const list = "62312e6e48d198674ad7ef77"
+        
+        await User.findOneAndUpdate({
+             _id: "6230e58ee8ace707b68fee77",
+        },{
+            $addToSet: {
+                favCategories: "horror",
+            },
+        })
+
+        const user = await User.findOne({
+            _id: "6230e58ee8ace707b68fee77",
+        })
+        res.send(user)
+})
+
+
 router.get('/current', passport
     .authenticate('jwt', { session: false }), (req, res) => { 
         res.json({ 
@@ -202,9 +221,13 @@ router.get('/:id', async (req, res) => {
         res.json(user)
     } catch (e) {
         res.status(404).json({ user: 'No user found' })
-    }
-    
+    }  
 })
+
+
+
+
+
 
 
 module.exports = router;
