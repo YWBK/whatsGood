@@ -37,7 +37,7 @@ const TopNavMain = ({ loggedIn, logout, currUserId }) => {
                 </IconButton>
               </Link>
               {/* <SearchBar /> */}
-              <SearchBar2 />
+              {/* <SearchBar2 /> */}
             </div>
             <SettingsBtn logout={logout} currUserId={currUserId} />
           </Toolbar>
