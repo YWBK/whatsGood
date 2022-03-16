@@ -1,0 +1,17 @@
+.items-show__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 99vh;
+  width: -webkit-fill-available;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+.items-show {
+  display: flex;
+  width: 70%;
+  max-width: 690px;
+  justify-content: space-between;
+}

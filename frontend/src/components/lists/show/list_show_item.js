@@ -28,7 +28,7 @@ class ListShowItem extends React.Component {
 
     render() {
         const { book } = this.props;
-        debugger;
+
         return (
             <>
                 {

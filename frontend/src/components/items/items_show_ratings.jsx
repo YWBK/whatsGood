@@ -1,14 +1,11 @@
 import React from "react";
+import "./items_show_ratings.css";
 
 const ItemsShowRatings = () => {
   return (
-    <div>
-      <ul>
-        <li>Rating 1</li>
-        <li>Rating 2</li>
-        <li>Rating 3</li>
-      </ul>
-    </div>
+    <ul className="items-show-ratings">
+      <li>Ratings will live here</li>
+    </ul>
   );
 };
 
