@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const User = require('../../models/User');
 const keys = require('../../config/keys');
+const Activity = require("../../models/Activity")
 const validateSignupInput = require('../../validation/signup');
 const validateLoginInput = require('../../validation/login');
 
@@ -227,6 +228,7 @@ router.get('/:id', async (req, res) => {
 
 //user follows a list
 router.post('/followlist', async (req, res) =>{
+    debugger
     const listId = req.body.listId
     const userId = req.body.userId
     debugger
@@ -238,7 +240,6 @@ router.post('/followlist', async (req, res) =>{
             followingLists: listId
         }
     })
-    debugger
     await List.findOneAndUpdate({
         _id: listId
     },{
@@ -246,6 +247,18 @@ router.post('/followlist', async (req, res) =>{
             followers: userId
         }
     })
+
+    //add to activity model      
+    const newActivity = await new Activity({
+            activityName: "FOLLOW_LIST",
+            actionType: "followed",
+            userId: userId,
+            listId: listId,
+    })
+
+    await newActivity.save()
+
+
     res.send("Successfully followed the list")
   } catch (error) {
       res.json(error.message)
@@ -257,7 +270,6 @@ router.post('/followlist', async (req, res) =>{
 router.post('/unfollowlist', async (req, res) =>{
     const listId = req.body.listId
     const userId = req.body.userId
-    debugger
   try {
     await User.findOneAndUpdate({
         _id: userId
@@ -266,7 +278,6 @@ router.post('/unfollowlist', async (req, res) =>{
             followingLists: listId
         }
     })
-    debugger
     await List.findOneAndUpdate({
         _id: listId
     },{
@@ -274,11 +285,88 @@ router.post('/unfollowlist', async (req, res) =>{
             followers: userId
         }
     })
+
+    //add to activity model      
+    const newActivity = await new Activity({
+            activityName: "UNFOLLOW_LIST",
+            actionType: "unfollowed",
+            userId: userId,
+            listId: listId,
+    })
+
+    await newActivity.save()
+
     res.send("Successfully unfollowed the list")
   } catch (error) {
       res.json(error.message)
   }
 })
+
+
+
+
+//user follows a user
+router.post('/followuser', async (req, res) =>{
+    const userIdBeingFollowed = req.body.userIdBeingFollowed
+    const userId = req.body.userId
+  try {
+    await User.findOneAndUpdate({
+        _id: userId
+    },{
+        $addToSet:{
+            followingUsers: userIdBeingFollowed
+        }
+    })
+  
+    //add to activity model      
+    const newActivity = await new Activity({
+            activityName: "FOLLOW_USER",
+            actionType: "followed",
+            userId: userId,
+            userIdBeingFollowed: userIdBeingFollowed
+    })
+
+    await newActivity.save()
+
+    res.send("Successfully followed the user")
+  } catch (error) {
+      res.json(error.message)
+  }
+})
+
+
+
+//user unfollows a user
+router.post('/unfollowuser', async (req, res) =>{
+    const userIdBeingFollowed = req.body.userIdBeingFollowed
+    const userId = req.body.userId
+    
+  try {
+    await User.findOneAndUpdate({
+        _id: userId
+    },{
+        $pull:{
+            followingUsers: userIdBeingFollowed
+        }
+    })
+  
+    //add to activity model      
+    const newActivity = await new Activity({
+            activityName: "UNFOLLOW_USER",
+            actionType: "unfollowed",
+            userId: userId,
+            userIdBeingFollowed: userIdBeingFollowed
+    })
+
+    await newActivity.save()
+    
+    res.send("Successfully unfollowed the user")
+  } catch (error) {
+      res.json(error.message)
+  }
+})
+
+
 
 
 
