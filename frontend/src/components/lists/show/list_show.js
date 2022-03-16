@@ -1,5 +1,7 @@
 import React from 'react';
 import './list_show.css';
+import ListShowItem from "./list_show_item";
+
 
 class ListShow extends React.Component {
     constructor(props) {
@@ -27,15 +29,30 @@ class ListShow extends React.Component {
     }
 
     render() {
+        // console.log(this.props)
+        // const listId = this.props.match.params.listId;
+
         return <>
             {
                 this.state.list && (
                     <div className="list-outer-box">
                         <div className='list-inner-box'>
-                            <h2>Your Books</h2>
+                            <h2>{this.state.list.name}</h2>
+                            <div>
+                                {this.state.list.description}
+                            </div>
+                            <div>
+                                created by: {this.state.list.owner}
+                            </div>
+                            <div>
+                                last updated time: {
+                                    this.state.list.updatedAt > this.state.list.createdAt ? this.state.list.updatedAt : this.state.list.createdAt
+                                }
+                            </div>
                             {this.state.list.bookItems.map(book => (
-                                <div>{book._id}</div>
+                                <ListShowItem book={book} key={book._id} />
                             ))}
+
                         </div>
                     </div>
                 )
