@@ -17,7 +17,8 @@ export default function SideNav({ history, loggedIn, currentUserId, userListIds,
   
   if (!loggedIn) return <div></div>
   const followingLists = (ids, lists) => {
-    lists.map(list => (
+    debugger
+    return lists.map(list => (
       ids.includes(list.id)
     ))
   }
@@ -25,8 +26,7 @@ export default function SideNav({ history, loggedIn, currentUserId, userListIds,
       e.preventDefault();
       switch(type) {
         case 'list':
-          // comment back in once list show route renders
-          // history.push(`/lists/${id}`);
+          history.push(`/lists/${id}`);
           break;
         case 'user':
           history.push(`/users/${id}`);

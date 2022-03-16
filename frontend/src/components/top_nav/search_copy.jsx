@@ -91,7 +91,7 @@ export default function SearchBar2() {
 
   return (
     <Autocomplete
-      id="google-map-demo"
+      id="top-search"
       sx={{ width: 300 }}
       getOptionLabel={(option) => {
         // will need to refactor this code once itemShow is ready
