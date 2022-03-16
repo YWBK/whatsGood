@@ -1,15 +1,18 @@
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 import SideNav from "./side_nav";
 import { fetchUser } from '../../actions/user_actions'
 
 const mSTP = (state) => {
-  // debugger
+  if (!state.session.isAuthenticated) return ({loggedIn: state.session.isAuthenticated})
+  debugger
   return ({
     loggedIn: state.session.isAuthenticated,
     currentUserId: state.session.user.id,
-    userLists: state.session.user.myLists,
-    followingLists: state.session.user.followingLists,
-    followingUsers: state.session.user.followingUsers
+    userListIds: state.session.user.myLists,
+    followingListIds: state.session.user.followingLists,
+    followingUsers: state.session.user.followingUsers,
+    lists: state.entities.lists.list
   })
 };
 
@@ -19,4 +22,4 @@ const mDTP = (dispatch) => {
   })
 };
 
-export default connect(mSTP, mDTP)(SideNav);
+export default withRouter(connect(mSTP, mDTP)(SideNav));

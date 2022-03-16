@@ -3,7 +3,9 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from "@mui/material/Box";
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
+import Grid from '@mui/material/Grid';
 import Fade from '@mui/material/Fade'
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 const style = {
@@ -16,6 +18,7 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+    // borderRadius: '4%'
   };
 
 export default function ModalForm() {
@@ -38,12 +41,32 @@ export default function ModalForm() {
             }}>
                 <Fade in={open}>
                 <Box sx={style}>
-                    <Typography id="transition-modal-title" variant="h6" component="h2">
-                    Text in a modal
-                    </Typography>
-                    <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <Typography id="transition-modal-title" variant="h6" component="h2">
+                            Add List
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField 
+                                fullWidth
+                                label='New List Name'
+                                variant='standard'
+                                // value={name}
+                                // onChange={handleChange}
+                            />
+                        </Grid>
+                        <Grid container justifyContent='flex-end' item xs={9}>
+                            <Button>
+                                Cancel
+                            </Button>
+                        </Grid>
+                        <Grid container justifyContent='flex-end' item xs={3}>
+                            <Button>
+                                Submit
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </Box>
                 </Fade>
             </Modal>

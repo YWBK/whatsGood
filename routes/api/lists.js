@@ -12,7 +12,7 @@ const List = require("../../models/List")
 
 
 router.post("/", async(req, res)=>{
-  debugger
+  // debugger
     const list = await new List({
     name: req.body.name,
     description: req.body.description,
