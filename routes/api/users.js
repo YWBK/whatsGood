@@ -225,7 +225,60 @@ router.get('/:id', async (req, res) => {
 })
 
 
+//user follows a list
+router.post('/followlist', async (req, res) =>{
+    const listId = req.body.listId
+    const userId = req.body.userId
+    debugger
+  try {
+    await User.findOneAndUpdate({
+        _id: userId
+    },{
+        $addToSet:{
+            followingLists: listId
+        }
+    })
+    debugger
+    await List.findOneAndUpdate({
+        _id: listId
+    },{
+        $addToSet:{
+            followers: userId
+        }
+    })
+    res.send("Successfully followed the list")
+  } catch (error) {
+      res.json(error.message)
+  }
+})
 
+
+//user unfollows a list
+router.post('/unfollowlist', async (req, res) =>{
+    const listId = req.body.listId
+    const userId = req.body.userId
+    debugger
+  try {
+    await User.findOneAndUpdate({
+        _id: userId
+    },{
+        $pull:{
+            followingLists: listId
+        }
+    })
+    debugger
+    await List.findOneAndUpdate({
+        _id: listId
+    },{
+        $pull:{
+            followers: userId
+        }
+    })
+    res.send("Successfully unfollowed the list")
+  } catch (error) {
+      res.json(error.message)
+  }
+})
 
 
 
