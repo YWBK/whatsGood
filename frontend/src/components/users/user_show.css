@@ -23,6 +23,7 @@
 .user-show__li {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border: 1px solid #3a77cf;
   background-color: #3a77cf;
   color: white;
@@ -30,7 +31,7 @@
   margin: 0.3em;
   border-radius: 3px;
   cursor: pointer;
-  transition: all .25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 
 .user-show__li:hover {
@@ -38,3 +39,30 @@
   background-color: #2561b6;
 }
 
+.user-show__li button,
+.user-show__follow-unfollow {
+  border: 1px solid #fff;
+  background-color: #fff;
+  color: #3a77cf;
+  padding: 0.5em;
+  border-radius: 3px;
+  font-family: "Roboto";
+  cursor: pointer;
+  transition: .2s all ease-in-out;
+}
+
+.user-show__follow-unfollow {
+  border: 1px solid #3a77cf;
+  background-color: #3a77cf;
+  color: #fff;
+  padding: 0.65em;
+}
+
+.user-show__li button:hover {
+  background-color: rgb(230, 230, 230);
+  border-color: rgb(230, 230, 230);
+}
+
+.user-show__follow-unfollow:hover {
+
+}
