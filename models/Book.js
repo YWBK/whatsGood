@@ -9,7 +9,8 @@ const BookSchema = new Schema({
   },
 
   rating:[{
-    Type: Number
+    Type: Number,
+    default: 0
   }],
   
   inLists:[{
