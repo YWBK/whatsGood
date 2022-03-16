@@ -12,10 +12,24 @@ const Activity = require("../../models/Activity")
 
 
 router.post("/", async (req, res) => {
-    const { errors, isValid } = validateCreateListInput(req.body);
-    if (!isValid) {
-        return res.status(400).json(errors);
-    }
+  const { errors, isValid } = validateCreateListInput(req.body);
+  if (!isValid) {
+      return res.status(400).json(errors);
+  }
+  
+  const existedList = await (List.findOne(({
+    $and:[
+      {owner: req.body.owner},
+      {name: req.body.name}
+    ]
+  })))
+  
+  if (JSON.parse(JSON.stringify(existedList))){
+    debugger
+    if (JSON.parse(JSON.stringify(existedList)).owner === req.body.owner){ 
+      debugger
+    return res.status(400).send('List already existed, please use a different name')
+  }}
   
   const list = await new List({
     name: req.body.name,
@@ -25,7 +39,7 @@ router.post("/", async (req, res) => {
 
   const createdList = await list.save()
   await User.findOneAndUpdate({
-          _id: "6230e58ee8ace707b68fee77",
+          _id: req.body.owner,
         },{
             $addToSet: {
                 myLists: createdList._id,
