@@ -38,13 +38,9 @@ const followingUsers = Object.values(state.entities.users[currentUserId].followi
   return ({
     loggedIn: state.session.isAuthenticated,
     currentUserId: currentUserId,
-    // userListIds: state.entities.users[currentUserId].myLists,
-    // followingListIds: state.entities.users[currentUserId].followingLists,
-    // followingUserIds: state.entities.users[currentUserId].followingUsers,
     myLists: myLists,
     followingLists: followingLists,
     followingUsers: followingUsers,
-    lists: state.entities.lists.all
   })
 };
 

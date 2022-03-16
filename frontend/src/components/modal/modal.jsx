@@ -23,8 +23,19 @@ const style = {
 
 export default function ModalForm() {
     const [open, setOpen] = React.useState(false);
+    const [listName, setListName] = React.useState('');
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+
+    const handleClick = (e) => {
+        e.preventDefault();
+    }
+
+    const handleChange = (e) => {
+        e.preventDefault();
+        setListName(e.target.value);
+    }
 
     return (
         <div>
@@ -52,17 +63,17 @@ export default function ModalForm() {
                                 fullWidth
                                 label='New List Name'
                                 variant='standard'
-                                // value={name}
-                                // onChange={handleChange}
+                                value={listName}
+                                onChange={handleChange}
                             />
                         </Grid>
                         <Grid container justifyContent='flex-end' item xs={9}>
-                            <Button>
+                            <Button onClick={handleClose}>
                                 Cancel
                             </Button>
                         </Grid>
                         <Grid container justifyContent='flex-end' item xs={3}>
-                            <Button>
+                            <Button onClick={handleClick}>
                                 Submit
                             </Button>
                         </Grid>
