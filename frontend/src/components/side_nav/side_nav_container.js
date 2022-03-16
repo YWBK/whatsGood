@@ -19,6 +19,7 @@ const mSTP = (state) => {
     });
   })
 const myLists = Object.values(state.entities.lists.all).map(list => {
+  // debugger
   if (list.ownerId === currentUserId) return ({
     id: list.id,
     name: list.name 
