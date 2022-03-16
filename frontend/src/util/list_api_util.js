@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const createList = (data) =>{
+export const createList = (data) => {
   return axios({
     method: "POST",
     url: "api/lists",
@@ -8,6 +8,12 @@ export const createList = (data) =>{
   })
 }
 
+export const getList = (listId) => {
+  return axios({
+    method: "GET",
+    url: `/api/lists/${listId}`
+  })
+}
 
 // export const getListItems = () => {
 //     return axios.get('/api/lists')
