@@ -9,6 +9,7 @@ const validateCreateBookInput = require("../../validation/book")
 const User = require('../../models/User');
 const List = require("../../models/List")
 const Book = require('../../models/Book')
+const Activity = require("../../models/Activity")
 
 
 router.post("/", async(req, res)=>{
@@ -39,8 +40,7 @@ router.post("/", async(req, res)=>{
                 }
               });    
   
-        //add the book to the bookItem bucket for the List  
-     
+        //add the book to the bookItem bucket for the List       
         await List.findOneAndUpdate({
                 _id: req.body.listId
               },{
@@ -48,6 +48,17 @@ router.post("/", async(req, res)=>{
                   bookItems: JSON.parse(JSON.stringify(createdBook))._id
                 }
               });    
+
+        //add to activity model      
+        const newActivity = await new Activity({
+              activityName: "ADD_BOOK",
+              actionType: "added",
+              userId: req.body.userId,
+              listId: req.body.listId,
+              bookId: JSON.parse(JSON.stringify(createdBook))._id
+        })
+
+        await newActivity.save()
   
         res.send("The book has successfully added to the list")        
       } catch (error) {
@@ -75,7 +86,18 @@ router.post("/", async(req, res)=>{
                   bookItems: JSON.parse(JSON.stringify(bookInDB))._id
                 }
               });            
-              res.send("The book has successfully added to the list")
+
+        //add to activity model      
+        const newActivity = await new Activity({
+              activityName: "ADD_BOOK",
+              actionType: "added",
+              userId: req.body.userId,
+              listId: req.body.listId,
+              bookId: JSON.parse(JSON.stringify(bookInDB))._id
+        })
+
+        await newActivity.save()
+        res.send("The book has successfully added to the list")
       } catch (error) {
         res.json(error.message)
       }     
