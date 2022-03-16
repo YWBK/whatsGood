@@ -29,24 +29,24 @@ class ListShow extends React.Component {
     }
 
     render() {
-        const listId = this.props.match.params.listId;
-        const { name, description, owner, createdAt, updatedAt } = this.props.allLists[listId];
+        // console.log(this.props)
+        // const listId = this.props.match.params.listId;
 
         return <>
             {
                 this.state.list && (
                     <div className="list-outer-box">
                         <div className='list-inner-box'>
-                            <h2>{name}</h2>
+                            <h2>{this.state.list.name}</h2>
                             <div>
-                                {description}
+                                {this.state.list.description}
                             </div>
                             <div>
-                                created by: {owner}
+                                created by: {this.state.list.owner}
                             </div>
                             <div>
                                 last updated time: {
-                                    updatedAt > createdAt ? updatedAt : createdAt
+                                    this.state.list.updatedAt > this.state.list.createdAt ? this.state.list.updatedAt : this.state.list.createdAt
                                 }
                             </div>
                             {this.state.list.bookItems.map(book => (

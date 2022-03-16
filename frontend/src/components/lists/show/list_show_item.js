@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import * as React from "react";
+import { fetchSingleBook } from "../../../util/search_util";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
@@ -12,31 +13,47 @@ import BasicRating from "./rating"
 
 class ListShowItem extends React.Component {
 
+    constructor() {
+        super();
+        this.state = { book: null };
+    }
+
+    componentDidMount() {
+        const { volumeId } = this.props.book;
+        fetchSingleBook(volumeId).then(res => {
+            console.log(res.data);
+            this.setState({ book: res.data });
+        });
+    }
+
     render() {
         const { book } = this.props;
+
         return (
-            <Link
-                to={`/items/${book._id}`}
-            // target="_blank"
-            >
-                <AlignItemsList book={book} />
-            </Link>
+            <>
+                {
+                    this.state.book && <Link
+                        to={`/items/${book._id}`}
+                    // target="_blank"
+                    >
+                        <AlignItemsList book={this.state.book.volumeInfo} />
+                    </Link>
+                }
+            </>
         );
     }
 }
 export default ListShowItem;
-
-
 
 function AlignItemsList(props) {
     return (
         <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
             <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                    <Avatar alt="Book1" src="/static/images/avatar/1.jpg" />
+                    <Avatar alt="Book1" src={`${props.book.imageLinks.thumbnail}`} />
                 </ListItemAvatar>
                 <ListItemText
-                    primary={`${props.book._id}`}
+                    primary={`${props.book.title}`}
                     secondary={
                         <React.Fragment>
                             <Typography
@@ -45,10 +62,10 @@ function AlignItemsList(props) {
                                 variant="body2"
                                 color="text.primary"
                             >
-                                Book Description
+                                {`${props.book.subtitle}`}
                             </Typography>
-                            {" — This is a book about…"}
-                            {`${props.book.volumeId}`}
+                            <br />
+                            {`by ${props.book.authors.map(author => `${author} `)}`}
                             <BasicRating book={props.book} />
                         </React.Fragment>
                     }
