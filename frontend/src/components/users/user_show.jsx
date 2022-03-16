@@ -26,22 +26,19 @@ const UserShow = (props) => {
     <div></div>
   );
 
-  // const otherUserView = props.user ? (
-  //   <div>
-  //     {props.currentUser.followingUsers.includes(props.user.id) ? (
-  //       <button>Unfollow {props.user.username}</button>
-  //     ) : (
-  //       <button>Follow {props.user.username}</button>
-  //     )}
-  //     <div>{props.user.username}'s lists</div>
-  //     <ul>{userLists}</ul>
-  //   </div>
-  // ) : (
-  //   <div></div>
-  // );
-
-  // placeholder
-  const otherUserView = <div></div>;
+  const otherUserView = props.user ? (
+    <div>
+      {props.currentUser.followingUsers.includes(props.user.id) ? (
+        <button>Unfollow {props.user.username}</button>
+      ) : (
+        <button>Follow {props.user.username}</button>
+      )}
+      <div>{props.user.username}'s lists</div>
+      <ul>{userLists}</ul>
+    </div>
+  ) : (
+    console.log("no user")
+  );
 
   const loggedInUserView = props.user ? (
     <div>
@@ -54,13 +51,19 @@ const UserShow = (props) => {
 
   // debugger;
   return (
-    <div className="user-show__container">
-      {/* {props.user
-        ? props.currentUser.id === props.user.id
-          ? { loggedInUserView }
-          : { otherUserView }
-        : ""} */}
-      {props.user && props.currentUser.id === props.user.id ? <div>{loggedInUserView}</div> : <div>Not Curr User</div>}
+    <div className="user-show__container-bg">
+      <div className="user-show__container">
+        {props.user ? (
+          props.currentUser.id === props.user.id ? (
+            <div>{loggedInUserView}</div>
+          ) : (
+            <div>{otherUserView}</div>
+          )
+        ) : (
+          ""
+        )}
+        {/* <div>{otherUserView}</div> */}
+      </div>
     </div>
   );
 };
