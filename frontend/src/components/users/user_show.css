@@ -13,11 +13,18 @@
   padding: 1em;
   margin: 0 auto;
   width: 40%;
+  /* max-height: 35vh; */
 }
 
 .user-show__container h1 {
   font-size: 1.75rem;
   margin: 0.5em 0 0.9em;
+}
+
+.user-show__list-container {
+  /* height: 20vh; */
+  max-height: 30vh;
+  overflow: auto;
 }
 
 .user-show__li {
