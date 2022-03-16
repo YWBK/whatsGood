@@ -30,7 +30,7 @@ const ListsReducer = (
                 newList.owner = list.owner;
                 newList.id = list._id;
 
-                if (!newState.list[newList.id]) newState.list[newList.id] = newList;
+                if (!newState.all[newList.id]) newState.all[newList.id] = newList;
                 // debugger;
             }
 
