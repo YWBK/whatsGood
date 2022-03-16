@@ -22,3 +22,12 @@ export const unfollowList = (data) =>{
     data
   })
 }
+
+
+export const followUser = (data) =>{
+  return axios({
+    method: "POST",
+    url: "api/users/followuser",
+    data
+  })
+}
