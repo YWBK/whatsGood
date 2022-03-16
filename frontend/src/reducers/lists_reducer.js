@@ -1,5 +1,5 @@
 import { RECEIVE_USER_LIST } from "../actions/list_actions";
-import { RECEIVE_USER } from '../actions/user_actions';
+import { RECEIVE_USER } from "../actions/user_actions";
 
 const ListsReducer = (
   state = { all: {}, list: {}, new: undefined },
@@ -18,7 +18,7 @@ const ListsReducer = (
     //     newState.new = action.list.data
     //     return newState;
     case RECEIVE_USER:
-    //   debugger;
+      //   debugger;
 
       const combinedLists = [
         ...action.user.data.myLists,
@@ -32,10 +32,12 @@ const ListsReducer = (
         newList.description = list.description;
         newList.followers = list.followers.map((user) => user._id);
         newList.name = list.name;
-        newList.owner = list.owner.id;
+        // newList.owner = list.owner._id;
+        newList.ownerId = list.owner._id ? list.owner._id : list.owner;
+        newList.ownerName = list.owner.username ? list.owner.username : null;
         newList.id = list._id;
 
-        if(!newState.list[newList.id]) newState.list[newList.id] = newList; 
+        if (!newState.list[newList.id]) newState.list[newList.id] = newList;
         // debugger;
       }
 
