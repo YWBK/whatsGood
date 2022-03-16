@@ -90,6 +90,7 @@ export default function SettingsBtn(props) {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        sx={{ zIndex: 10001 }}
       >
         <MenuItem onClick={handleClose} disableRipple>
           <PersonIcon />
