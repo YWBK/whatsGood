@@ -1,12 +1,15 @@
 import React from 'react';
 import './list_show.css';
 import ListShowItem from "./list_show_item";
+import ItemCompose from "../../items/item_compose_container"
 
 
 class ListShow extends React.Component {
     constructor(props) {
         super(props);
         const listId = this.props.match.params.listId;
+        // debugger
+
         this.state = {
             list: this.props.allLists[listId],
         }
@@ -14,14 +17,16 @@ class ListShow extends React.Component {
 
     componentWillMount() {
         const listId = this.props.match.params.listId;
-
+        // debugger
         if (!this.props.allLists[listId]) {
             this.props.fetchList(listId);
         }
     }
 
-    // Called when component propos changes.
+    // Called when component props changes.
     componentDidUpdate(prevProps) {
+        // debugger
+
         const isLocationChanged = prevProps.match.params.listId !== this.props.match.params.listId;
         const listId = this.props.match.params.listId;
         if (!this.state.list || isLocationChanged) {
@@ -32,6 +37,7 @@ class ListShow extends React.Component {
     render() {
         // console.log(this.props)
         // const listId = this.props.match.params.listId;
+        // debugger
 
         return <>
             {
@@ -45,16 +51,20 @@ class ListShow extends React.Component {
                             <div>
                                 {(this.state.list.owner && this.state.list.owner.username) ? `by ${this.state.list.owner.username}` : ""
                                 }
-
                             </div>
                             <div>
-                                last updated time: {
+                                updated: {
                                     this.state.list.updatedAt > this.state.list.createdAt ? this.state.list.updatedAt : this.state.list.createdAt
                                 }
                             </div>
-                            {this.state.list.bookItems.map(book => (
-                                <ListShowItem book={book} key={book._id} />
-                            ))}
+                            <div>
+                                {this.state.list.bookItems.map(book => (
+                                    <ListShowItem book={book} key={book._id} />
+                                ))}
+                            </div>
+                            <div>
+                                <ItemCompose />
+                            </div>
 
                         </div>
                     </div>
