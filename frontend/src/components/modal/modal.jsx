@@ -24,6 +24,7 @@ const style = {
 export default function ModalForm() {
     const [open, setOpen] = React.useState(false);
     const [listName, setListName] = React.useState('');
+    const [listDescription, setListDescription] = React.useState('');
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -64,6 +65,15 @@ export default function ModalForm() {
                                 label='New List Name'
                                 variant='standard'
                                 value={listName}
+                                onChange={handleChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField 
+                                fullWidth
+                                label='List Description'
+                                variant='standard'
+                                value={listDescription}
                                 onChange={handleChange}
                             />
                         </Grid>

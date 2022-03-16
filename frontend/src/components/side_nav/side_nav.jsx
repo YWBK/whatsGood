@@ -2,35 +2,19 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
-import ModalForm from '../modal/modal';
-
+import SideNavList from './side_nav_list';
 
 const drawerWidth = 240;
 
-export default function SideNav({ history, loggedIn, currentUserId, myLists, followingLists, followingUsers, fetchUser }) {
-  React.useEffect(() => fetchUser(currentUserId), []);
+export default function SideNav({ loggedIn, currentUserId, myLists, followingLists, followingUsers, fetchUser }) {
   
+  React.useEffect(() => {
+    fetchUser(currentUserId)
+}, [currentUserId]);
+
   if (!loggedIn) return <div></div>
   if (!myLists) return <div></div>
-
-  const handleClick = (id, type, e) => {
-      e.preventDefault();
-      switch(type) {
-        case 'list':
-          history.push(`/lists/${id}`);
-          break;
-        case 'user':
-          history.push(`/users/${id}`);
-          break;
-        default:
-            return null;
-      };
-  }
 
   return (
     <Drawer
@@ -48,48 +32,29 @@ export default function SideNav({ history, loggedIn, currentUserId, myLists, fol
     >
       <Toolbar />
       <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-        <List
-          sx={{ maxHeight: "max-content", overflow: "auto", paddingTop: 0 }}
-        >
-          <ListSubheader sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <span>My Lists</span>
-            <ModalForm />
-          </ListSubheader>
-          {myLists.map((list) => {
-            if (!list) return null;
-            return (
-              <ListItem button onClick={e => handleClick(list.id, 'list', e)} key={list.id}>
-                <ListItemText primary={`${list.name}`} />
-              </ListItem>
-            )
-          }
-          )}
-        </List>
+        <SideNavList 
+          className='side-nav-my-lists'
+          formType={'my-lists'}
+          currentUserId={currentUserId}
+          list={myLists}
+          fetchUser={fetchUser}
+        />
         <Divider />
-        <List sx={{ height: 380, overflow: "auto", paddingTop: 0 }}>
-          <ListSubheader>Following Lists</ListSubheader>
-          {followingLists.map((list) => {
-            if (!list) return null;
-            return ( 
-              <ListItem button onClick={e => handleClick(list.id, 'list', e)} key={list.id}>
-                <ListItemText primary={`${list.name}`} secondary={`by ${list.ownerName}`} />
-              </ListItem>
-            )
-          }
-          )}
-        </List>
+          <SideNavList 
+            className='side-nav-following-lists'
+            formType='following-lists'
+            currentUserId={currentUserId}
+            list={followingLists}
+            fetchUser={fetchUser}
+          />
         <Divider />
-        <List sx={{ height: 450, overflow: "auto", paddingTop: 0 }}>
-          <ListSubheader>Following Users</ListSubheader>
-          {followingUsers.map((user) => {
-            return (
-              <ListItem button onClick={e => handleClick(user.id, 'user', e)} key={user.id}>
-                <ListItemText primary={`${user.username}`} />
-              </ListItem>
-            )
-          }
-          )}
-        </List>
+        <SideNavList 
+          className='side-nav-following-users'
+          formType='following-users'
+          currentUserId={currentUserId}
+          list={followingUsers}
+          fetchUser={fetchUser}
+        />
       </Box>
     </Drawer>
   );
