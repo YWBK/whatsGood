@@ -6,11 +6,20 @@ module.exports = function validateCreateBookInput(data) {
 
   data.volumeId = validText(data.volumeId) ? data.volumeId : '';
   data.description = validText(data.description) ? data.description : '';
+  data.userId = validText(data.userId) ? data.userId : '';
+  data.listId = validText(data.listId) ? data.listId : '';
 
   if (Validator.isEmpty(data.volumeId)) {
     errors.volumeId = 'volumeId field is required';
   }
 
+  if (Validator.isEmpty(data.userId)) {
+    errors.userId = 'userId field is required';
+  }
+
+  if (Validator.isEmpty(data.listId)) {
+    errors.listId = 'listId field is required';
+  }
 
   return {
     errors,

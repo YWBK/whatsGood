@@ -13,6 +13,16 @@ const BookSchema = new Schema({
     default: 0
   }],
   
+  userID:[{
+    type: Schema.Types.ObjectId,
+    ref: 'User' 
+  }],
+
+  listID:[{
+    type: Schema.Types.ObjectId,
+    ref: 'List' 
+  }],
+
   inLists:[{
     type: Schema.Types.ObjectId,
     ref: 'List' 
