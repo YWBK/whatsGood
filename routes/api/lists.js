@@ -8,6 +8,7 @@ const validateCreateListInput = require("../../validation/list")
 const { route } = require('./users');
 const User = require('../../models/User');
 const List = require("../../models/List")
+const Activity = require("../../models/Activity")
 
 
 router.post("/", async (req, res) => {
@@ -30,6 +31,16 @@ router.post("/", async (req, res) => {
                 myLists: createdList._id,
             },
         })
+  
+  const newActivity = await new Activity({
+      activityName: "CREATE_LIST",
+      actionType: "created",
+      userId: req.body.owner,
+      listId: createdList._id
+  })
+
+  await newActivity.save()
+
   res.json(createdList)
 })
 
