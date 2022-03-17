@@ -1,5 +1,7 @@
 import { RECEIVE_LIST } from "../actions/list_actions";
 import { RECEIVE_USER } from "../actions/user_actions";
+import { RECEIVE_NEW_ITEM } from "../actions/item_actions";
+
 
 const ListsReducer = (
   state = { all: {}, list: {}, new: undefined },
@@ -38,6 +40,15 @@ const ListsReducer = (
       }
 
       return newState;
+
+    case RECEIVE_NEW_ITEM:
+      const item = action.item;
+      const listId = action.listId;
+      if (listId in newState.all) {
+        newState.all[listId].bookItems.push(item);
+      }
+      return newState;
+
     default:
       return state;
   }

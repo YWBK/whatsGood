@@ -1,67 +1,61 @@
 import React from 'react';
 import BasicRating from './item_rate';
 import ItemRate from './item_rate';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import { fetchSingleBook } from '../../util/search_util';
 
+export default function ItemCompose(props) {
+    const [itemRating, setItemRating] = React.useState(0);
+    const [itemName, setItemName] = React.useState("");
 
-class ItemCompose extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            itemName: "",
-            itemRate: 0
-        }
-
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState({ itemRate: nextProps.newItem.itemName });
-    }
-
-    handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        let item = {
-            itemName: this.state.itemName
-        };
+        const volumeId = itemName;
+        const listId = props.listId;
+        const userId = props.userId;
 
-        this.props.composeItem(item);
-        this.setState({ itemName: '', itemRate: 0 })
+        props.addItemToList(volumeId, listId, userId);
     }
 
 
-    update(field) {
-        return e => this.setState({
-            [field]: e.currentTarget.value
-        });
+    const updateRating = (rating) => {
+        setItemRating(rating);
     }
 
-    render() {
-        return (
+    const updateName = (e) => {
+        setItemName(e.target.value);
+    }
+
+    return (
+        <div>
             <div>
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <input type="itemNamearea"
-                            value={this.state.itemName}
-                            onChange={this.update("itemName")}
-                            placeholder="Write your book title"
+                <TextField
+                    id="outlined-basic"
+                    label="Book volume id" variant="outlined"
+                    value={itemName}
+                    onChange={updateName} />
+
+                {/* <Box sx={{ '& > legend': { mt: 2 }, }}>
+                        <Typography component="legend">
+                            Leave a rate
+                        </Typography>
+                        <Rating
+                            name="simple-controlled"
+                            value={itemRating}
+                            onChange={(event, newValue) => {
+                                updateRating(newValue);
+                            }}
                         />
-                        {/* <input type="number"
-                            value={this.state.itemRate}
-                            onChange={this.update("itemRate")}
-                            placeholder="Rate this book..."
-                        /> */}
+                    </Box> */}
 
-                        {/* <ItemRate rate={this.state.itemRate} /> */}
-                        <BasicRating />
-
-                        <input type="submit" value="Submit" />
-                    </div>
-                </form>
-                <br />
+                <Button variant="contained" onClick={handleSubmit} >Add</Button>
             </div>
-        )
-    }
-}
+            <br />
+        </div>
+    )
 
-export default ItemCompose;
+}

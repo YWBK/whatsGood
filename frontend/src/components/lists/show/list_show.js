@@ -73,7 +73,9 @@ class ListShow extends React.Component {
                                 ))}
                             </div>
                             <div>
-                                <ItemCompose />
+                                <ItemCompose
+                                    listId={this.props.match.params.listId}
+                                    userId={this.state.list.ownerId} />
                             </div>
 
                         </div>
