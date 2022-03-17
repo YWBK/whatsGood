@@ -12,3 +12,9 @@ export const fetchUser = (userId) => (dispatch) => {
     .then((user) => dispatch(receiveUser(user)))
     .catch((err) => console.log(err));
 };
+
+// export const followUser = (userBeingFollowedId, userId) => dispatch => {
+//   return UserApiUtil.followUser(userBeingFollowedId, userId)
+//     .then(res => )
+
+// }

@@ -4,8 +4,6 @@ import "./user_show.css";
 
 const UserShow = (props) => {
   useEffect(() => {
-    // props.fetchUser("623163debe6f6b61d32195c7");
-    // debugger
     // const getUserContent = async () => {
     //   await props.fetchUser(props.currentUserId);
     //   props.fetchUser(props.match.params.userId);
@@ -16,14 +14,6 @@ const UserShow = (props) => {
     props.fetchUser(props.currentUserId)
       .then(() => props.fetchUser(props.match.params.userId));
   }, [props.match.params.userId]);
-  // useEffect(() => props.fetchUser(props.currentUserId), []);
-
-  // KEEP
-  // useEffect(() => {
-  //   props.fetchUser(props.match.params.userId);
-  // }, [props.match.params.userId]);
-
-  // debugger;
 
   const followListHandler = (e) => {
     e.preventDefault();
@@ -104,7 +94,6 @@ const UserShow = (props) => {
         ) : (
           ""
         )}
-        {/* <div>{otherUserView}</div> */}
       </div>
     </div>
   );
