@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ItemsShowItem from "./items_show_item";
-import ItemsShowRatings from "./items_show_ratings";
 import { fetchSingleBook } from "../../util/search_util";
 import Button from "@mui/material/Button";
 import "./items_show.css";
@@ -19,11 +18,14 @@ const ItemsShow = (props) => {
     <div className="items-show__container">
       <div className="items-show">
         <ItemsShowItem item={item} />
-        <ItemsShowRatings />
+        <Button
+          variant="contained"
+          sx={{ marginTop: "2em", width: "max-content" }}
+          size="medium"
+        >
+          Add to list
+        </Button>
       </div>
-      <Button variant="contained" sx={{marginTop: "2em"}}>
-        Add to list
-      </Button>
     </div>
   );
 };
