@@ -12,7 +12,7 @@ const mSTP = (state) => {
   if (Object.keys(state.entities.users).length < 1) return (
     { loggedIn: state.session.isAuthenticated, currentUserId: currentUserId })
   const followingLists = Object.values(allLists).map(list => {
-    if (state.session.user.followingLists.includes(list.id)) {
+    if (state.entities.users[currentUserId].followingLists.includes(list.id)) {
       return ({
         id: list.id,
         name: list.name,
