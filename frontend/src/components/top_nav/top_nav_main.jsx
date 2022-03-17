@@ -17,7 +17,7 @@ const TopNavMain = ({ loggedIn, logout, currUserId }) => {
         <AppBar position="static">
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <div style={{ display: "flex", alignItems: "center" }}>
-              <Link to={`/users/${currUserId}`}>
+              <Link to={"/"}>
                 <IconButton
                   size="large"
                   edge="start"
@@ -36,7 +36,6 @@ const TopNavMain = ({ loggedIn, logout, currUserId }) => {
                   </Typography>
                 </IconButton>
               </Link>
-              {/* <SearchBar /> */}
               <SearchBar2 />
             </div>
             <SettingsBtn logout={logout} currUserId={currUserId} />
