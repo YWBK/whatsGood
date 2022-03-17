@@ -1,5 +1,6 @@
 import React from "react";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
+import ItemsShowSynopsis from "./items_show_synopsis";
 
 const ItemsShowItem = (props) => {
   const item = props.item ? props.item.volumeInfo : null;
@@ -40,9 +41,10 @@ const ItemsShowItem = (props) => {
         </p>
       </div>
       <div>
-        <Button variant="outlined" size="small">
+        {/* <Button variant="outlined" size="small">
           Synopsis
-        </Button>
+        </Button> */}
+        <ItemsShowSynopsis synopsis={item.description} />
       </div>
     </div>
   ) : (
