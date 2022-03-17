@@ -57,24 +57,28 @@ class ListShow extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="list-container">
         {this.state.list && (
           <div className="list-outer-box">
             <div className="list-inner-box">
-              <h2>{this.state.list.name}</h2>
-              <div>{this.state.list.description}</div>
               <div>
-                {this.state.list.owner && this.state.list.owner.username
-                  ? `by ${this.state.list.owner.username}`
-                  : ""}
+                <h2>{this.state.list.name}</h2>
+                <div className="list-description">
+                  {this.state.list.description}
+                </div>
+                <div className="list-owner">
+                  {this.state.list.owner && this.state.list.owner.username
+                    ? `by ${this.state.list.owner.username}`
+                    : ""}
+                </div>
+                <div className="list-date">
+                  updated:{" "}
+                  {this.state.list.updatedAt > this.state.list.createdAt
+                    ? this.state.list.updatedAt
+                    : this.state.list.createdAt}
+                </div>
               </div>
-              <div>
-                updated:{" "}
-                {this.state.list.updatedAt > this.state.list.createdAt
-                  ? this.state.list.updatedAt
-                  : this.state.list.createdAt}
-              </div>
-              <div>
+              <div className="list-items">
                 {typeof this.state.list.bookItems[0] === "object" ? (
                   this.state.list.bookItems.map((book) => {
                     return (
@@ -97,18 +101,22 @@ class ListShow extends React.Component {
                   <div></div>
                 )}
               </div>
-              <div>
-                <ListItemSearch
-                  userId={this.state.list.ownerId}
-                  addItem={this.props.addItemToList}
-                />
-                {/* <ItemCompose
-                                    listId={this.props.match.params.listId}
-                                    userId={this.state.list.ownerId} /> */}
-              </div>
             </div>
           </div>
         )}
+
+        <div className="list-search">
+          {this.state.list && (
+            <ListItemSearch
+              userId={this.state.list.ownerId}
+              addItem={this.props.addItemToList}
+            />
+          )}
+
+          {/* <ItemCompose
+                                    listId={this.props.match.params.listId}
+                                    userId={this.state.list.ownerId} /> */}
+        </div>
 
         <Snackbar
           open={this.state.snackOpen}
@@ -116,7 +124,7 @@ class ListShow extends React.Component {
           onClose={this.handleSnackClose}
           message="Your book is deleted from this list!"
         />
-      </>
+      </div>
     );
   }
 }
