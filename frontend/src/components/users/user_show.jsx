@@ -4,8 +4,6 @@ import "./user_show.css";
 
 const UserShow = (props) => {
   useEffect(() => {
-    // props.fetchUser("623163debe6f6b61d32195c7");
-    // debugger
     // const getUserContent = async () => {
     //   await props.fetchUser(props.currentUserId);
     //   props.fetchUser(props.match.params.userId);
@@ -13,22 +11,33 @@ const UserShow = (props) => {
     // }
 
     // getUserContent();
-    props.fetchUser(props.currentUserId)
+    props
+      .fetchUser(props.currentUserId)
       .then(() => props.fetchUser(props.match.params.userId));
   }, [props.match.params.userId]);
-  // useEffect(() => props.fetchUser(props.currentUserId), []);
 
-  // KEEP
-  // useEffect(() => {
-  //   props.fetchUser(props.match.params.userId);
-  // }, [props.match.params.userId]);
-
-  // debugger;
-
-  const followListHandler = (e) => {
+  const followListHandler = (e, listId) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log("clicked")
+    props.followList(listId, props.currentUserId);
+  };
+
+  const followUserHandler = (e) => {
+    e.preventDefault();
+    props.followUser(props.user.id, props.currentUserId);
+  };
+
+  const unfollowUserHandler = (e) => {
+    e.preventDefault();
+    props.unfollowUser(props.user.id, props.currentUserId);
+    // props.history.push(`/users/${props.currentUserId}`);
+  };
+
+  const unfollowListHandler = (e, listId) => {
+    // debugger;
+    e.preventDefault();
+    e.stopPropagation();
+    props.unfollowList(listId, props.currentUserId);
   };
 
   const userLists =
@@ -43,11 +52,11 @@ const UserShow = (props) => {
                 <p>{list.name}</p>
                 {props.user.id !== props.currentUser.id ? (
                   props.currentUser.followingLists.includes(list.id) ? (
-                    <button onClick={(e) => followListHandler(e)}>
+                    <button onClick={(e) => unfollowListHandler(e, list.id)}>
                       Unfollow
                     </button>
                   ) : (
-                    <button onClick={(e) => followListHandler(e)}>
+                    <button onClick={(e) => followListHandler(e, list.id)}>
                       Follow
                     </button>
                   )
@@ -65,12 +74,20 @@ const UserShow = (props) => {
   const otherUserView =
     props.currentUser && props.user ? (
       <div>
-        {props.currentUser.followingUsers.includes(props.user.id) ? (
-          <button className="user-show__follow-unfollow">
+        {props.currentUser.followingUsers.find(
+          (user) => user.id === props.user.id
+        ) ? (
+          <button
+            className="user-show__follow-unfollow"
+            onClick={(e) => unfollowUserHandler(e)}
+          >
             Unfollow {props.user.username}
           </button>
         ) : (
-          <button className="user-show__follow-unfollow">
+          <button
+            className="user-show__follow-unfollow"
+            onClick={(e) => followUserHandler(e)}
+          >
             Follow {props.user.username}
           </button>
         )}
@@ -104,7 +121,6 @@ const UserShow = (props) => {
         ) : (
           ""
         )}
-        {/* <div>{otherUserView}</div> */}
       </div>
     </div>
   );

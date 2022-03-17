@@ -2,42 +2,39 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from "@mui/icons-material/Search";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
 import throttle from 'lodash/throttle';
-import { fetchBooksAndUsers } from '../../util/search_util';
+import { fetchBooks } from '../../../util/search_util';
 import { withRouter } from 'react-router-dom';
 
-function SearchBar2({ history }) {
+function ListItemSearch({ userId, addItem, match }) {
   const [value, setValue] = React.useState(null);
   const [inputValue, setInputValue] = React.useState('Harry Potter');
   const [options, setOptions] = React.useState([]);
 
+  const styles = theme => ({
+    multilineColor: {
+      color: 'white'
+    }
+  });
+
   const fetch = React.useMemo(
     () =>
       throttle((request) => {
-        fetchBooksAndUsers(request)
+        fetchBooks(request)
           .then(json => {
             return setOptions(Object
               .values(json.data)
-              .reverse()
-              .flat()
-              .map((res) => {
-                if (res.volumeInfo) {
+              .map(book => {
                   return ({
-                    id: res.id,
-                    volumeInfo: res.volumeInfo
-                  });
-                } else if (res.username) {
-                  return ({
-                    id: res._id,
-                    username: res.username
-                  });
-                } else {
-                  return null;
-                }
+                      id: book.id, 
+                      volumeInfo: book.volumeInfo
+                  })
               })
             )
           });
@@ -46,6 +43,7 @@ function SearchBar2({ history }) {
   );
 
   React.useEffect(() => {
+    // debugger
     let active = true;
 
     if (inputValue === '') {
@@ -54,6 +52,22 @@ function SearchBar2({ history }) {
     }
 
     fetch( inputValue , 
+    //   (results) => {
+    //   debugger
+    //   if (active) {
+    //     let newOptions = [];
+
+    //     if (value) {
+    //       newOptions = [value];
+    //     }
+
+    //     if (results) {
+    //       newOptions = [...newOptions, ...results];
+    //     }
+
+    //     setOptions(newOptions);
+    //   }
+    // }
     );
 
     return () => {
@@ -79,13 +93,18 @@ function SearchBar2({ history }) {
     return authorsResult;
   } 
 
+ const handleSelect = () => {
+   debugger
+ }
+
   return (
     <Autocomplete
       id="top-search"
       sx={{ width: 300 }}
       getOptionLabel={(option) => {
+        // will need to refactor this code once itemShow is ready
         return (
-          typeof option.id === 'string' ? option.id : null
+          typeof option.volumeInfo.title === 'string' ? option.id : null
         )
       }
       }
@@ -96,15 +115,10 @@ function SearchBar2({ history }) {
       filterSelectedOptions
       value={value}
       onChange={(event, newValue) => {
-        if (newValue.username) {
-          history.push({
-            pathname: `/users/${newValue.id}`
-          })
-        } else if (newValue.volumeInfo) {
-          history.push({
-            pathname: `/items/${newValue.id}`
-          })
-        }
+        const volumeId = newValue.id;
+        const listId = match.params.listId;
+        const ownerId = userId;
+        addItem(volumeId, listId, ownerId);
         setValue(newValue);
       }}
       onInputChange={(event, newInputValue) => {
@@ -113,16 +127,8 @@ function SearchBar2({ history }) {
       renderInput={(params) => (
         <TextField 
           {...params} 
-          InputProps={{
-            ...params.InputProps,
-            startAdornment: (
-                <InputAdornment position='start'>
-                    <SearchIcon sx={{ color: 'white' }} />
-                </InputAdornment>
-            ),
-          }}
-          sx={{ input: { color: 'white' }}}
-          label="Search" 
+          sx={{ input: { color: 'text.primary' }}}
+          label="Add Item" 
           fullWidth />
       )}
       renderOption={(props, option) => {
@@ -136,10 +142,10 @@ function SearchBar2({ history }) {
               </Grid>
               <Grid item xs >
                 <Typography variant="body3" color="text.primary">
-                  {option.volumeInfo ? option.volumeInfo.title : (option.username ? option.username : null)}
+                  {option.volumeInfo.title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {option.volumeInfo ? authors(option.volumeInfo.authors) : null }
+                  {authors(option.volumeInfo.authors)}
                 </Typography>
               </Grid>
             </Grid>
@@ -150,4 +156,4 @@ function SearchBar2({ history }) {
   );
 }
 
-export default withRouter(SearchBar2);
+export default withRouter(ListItemSearch);

@@ -8,7 +8,7 @@ import SettingsBtn from "./settings_btn";
 import { Link } from "react-router-dom";
 import "./top_nav.css";
 // import SearchBar from './search';
-import SearchBar2 from './search_copy';
+import SearchBar2 from "./search_copy";
 
 const TopNavMain = ({ loggedIn, logout, currUserId }) => {
   return (
@@ -17,7 +17,7 @@ const TopNavMain = ({ loggedIn, logout, currUserId }) => {
         <AppBar position="static">
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <div style={{ display: "flex", alignItems: "center" }}>
-              <Link to="/">
+              <Link to={"/"}>
                 <IconButton
                   size="large"
                   edge="start"
@@ -36,7 +36,6 @@ const TopNavMain = ({ loggedIn, logout, currUserId }) => {
                   </Typography>
                 </IconButton>
               </Link>
-              {/* <SearchBar /> */}
               <SearchBar2 />
             </div>
             <SettingsBtn logout={logout} currUserId={currUserId} />
