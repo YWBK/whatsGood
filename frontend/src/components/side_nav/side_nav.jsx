@@ -9,7 +9,7 @@ const drawerWidth = 240;
 
 export default function SideNav({ 
   loggedIn, 
-  currentUserId, 
+  currentUserId,
   myLists, 
   followingLists, 
   followingUsers,
@@ -26,7 +26,7 @@ export default function SideNav({
     }
     getNavContent();
 
-}, [currentUserId]);
+}, [fetchUser, currentUserId]);
 
   if (!loggedIn) return <div></div>
   if (!myLists) return <div></div>

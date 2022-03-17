@@ -8,36 +8,41 @@ const mSTP = (state) => {
 
   if (!state.session.isAuthenticated) return ({loggedIn: state.session.isAuthenticated})
   const currentUserId = state.session.user.id
+  const allLists = state.entities.lists.all
   if (Object.keys(state.entities.users).length < 1) return (
     {loggedIn: state.session.isAuthenticated, currentUserId: currentUserId})
-  const followingLists = Object.values(state.entities.lists.all).map(list => {
-    // debugger
-    if (state.session.user.followingLists.includes(list.id)) return ({
+    const followingLists = Object.values(allLists).map(list => {
+    if (state.session.user.followingLists.includes(list.id)) {return ({
         id: list.id,
         name: list.name,
-        ownerName: list.ownerName
-    });
+        ownerName: list.ownerName,
+        bookItems: list.bookItems
+    })} else {
+      return null;
+    };
   })
-const myLists = Object.values(state.entities.lists.all).map(list => {
-  // debugger
-  if (list.ownerId === currentUserId) return ({
+  const myLists = Object.values(allLists).map(list => {
+  if (list.ownerId === currentUserId) {return ({
     id: list.id,
-    name: list.name 
-  })
+    name: list.name,
+    booktItems: list.bookItems
+  })} else {
+    return null;
+  }
 });
-// debugger
 const followingUsers = Object.values(state.entities.users[currentUserId].followingUsers).map(user => {
-  // debugger
-  if (user.id !== currentUserId) return ({
+  if (user.id !== currentUserId) {return ({
     id: user.id,
     username: user.username 
-  })
+  })} else {
+    return null;
+  }
 });
-// debugger
-   
+
   return ({
     loggedIn: state.session.isAuthenticated,
     currentUserId: currentUserId,
+    // allLists: allLists,
     myLists: myLists,
     followingLists: followingLists,
     followingUsers: followingUsers,
