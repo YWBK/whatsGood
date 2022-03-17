@@ -60,6 +60,7 @@ const ListsReducer = (
       newState.all[action.data.listId].followers.filter(
         (followerId) => followerId !== action.data.userId
       );
+      // debugger;
       return newState;
     default:
       return state;
