@@ -21,7 +21,6 @@ class ListShowItem extends React.Component {
     componentDidMount() {
         const { volumeId } = this.props.book;
         fetchSingleBook(volumeId).then(res => {
-            console.log(res.data);
             this.setState({ book: res.data });
         });
     }
@@ -33,7 +32,7 @@ class ListShowItem extends React.Component {
             <>
                 {
                     this.state.book && <Link
-                        to={`/items/${book._id}`}
+                        to={`/items/${book.volumeId}`}
                     // target="_blank"
                     >
                         <AlignItemsList book={this.state.book.volumeInfo} />

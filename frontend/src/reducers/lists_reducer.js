@@ -1,5 +1,7 @@
 import { RECEIVE_LIST } from "../actions/list_actions";
 import { RECEIVE_USER } from "../actions/user_actions";
+import { RECEIVE_NEW_ITEM } from "../actions/item_actions";
+
 
 const ListsReducer = (
   state = { all: {}, list: {}, new: undefined },
@@ -10,10 +12,13 @@ const ListsReducer = (
   switch (action.type) {
     case RECEIVE_LIST:
       const list = action.list.data;
-      newState.all[list._id] = list;
+      list.id = list._id;
+      delete list._id;
+      list.ownerId = list.owner._id ? list.owner._id : list.owner;
+      newState.all[list.id] = list;
+
       return newState;
     case RECEIVE_USER:
-      //   debugger;
 
       const combinedLists = [
         ...action.user.data.myLists,
@@ -32,11 +37,18 @@ const ListsReducer = (
         newList.id = list._id;
 
         if (!newState.all[newList.id]) newState.all[newList.id] = newList;
-        // debugger;
       }
 
-      // debugger;
       return newState;
+
+    case RECEIVE_NEW_ITEM:
+      const item = action.item;
+      const listId = action.listId;
+      if (listId in newState.all) {
+        newState.all[listId].bookItems.push(item);
+      }
+      return newState;
+
     default:
       return state;
   }

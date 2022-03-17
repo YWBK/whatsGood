@@ -21,7 +21,8 @@ const UsersReducer = (oldState = {}, action) => {
       }
 
       for (let list of action.user.data.followingUsers) {
-        newUser.followingUsers.push(list._id);
+        newUser.followingUsers.push({id: list._id, username: list.username});
+        // newUser.followingUsers.push(list._id);
       }
 
       for (let list of action.user.data.myLists) {

@@ -1,12 +1,15 @@
 import React from 'react';
 import './list_show.css';
 import ListShowItem from "./list_show_item";
+import ItemCompose from "../../items/item_compose_container"
 
 
 class ListShow extends React.Component {
     constructor(props) {
         super(props);
         const listId = this.props.match.params.listId;
+        // debugger
+
         this.state = {
             list: this.props.allLists[listId],
         }
@@ -14,24 +17,27 @@ class ListShow extends React.Component {
 
     componentWillMount() {
         const listId = this.props.match.params.listId;
-
         if (!this.props.allLists[listId]) {
             this.props.fetchList(listId);
         }
     }
 
-    // Called when component propos changes.
-    componentDidUpdate() {
+    // Called when component props changes.
+    componentDidUpdate(prevProps) {
+        const isLocationChanged = prevProps.match.params.listId !== this.props.match.params.listId;
         const listId = this.props.match.params.listId;
-        if (!this.state.list) {
-            this.setState({ list: this.props.allLists[listId] });
+        const getListContent = async () => {
+            if (isLocationChanged) {
+                await this.props.fetchList(listId)
+            }
+            if (!this.state.list || isLocationChanged) {
+                this.setState({ list: this.props.allLists[listId] });
+            }
         }
+        getListContent();
     }
 
     render() {
-        // console.log(this.props)
-        // const listId = this.props.match.params.listId;
-
         return <>
             {
                 this.state.list && (
@@ -44,16 +50,22 @@ class ListShow extends React.Component {
                             <div>
                                 {(this.state.list.owner && this.state.list.owner.username) ? `by ${this.state.list.owner.username}` : ""
                                 }
-
                             </div>
                             <div>
-                                last updated time: {
+                                updated: {
                                     this.state.list.updatedAt > this.state.list.createdAt ? this.state.list.updatedAt : this.state.list.createdAt
                                 }
                             </div>
-                            {this.state.list.bookItems.map(book => (
-                                <ListShowItem book={book} key={book._id} />
-                            ))}
+                            <div>
+                                {this.state.list.bookItems.map(book => (
+                                    <ListShowItem book={book} key={book._id} />
+                                ))}
+                            </div>
+                            <div>
+                                <ItemCompose
+                                    listId={this.props.match.params.listId}
+                                    userId={this.state.list.ownerId} />
+                            </div>
 
                         </div>
                     </div>
