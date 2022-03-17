@@ -14,7 +14,7 @@ const TopNavAuth = () => {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar sx={{ justifyContent: "space-between" }}>
-            <Link to="/home">
+            <Link to="/">
               <IconButton
                 size="large"
                 edge="start"
