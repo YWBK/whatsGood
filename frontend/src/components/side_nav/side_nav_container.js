@@ -15,21 +15,10 @@ const mSTP = (state) => {
       currentUserId: currentUserId,
     };
 
-<<<<<<< HEAD
-  if (!state.session.isAuthenticated) return ({ loggedIn: state.session.isAuthenticated })
-  const currentUserId = state.session.user.id
-  const allLists = state.entities.lists.all
-  if (Object.keys(state.entities.users).length < 1) return (
-    { loggedIn: state.session.isAuthenticated, currentUserId: currentUserId })
-  const followingLists = Object.values(allLists).map(list => {
-    if (state.entities.users[currentUserId].followingLists.includes(list.id)) {
-      return ({
-=======
   // debugger;
   const followingLists = Object.values(allLists).map((list) => {
     if (state.entities.users[currentUserId].followingLists.includes(list.id)) {
       return {
->>>>>>> ba34434be97b1d21e6f1da31352281ed079125ac
         id: list.id,
         name: list.name,
         ownerName: list.ownerName,
