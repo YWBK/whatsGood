@@ -46,7 +46,7 @@ export default function SideNav({
       }}
     >
       <Toolbar />
-      <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+      <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "space-evenly",  height: "100vh" }}>
         <SideNavList
           className="side-nav-my-lists"
           formType={"my-lists"}
