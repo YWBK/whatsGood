@@ -12,7 +12,7 @@ const Book = require('../../models/Book')
 const Activity = require("../../models/Activity");
 
 
-
+//user adds a book to the list
 router.post("/", async(req, res)=>{
     const { errors, isValid } = validateCreateBookInput(req.body);
     if (!isValid) {
@@ -152,6 +152,50 @@ router.get('/popular_score', async(req, res) =>{
   res.json(percentage)
 })
 
+
+
+router.post('/remove_book_from_list', async (req, res) =>{
+  const userId = req.body.userId;
+  const bookId = req.body.bookId;
+  const listId = req.body.listId;
+
+  try {
+    //remove the book from the list
+      await List.findOneAndUpdate({
+        _id: listId
+      },{
+        $pull:{
+          bookItems: bookId
+        }
+      });
+
+     //remove the list from the inLists bucket for this book 
+      await Book.findOneAndUpdate({
+        _id: bookId
+      },{
+        $pull:{
+          inLists: listId
+        }
+      })
+
+    const book = await Book.findOne({
+      _id: bookId
+    })
+
+    //add to activity model      
+    const newActivity = await new Activity({
+            activityName: "REMOVE_BOOK",
+            actionType: "removed",
+            userId: userId,
+            bookId: bookId
+    })
+    await newActivity.save()
+
+   res.json(book) 
+  } catch (error) {
+    res.json(error.message)
+  }
+})
 
 
 module.exports = router
