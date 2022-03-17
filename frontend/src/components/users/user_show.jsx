@@ -26,7 +26,7 @@ const UserShow = (props) => {
   const unfollowUserHandler = (e) => {
     e.preventDefault();
     props.unfollowUser(props.user.id, props.currentUserId);
-    props.history.push(`/users/${props.currentUserId}`);
+    // props.history.push(`/users/${props.currentUserId}`);
   };
 
   const unfollowListHandler = (e, listId) => {
