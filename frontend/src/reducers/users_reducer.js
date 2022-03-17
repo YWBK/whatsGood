@@ -1,4 +1,9 @@
-import { RECEIVE_USER } from "../actions/user_actions";
+import {
+  RECEIVE_USER,
+  REMOVE_USER,
+  REMOVE_LIST_FOLLOW,
+  ADD_LIST_FOLLOW,
+} from "../actions/user_actions";
 
 const UsersReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
@@ -21,7 +26,7 @@ const UsersReducer = (oldState = {}, action) => {
       }
 
       for (let list of action.user.data.followingUsers) {
-        newUser.followingUsers.push({id: list._id, username: list.username});
+        newUser.followingUsers.push({ id: list._id, username: list.username });
         // newUser.followingUsers.push(list._id);
       }
 
@@ -30,6 +35,32 @@ const UsersReducer = (oldState = {}, action) => {
       }
 
       newState[newUser.id] = newUser;
+
+      // debugger;
+      return newState;
+    case REMOVE_USER:
+      const currentUser = newState[action.data.userId];
+      const userIdBeingFollowed = action.data.userIdBeingFollowed;
+
+      currentUser.followingLists = currentUser.followingUsers.filter(
+        (user) => user.id !== userIdBeingFollowed
+      );
+
+      return newState;
+    case REMOVE_LIST_FOLLOW:
+      // debugger;
+      const listId = action.data.listId;
+
+      newState[action.data.userId].followingLists = newState[
+        action.data.userId
+      ].followingLists.filter((id) => id !== listId);
+
+      // debugger;
+      return newState;
+    case ADD_LIST_FOLLOW:
+      // debugger;
+
+      newState[action.data.userId].followingLists.push(action.data.listId);
 
       // debugger;
       return newState;
