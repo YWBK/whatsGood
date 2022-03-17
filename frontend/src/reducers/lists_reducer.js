@@ -57,9 +57,9 @@ const ListsReducer = (
 
     case REMOVE_LIST_FOLLOW:
       // debugger;
-      newState.all[action.data.listId].followers.filter(
-        (followerId) => followerId !== action.data.userId
-      );
+      newState.all[action.data.listId].followers = newState.all[
+        action.data.listId
+      ].followers.filter((followerId) => followerId !== action.data.userId);
       // debugger;
       return newState;
     default:

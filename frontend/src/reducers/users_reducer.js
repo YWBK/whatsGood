@@ -42,7 +42,7 @@ const UsersReducer = (oldState = {}, action) => {
       const currentUser = newState[action.data.userId];
       const userIdBeingFollowed = action.data.userIdBeingFollowed;
 
-      currentUser.followingUsers.filter(
+      currentUser.followingLists = currentUser.followingUsers.filter(
         (user) => user.id !== userIdBeingFollowed
       );
 
@@ -51,7 +51,9 @@ const UsersReducer = (oldState = {}, action) => {
       // debugger;
       const listId = action.data.listId;
 
-      newState[action.data.userId].followingLists.filter((id) => id !== listId);
+      newState[action.data.userId].followingLists = newState[
+        action.data.userId
+      ].followingLists.filter((id) => id !== listId);
 
       // debugger;
       return newState;
