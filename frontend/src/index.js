@@ -12,6 +12,7 @@ import { followList } from "./util/user_api_util"
 import { popularScore } from "./util/book_api_util"
 import { removeBookFromList } from "./util/book_api_util"
 import { fetchBooksAndUsers } from "./util/search_util"
+import { seeds } from "./util/seed_apil_util"
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;
@@ -43,3 +44,4 @@ window.followList = followList
 window.popularScore = popularScore
 window.removeBookFromList = removeBookFromList
 window.fetchBooksAndUsers = fetchBooksAndUsers
+window.seedUsers = seeds
