@@ -10,8 +10,9 @@ import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import throttle from 'lodash/throttle';
 import { fetchBooks } from '../../util/search_util';
+import { withRouter } from 'react-router-dom';
 
-export default function SearchBar2() {
+function SearchBar2({ history }) {
   const [value, setValue] = React.useState(null);
   const [inputValue, setInputValue] = React.useState('Harry Potter');
   const [options, setOptions] = React.useState([]);
@@ -92,6 +93,10 @@ export default function SearchBar2() {
     return authorsResult;
   } 
 
+ const handleSelect = () => {
+   debugger
+ }
+
   return (
     <Autocomplete
       id="top-search"
@@ -110,7 +115,9 @@ export default function SearchBar2() {
       filterSelectedOptions
       value={value}
       onChange={(event, newValue) => {
-        setOptions(newValue ? [newValue, ...options] : options);
+        history.push({
+          pathname: `/items/${newValue.id}`
+        })
         setValue(newValue);
       }}
       onInputChange={(event, newInputValue) => {
@@ -134,7 +141,7 @@ export default function SearchBar2() {
       )}
       renderOption={(props, option) => {
         return (
-          <li {...props} key={option.id}>
+          <li {...props} key={option.id} >
             <Grid container alignItems="center" >
               <Grid item >
                 <Box
@@ -158,3 +165,5 @@ export default function SearchBar2() {
     />
   );
 }
+
+export default withRouter(SearchBar2);
