@@ -53,8 +53,9 @@ const ListsReducer = (
 
     case ITEM_REMOVED_FROM_LIST:
       if (action.listId in newState.all) {
-        newState.all[listId].bookItems = newState.all[listId].bookItems.filter(item => item.id !== action.bookId && item !== action.bookId);
+        newState.all[action.listId].bookItems = newState.all[action.listId].bookItems.filter(item => item._id !== action.bookId && item !== action.bookId);
       }
+      return newState;
 
     case ADD_LIST_FOLLOW:
       newState.all[action.data.listId].followers.push(action.data.userId);
@@ -70,6 +71,6 @@ const ListsReducer = (
     default:
       return state;
   }
-};
+}
 
 export default ListsReducer;

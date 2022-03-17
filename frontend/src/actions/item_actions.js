@@ -18,19 +18,15 @@ export const itemRemovedFromList = (bookId, listId) => ({
 export const addItemToList = (volumeId, listId, userId) => dispatch => {
     createBook({ volumeId, listId, userId })
         .then(item => {
-            console.log(item);
             dispatch(receiveNewItem(item.data, listId))
         })
         .catch(err => console.log(err))
-    // For ui only test    
-    // dispatch(receiveNewItem({ volumeId: 'QpkrDwAAQBAJ' }, listId));
 };
 
 export const removeItemFromList = (userId, volumeId, listId) => dispatch => {
-    debugger
+    // debugger
     removeBookFromList(userId, volumeId, listId)
         .then(res => {
-            console.log(res);
             dispatch(itemRemovedFromList(volumeId, listId))
         })
         .catch(err => console.log(err))

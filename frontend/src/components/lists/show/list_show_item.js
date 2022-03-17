@@ -17,8 +17,11 @@ class ListShowItem extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { book: null };
+        this.state = {
+            book: null
+        };
         this.onDelete = this.onDelete.bind(this);
+
     }
 
     componentDidMount() {
