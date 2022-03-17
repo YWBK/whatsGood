@@ -1,4 +1,4 @@
-import { RECEIVE_USER } from "../actions/user_actions";
+import { RECEIVE_USER, REMOVE_USER } from "../actions/user_actions";
 
 const UsersReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
@@ -21,7 +21,7 @@ const UsersReducer = (oldState = {}, action) => {
       }
 
       for (let list of action.user.data.followingUsers) {
-        newUser.followingUsers.push({id: list._id, username: list.username});
+        newUser.followingUsers.push({ id: list._id, username: list.username });
         // newUser.followingUsers.push(list._id);
       }
 
@@ -32,6 +32,15 @@ const UsersReducer = (oldState = {}, action) => {
       newState[newUser.id] = newUser;
 
       // debugger;
+      return newState;
+    case REMOVE_USER:
+      const currentUser = newState[action.data.userId];
+      const userIdBeingFollowed = action.data.userIdBeingFollowed;
+
+      currentUser.followingUsers.filter(
+        (user) => user.id !== userIdBeingFollowed
+      );
+
       return newState;
     default:
       return oldState;

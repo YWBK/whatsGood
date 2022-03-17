@@ -11,14 +11,21 @@ const UserShow = (props) => {
     // }
 
     // getUserContent();
-    props.fetchUser(props.currentUserId)
+    props
+      .fetchUser(props.currentUserId)
       .then(() => props.fetchUser(props.match.params.userId));
   }, [props.match.params.userId]);
 
   const followListHandler = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log("clicked")
+    console.log("clicked");
+  };
+
+  const unfollowUserHandler = (e) => {
+    e.preventDefault();
+    props.unfollowUser(props.user.id, props.currentUserId);
+    props.history.push(`/users/${props.currentUserId}`);
   };
 
   const userLists =
@@ -33,9 +40,7 @@ const UserShow = (props) => {
                 <p>{list.name}</p>
                 {props.user.id !== props.currentUser.id ? (
                   props.currentUser.followingLists.includes(list.id) ? (
-                    <button onClick={(e) => followListHandler(e)}>
-                      Unfollow
-                    </button>
+                    <button>Unfollow</button>
                   ) : (
                     <button onClick={(e) => followListHandler(e)}>
                       Follow
@@ -55,8 +60,13 @@ const UserShow = (props) => {
   const otherUserView =
     props.currentUser && props.user ? (
       <div>
-        {props.currentUser.followingUsers.find(user => user.id === props.user.id) ? (
-          <button className="user-show__follow-unfollow">
+        {props.currentUser.followingUsers.find(
+          (user) => user.id === props.user.id
+        ) ? (
+          <button
+            className="user-show__follow-unfollow"
+            onClick={(e) => unfollowUserHandler(e)}
+          >
             Unfollow {props.user.username}
           </button>
         ) : (
