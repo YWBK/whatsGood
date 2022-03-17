@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { fetchList } from '../../../actions/list_actions';
+import { removeItemFromList } from '../../../actions/item_actions';
 import ListShow from './list_show';
 
 
@@ -12,7 +13,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchList: listId => dispatch(fetchList(listId))
+        fetchList: listId => dispatch(fetchList(listId)),
+        removeItemFromList: (userId, volumeId, listId) => dispatch(removeItemFromList(userId, volumeId, listId))
     };
 };
 

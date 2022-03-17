@@ -1,10 +1,17 @@
-import { createBook } from '../util/book_api_util';
+import { createBook, removeBookFromList } from '../util/book_api_util';
 
 export const RECEIVE_NEW_ITEM = "RECEIVE_NEW_ITEM";
+export const ITEM_REMOVED_FROM_LIST = "ITEM_REMOVED_FROM_LIST";
 
 export const receiveNewItem = (item, listId) => ({
     type: RECEIVE_NEW_ITEM,
     item,
+    listId
+})
+
+export const itemRemovedFromList = (bookId, listId) => ({
+    type: ITEM_REMOVED_FROM_LIST,
+    bookId,
     listId
 })
 
@@ -17,4 +24,14 @@ export const addItemToList = (volumeId, listId, userId) => dispatch => {
         .catch(err => console.log(err))
     // For ui only test    
     // dispatch(receiveNewItem({ volumeId: 'QpkrDwAAQBAJ' }, listId));
+};
+
+export const removeItemFromList = (userId, volumeId, listId) => dispatch => {
+    debugger
+    removeBookFromList(userId, volumeId, listId)
+        .then(res => {
+            console.log(res);
+            dispatch(itemRemovedFromList(volumeId, listId))
+        })
+        .catch(err => console.log(err))
 };

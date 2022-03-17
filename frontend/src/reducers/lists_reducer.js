@@ -1,6 +1,6 @@
 import { RECEIVE_LIST } from "../actions/list_actions";
 import { RECEIVE_USER } from "../actions/user_actions";
-import { RECEIVE_NEW_ITEM } from "../actions/item_actions";
+import { RECEIVE_NEW_ITEM, ITEM_REMOVED_FROM_LIST } from "../actions/item_actions";
 
 
 const ListsReducer = (
@@ -49,6 +49,11 @@ const ListsReducer = (
       }
       return newState;
 
+    case ITEM_REMOVED_FROM_LIST:
+      if (action.listId in newState.all) {
+        newState.all[listId].bookItems = newState.all[listId].bookItems.filter(item => item.id !== action.bookId && item !== action.bookId);
+      }
+      return newState;
     default:
       return state;
   }

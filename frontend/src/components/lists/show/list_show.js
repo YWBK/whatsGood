@@ -58,7 +58,17 @@ class ListShow extends React.Component {
                             </div>
                             <div>
                                 {this.state.list.bookItems.map(book => (
-                                    <ListShowItem book={book} key={book._id} />
+                                    <ListShowItem
+                                        book={book}
+                                        key={book._id}
+                                        listId={this.state.id}
+                                        removeBookFromList={
+                                            () => this.props.removeItemFromList(
+                                                this.state.list.ownerId,
+                                                book._id,
+                                                this.props.match.params.listId
+                                            )
+                                        } />
                                 ))}
                             </div>
                             <div>
