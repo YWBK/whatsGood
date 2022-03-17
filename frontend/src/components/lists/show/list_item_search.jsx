@@ -127,7 +127,7 @@ function ListItemSearch({ userId, addItem, match }) {
       renderInput={(params) => (
         <TextField 
           {...params} 
-          sx={{ input: { color: 'white' }}}
+          sx={{ input: { color: 'text.primary' }}}
           label="Add Item" 
           fullWidth />
       )}
