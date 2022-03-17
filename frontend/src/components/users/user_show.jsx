@@ -55,7 +55,7 @@ const UserShow = (props) => {
   const otherUserView =
     props.currentUser && props.user ? (
       <div>
-        {props.currentUser.followingUsers.includes(props.user.id) ? (
+        {props.currentUser.followingUsers.find(user => user.id === props.user.id) ? (
           <button className="user-show__follow-unfollow">
             Unfollow {props.user.username}
           </button>
