@@ -4,6 +4,13 @@ import ListShowItem from "./list_show_item";
 import ItemCompose from "../../items/item_compose_container"
 import ListItemSearch from './list_item_search';
 import Snackbar from '@mui/material/Snackbar';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 class ListShow extends React.Component {
     constructor(props) {
@@ -13,10 +20,13 @@ class ListShow extends React.Component {
 
         this.state = {
             list: this.props.allLists[listId],
-            snackOpen: false
+            snackOpen: false,
+            listDeleteConfirmDialogOpen: false
         }
         this.handleSnackClose = this.handleSnackClose.bind(this);
-    }   
+        this.onDeleteList = this.onDeleteList.bind(this);
+        this.handleDeleteConfirmDialogClose = this.handleDeleteConfirmDialogClose.bind(this);
+    }
 
     componentWillMount() {
         const listId = this.props.match.params.listId;
@@ -48,24 +58,43 @@ class ListShow extends React.Component {
         this.setState({ snackOpen: false });
     };
 
+    onDeleteList() {
+        const userId = this.state.list.ownerId;
+        this.props.removeList(this.props.match.params.listId, userId);
+        this.props.history.push(`/users/${userId}`);
+    }
+
+    handleDeleteConfirmDialogClose() {
+        this.setState({ listDeleteConfirmDialogOpen: false });
+    }
+
     render() {
         return <>
             {
                 this.state.list && (
                     <div className="list-outer-box">
                         <div className='list-inner-box'>
-                            <h2>{this.state.list.name}</h2>
-                            <div>
-                                {this.state.list.description}
-                            </div>
-                            <div>
-                                {(this.state.list.owner && this.state.list.owner.username) ? `by ${this.state.list.owner.username}` : ""
-                                }
-                            </div>
-                            <div>
-                                updated: {
-                                    this.state.list.updatedAt > this.state.list.createdAt ? this.state.list.updatedAt : this.state.list.createdAt
-                                }
+                            <div className='list-info'>
+                                <div className='list-info-left'>
+                                    <h2>{this.state.list.name}</h2>
+                                    <div className='list-show-des'>
+                                        {this.state.list.description}
+                                    </div>
+                                    <div className='list-show-author'>
+                                        {(this.state.list.owner && this.state.list.owner.username) ? `by ${this.state.list.owner.username}` : ""
+                                        }
+                                    </div>
+                                </div>
+                                <div className='list-info-right'>
+                                    <Button
+                                        onClick={() => {
+                                            this.setState({ listDeleteConfirmDialogOpen: true })
+                                        }}
+                                        variant="outlined"
+                                        startIcon={<DeleteIcon />}>
+                                        Delete
+                                    </Button>
+                                </div>
                             </div>
                             <div>
                                 {this.state.list.bookItems.map(book => (
@@ -86,7 +115,7 @@ class ListShow extends React.Component {
                                 ))}
                             </div>
                             <div>
-                                <ListItemSearch 
+                                <ListItemSearch
                                     userId={this.state.list.ownerId}
                                     addItem={this.props.addItemToList} />
                                 {/* <ItemCompose
@@ -95,6 +124,28 @@ class ListShow extends React.Component {
                             </div>
 
                         </div>
+
+                        <Dialog
+                            open={this.state.listDeleteConfirmDialogOpen}
+                            onClose={this.handleDeleteConfirmDialogClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <DialogTitle id="alert-dialog-title">
+                                {`Do you want to delete ${this.state.list.name}?`}
+                            </DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-description">
+                                    You won't be able to restore this once deleted.
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={this.handleDeleteConfirmDialogClose}>Cancel</Button>
+                                <Button onClick={this.onDeleteList} autoFocus>
+                                    Delete
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
                     </div>
                 )
             }

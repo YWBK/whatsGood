@@ -3,6 +3,7 @@ import {
   REMOVE_USER,
   REMOVE_LIST_FOLLOW,
   ADD_LIST_FOLLOW,
+
 } from "../actions/user_actions";
 
 const UsersReducer = (oldState = {}, action) => {
@@ -39,7 +40,7 @@ const UsersReducer = (oldState = {}, action) => {
       // debugger;
       return newState;
     case REMOVE_USER:
-      
+
       newState[action.data.userId].followingUsers = newState[
         action.data.userId
       ].followingUsers.filter(

@@ -41,12 +41,14 @@ class ListShowItem extends React.Component {
         return (
             <>
                 {
-                    this.state.book && <><Link
-                        to={`/items/${book.volumeId}`}
-                    // target="_blank"
-                    >
-                        <AlignItemsList book={this.state.book.volumeInfo} />
-                    </Link>
+                    this.state.book && <>
+                        <Link
+                            to={`/items/${book.volumeId}`}
+                        // target="_blank"
+                        >
+                            <AlignItemsList book={this.state.book.volumeInfo} />
+                        </Link>
+
                         <IconButton aria-label="delete"
 
                             onClick={this.onDelete}>

@@ -8,4 +8,30 @@
 
 .list-inner-box {
   margin-top: 100px;
+  width: 70%;
+}
+
+.list-show-des {
+  font-size: 18px;
+  font-weight: 400;
+  padding-bottom: 8px;
+}
+
+.list-show-author {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.list-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid grey;
+  padding-bottom: 20px;
+}
+
+.list-info-left h2 {
+  font-size: 28px;
+  font-weight: 500;
+  padding-bottom: 18px;
 }

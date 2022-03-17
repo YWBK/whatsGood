@@ -1,4 +1,4 @@
-import { RECEIVE_LIST } from "../actions/list_actions";
+import { RECEIVE_LIST, REMOVE_LIST } from "../actions/list_actions";
 import {
   RECEIVE_USER,
   REMOVE_LIST_FOLLOW,
@@ -20,6 +20,11 @@ const ListsReducer = (
       list.ownerId = list.owner._id ? list.owner._id : list.owner;
       newState.all[list.id] = list;
 
+      return newState;
+    case REMOVE_LIST:
+      if (action.listId in newState.all) {
+        delete newState.all[action.listId];
+      }
       return newState;
     case RECEIVE_USER:
       const combinedLists = [
