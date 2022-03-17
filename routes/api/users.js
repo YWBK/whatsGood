@@ -231,7 +231,7 @@ router.post('/followlist', async (req, res) =>{
     debugger
     const listId = req.body.listId
     const userId = req.body.userId
-    debugger
+    // debugger
   try {
     await User.findOneAndUpdate({
         _id: userId
