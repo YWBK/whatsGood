@@ -15,4 +15,6 @@ export const addItemToList = (volumeId, listId, userId) => dispatch => {
             dispatch(receiveNewItem(item, listId))
         })
         .catch(err => console.log(err))
+    // For ui only test    
+    // dispatch(receiveNewItem({ volumeId: 'QpkrDwAAQBAJ' }, listId));
 };
