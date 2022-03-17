@@ -21,7 +21,6 @@ class ListShowItem extends React.Component {
     componentDidMount() {
         const { volumeId } = this.props.book;
         fetchSingleBook(volumeId).then(res => {
-            console.log(res.data);
             this.setState({ book: res.data });
         });
     }
