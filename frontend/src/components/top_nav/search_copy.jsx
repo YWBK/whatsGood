@@ -2,14 +2,12 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from "@mui/icons-material/Search";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
 import throttle from 'lodash/throttle';
-import { fetchBooks } from '../../util/search_util';
+import { fetchBooksAndUsers } from '../../util/search_util';
 import { withRouter } from 'react-router-dom';
 
 function SearchBar2({ history }) {
@@ -17,24 +15,29 @@ function SearchBar2({ history }) {
   const [inputValue, setInputValue] = React.useState('Harry Potter');
   const [options, setOptions] = React.useState([]);
 
-  const styles = theme => ({
-    multilineColor: {
-      color: 'white'
-    }
-  });
-
   const fetch = React.useMemo(
     () =>
       throttle((request) => {
-        fetchBooks(request)
+        fetchBooksAndUsers(request)
           .then(json => {
             return setOptions(Object
               .values(json.data)
-              .map(book => {
+              .reverse()
+              .flat()
+              .map((res) => {
+                if (res.volumeInfo) {
                   return ({
-                      id: book.id, 
-                      volumeInfo: book.volumeInfo
-                  })
+                    id: res.id,
+                    volumeInfo: res.volumeInfo
+                  });
+                } else if (res.username) {
+                  return ({
+                    id: res._id,
+                    username: res.username
+                  });
+                } else {
+                  return null;
+                }
               })
             )
           });
@@ -43,7 +46,6 @@ function SearchBar2({ history }) {
   );
 
   React.useEffect(() => {
-    // debugger
     let active = true;
 
     if (inputValue === '') {
@@ -52,22 +54,6 @@ function SearchBar2({ history }) {
     }
 
     fetch( inputValue , 
-    //   (results) => {
-    //   debugger
-    //   if (active) {
-    //     let newOptions = [];
-
-    //     if (value) {
-    //       newOptions = [value];
-    //     }
-
-    //     if (results) {
-    //       newOptions = [...newOptions, ...results];
-    //     }
-
-    //     setOptions(newOptions);
-    //   }
-    // }
     );
 
     return () => {
@@ -93,18 +79,13 @@ function SearchBar2({ history }) {
     return authorsResult;
   } 
 
- const handleSelect = () => {
-   debugger
- }
-
   return (
     <Autocomplete
       id="top-search"
       sx={{ width: 300 }}
       getOptionLabel={(option) => {
-        // will need to refactor this code once itemShow is ready
         return (
-          typeof option.volumeInfo.title === 'string' ? option.id : null
+          typeof option.id === 'string' ? option.id : null
         )
       }
       }
@@ -115,9 +96,15 @@ function SearchBar2({ history }) {
       filterSelectedOptions
       value={value}
       onChange={(event, newValue) => {
-        history.push({
-          pathname: `/items/${newValue.id}`
-        })
+        if (newValue.username) {
+          history.push({
+            pathname: `/users/${newValue.id}`
+          })
+        } else if (newValue.volumeInfo) {
+          history.push({
+            pathname: `/items/${newValue.id}`
+          })
+        }
         setValue(newValue);
       }}
       onInputChange={(event, newInputValue) => {
@@ -135,7 +122,6 @@ function SearchBar2({ history }) {
             ),
           }}
           sx={{ input: { color: 'white' }}}
-          // color='secondary'
           label="Search" 
           fullWidth />
       )}
@@ -150,12 +136,10 @@ function SearchBar2({ history }) {
               </Grid>
               <Grid item xs >
                 <Typography variant="body3" color="text.primary">
-                  {option.volumeInfo.title}
-                  {/* {authors(option.volumeInfo.authors)} */}
+                  {option.volumeInfo ? option.volumeInfo.title : (option.username ? option.username : null)}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {/* {option.volumeInfo.title} */}
-                  {authors(option.volumeInfo.authors)}
+                  {option.volumeInfo ? authors(option.volumeInfo.authors) : null }
                 </Typography>
               </Grid>
             </Grid>

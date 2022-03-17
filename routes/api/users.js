@@ -413,7 +413,6 @@ router.post('/remove_a_list', async (req, res) => {
         }
 
         //remove the list from list owner / current user's mylist bucket
-        debugger        
         const user = await User.findOneAndUpdate({
             _id: userId
         },{
@@ -438,7 +437,6 @@ router.post('/remove_a_list', async (req, res) => {
 
         res.json(deletedList)
     } catch (error) {
-        debugger
         res.json(error.message)
     }
 })

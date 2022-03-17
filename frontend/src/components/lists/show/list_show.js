@@ -1,5 +1,5 @@
-import React from 'react';
-import './list_show.css';
+import React from "react";
+import "./list_show.css";
 import ListShowItem from "./list_show_item";
 import ItemCompose from "../../items/item_compose_container"
 import ListItemSearch from './list_item_search';
@@ -11,6 +11,10 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import ItemCompose from "../../items/item_compose_container";
+import ListItemSearch from "./list_item_search";
+import Snackbar from "@mui/material/Snackbar";
+
 
 class ListShow extends React.Component {
     constructor(props) {
@@ -35,28 +39,44 @@ class ListShow extends React.Component {
         }
     }
 
+
+
+    handleSnackClose(event, reason) {
+        if (reason === "clickaway") {
+            return;
+        }
+
+
+        this.setState({ snackOpen: false });
+    }
+    componentWillMount() {
+        const listId = this.props.match.params.listId;
+        if (!this.props.allLists[listId]) {
+            this.props.fetchList(listId);
+        }
+    }
+
+    componentDidMount() {
+        this.props.fetchList(this.props.match.params.listId).then((list) => {
+            this.setState({ list: list });
+        });
+    }
+
     // Called when component props changes.
     componentDidUpdate(prevProps) {
-        const isLocationChanged = prevProps.match.params.listId !== this.props.match.params.listId;
+        const isLocationChanged =
+            prevProps.match.params.listId !== this.props.match.params.listId;
         const listId = this.props.match.params.listId;
         const getListContent = async () => {
             if (isLocationChanged) {
-                await this.props.fetchList(listId)
+                await this.props.fetchList(listId);
             }
             if (!this.state.list || isLocationChanged) {
                 this.setState({ list: this.props.allLists[listId] });
             }
-        }
+        };
         getListContent();
     }
-
-    handleSnackClose(event, reason) {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        this.setState({ snackOpen: false });
-    };
 
     onDeleteList() {
         const userId = this.state.list.ownerId;
@@ -149,17 +169,10 @@ class ListShow extends React.Component {
                     </div>
                 )
             }
-
-            <Snackbar
-                open={this.state.snackOpen}
-                autoHideDuration={6000}
-                onClose={this.handleSnackClose}
-                message="Your book is deleted from this list!"
-            />
-
-        </>;
-
+        </>
     }
+
+
 }
 
 export default ListShow;

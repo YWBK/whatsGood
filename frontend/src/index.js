@@ -11,6 +11,7 @@ import { logout } from './actions/session_actions';
 import { followList } from "./util/user_api_util"
 import { popularScore } from "./util/book_api_util"
 import { removeBookFromList } from "./util/book_api_util"
+import { fetchBooksAndUsers } from "./util/search_util"
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;
@@ -41,3 +42,4 @@ window.searchbar = fetchBooks
 window.followList = followList
 window.popularScore = popularScore
 window.removeBookFromList = removeBookFromList
+window.fetchBooksAndUsers = fetchBooksAndUsers

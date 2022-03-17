@@ -23,6 +23,14 @@ export const fetchSingleBook = (volumeId) => {
 }
 
 
+export const fetchBooksAndUsers = (str) =>{
+  return axios.get('/api/search/books_and_users',{
+    params:{
+      searchString: str
+    }
+  })
+}
+
 
 
 

@@ -3,7 +3,7 @@ import {
   REMOVE_USER,
   REMOVE_LIST_FOLLOW,
   ADD_LIST_FOLLOW,
-
+  ADD_USER_FOLLOW,
 } from "../actions/user_actions";
 
 const UsersReducer = (oldState = {}, action) => {
@@ -12,7 +12,7 @@ const UsersReducer = (oldState = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_USER:
-      // debugger;
+
       const newUser = {};
 
       newUser.id = action.user.data._id;
@@ -37,10 +37,8 @@ const UsersReducer = (oldState = {}, action) => {
 
       newState[newUser.id] = newUser;
 
-      // debugger;
       return newState;
     case REMOVE_USER:
-
       newState[action.data.userId].followingUsers = newState[
         action.data.userId
       ].followingUsers.filter(
@@ -48,22 +46,28 @@ const UsersReducer = (oldState = {}, action) => {
       );
 
       return newState;
+    case ADD_USER_FOLLOW:
+
+      let newlyFollowedUser = {
+        id: newState[action.data.userBeingFollowedId].id,
+        username: newState[action.data.userBeingFollowedId].username,
+      };
+
+      newState[action.data.userId].followingUsers.push(newlyFollowedUser);
+
+      return newState;
     case REMOVE_LIST_FOLLOW:
-      // debugger;
       const listId = action.data.listId;
 
       newState[action.data.userId].followingLists = newState[
         action.data.userId
       ].followingLists.filter((id) => id !== listId);
 
-      // debugger;
       return newState;
     case ADD_LIST_FOLLOW:
-      // debugger;
 
       newState[action.data.userId].followingLists.push(action.data.listId);
 
-      // debugger;
       return newState;
     default:
       return oldState;
