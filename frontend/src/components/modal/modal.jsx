@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid';
 import Fade from '@mui/material/Fade'
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { withRouter } from "react-router-dom";
 
 const style = {
     position: 'absolute',
@@ -21,7 +22,7 @@ const style = {
     // borderRadius: '4%'
   };
 
-export default function ModalForm() {
+function ModalForm({ currentUserId, addList, history }) {
     const [open, setOpen] = React.useState(false);
     const [listName, setListName] = React.useState('');
     const [listDescription, setListDescription] = React.useState('');
@@ -31,11 +32,29 @@ export default function ModalForm() {
 
     const handleClick = (e) => {
         e.preventDefault();
+        const owner = currentUserId;
+        const name = listName;
+        const description = listDescription;
+        const newList = {
+            owner: owner,
+            name: name,
+            description, description
+        }
+        const makeList = async () => {
+            const res = await addList(newList);
+            const id = res.list.data.id;
+            history.push({
+                pathname: `/lists/${id}`
+            })
+            handleClose();
+        }
+        makeList();
     }
 
-    const handleChange = (e) => {
+    const handleChange = (field, e) => {
         e.preventDefault();
-        setListName(e.target.value);
+        field(e.target.value);
+        // setListName(e.target.value);
     }
 
     return (
@@ -65,7 +84,7 @@ export default function ModalForm() {
                                 label='New List Name'
                                 variant='standard'
                                 value={listName}
-                                onChange={handleChange}
+                                onChange={ e => handleChange(setListName, e)}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -74,7 +93,10 @@ export default function ModalForm() {
                                 label='List Description'
                                 variant='standard'
                                 value={listDescription}
-                                onChange={handleChange}
+                                onChange={e => handleChange(setListDescription, e)}
+                                onKeyPress={e => {
+                                    if (e.key === 'Enter') handleClick(e)
+                                }}
                             />
                         </Grid>
                         <Grid container justifyContent='flex-end' item xs={9}>
@@ -94,3 +116,5 @@ export default function ModalForm() {
         </div>
     )
 }
+
+export default withRouter(ModalForm);

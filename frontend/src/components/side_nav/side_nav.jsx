@@ -17,7 +17,8 @@ export default function SideNav({
   followingListIds,
   followingUserIds, 
   fetchUser, 
-  fetchList }) {
+  fetchList,
+  addList }) {
   
   React.useEffect(() => {
     const getNavContent = async () => {
@@ -54,6 +55,7 @@ export default function SideNav({
           list={myLists}
           listIds={myListIds}
           fetch={fetchList}
+          addList={addList}
         />
         <Divider />
           <SideNavList 
