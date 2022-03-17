@@ -16,25 +16,18 @@ class ListShow extends React.Component {
     }
 
     componentWillMount() {
-        // debugger
         const listId = this.props.match.params.listId;
-        // debugger
         if (!this.props.allLists[listId]) {
-            // debugger
             this.props.fetchList(listId);
         }
     }
 
     // Called when component props changes.
     componentDidUpdate(prevProps) {
-        // debugger
-
         const isLocationChanged = prevProps.match.params.listId !== this.props.match.params.listId;
         const listId = this.props.match.params.listId;
-        // debugger
         const getListContent = async () => {
             if (isLocationChanged) {
-                // debugger
                 await this.props.fetchList(listId)
             }
             if (!this.state.list || isLocationChanged) {
@@ -45,10 +38,6 @@ class ListShow extends React.Component {
     }
 
     render() {
-        // console.log(this.props)
-        // const listId = this.props.match.params.listId;
-        // debugger
-
         return <>
             {
                 this.state.list && (
