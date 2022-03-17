@@ -8,6 +8,7 @@ const keys = require('../../config/keys');
 const Activity = require("../../models/Activity")
 const validateSignupInput = require('../../validation/signup');
 const validateLoginInput = require('../../validation/login');
+const List = require('../../models/List');
 
 
 
@@ -381,7 +382,66 @@ router.post('/unfollowuser', async (req, res) => {
 })
 
 
+//user removes a list
+router.post('/remove_a_list', async (req, res) => {
+    const userId = req.body.userId;
+    const listId = req.body.listId;
+    try { 
+        //find all users have this list
+        const list = await List.findOne({
+            _id: listId
+        });
 
+        const listParsed = JSON.parse(JSON.stringify(list))
+
+        //can't remove a list created by someone else
+        if (listParsed.owner !== userId){
+            return res.status(400).send("Can't remove a list created by someone else")
+        }
+
+        //iterate through all the users who have this list in their followingLists bucket and delete the list
+        for (let i = 0; i < listParsed.followers.length; i++) {
+            const listFollowerId = listParsed.followers[i]
+            debugger
+            await User.findByIdAndUpdate({
+                _id: listFollowerId
+            },{
+                $pull:{
+                    followingLists: listId
+                }
+            })
+        }
+
+        //remove the list from list owner / current user's mylist bucket
+        debugger        
+        const user = await User.findOneAndUpdate({
+            _id: userId
+        },{
+            $pull:{
+                myLists: listId
+            }
+        });
+        
+        //remove the list from List model
+        const deletedList = await List.findOneAndDelete({
+            _id: listId
+        })
+
+      //add to activity model 
+        const newActivity = await new Activity({
+            activityName: "REMOVE_LIST",
+            actionType: "removed",
+            userId: userId,
+            listId: listId
+        })
+        await newActivity.save()
+
+        res.json(deletedList)
+    } catch (error) {
+        debugger
+        res.json(error.message)
+    }
+})
 
 
 
