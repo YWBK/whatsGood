@@ -16,16 +16,24 @@ const UserShow = (props) => {
       .then(() => props.fetchUser(props.match.params.userId));
   }, [props.match.params.userId]);
 
-  const followListHandler = (e) => {
+  const followListHandler = (e, listId) => {
+    // debugger;
     e.preventDefault();
     e.stopPropagation();
-    console.log("clicked");
+    props.followList(listId, props.currentUserId);
   };
 
   const unfollowUserHandler = (e) => {
     e.preventDefault();
     props.unfollowUser(props.user.id, props.currentUserId);
     props.history.push(`/users/${props.currentUserId}`);
+  };
+
+  const unfollowListHandler = (e, listId) => {
+    // debugger;
+    e.preventDefault();
+    e.stopPropagation();
+    props.unfollowList(listId, props.currentUserId);
   };
 
   const userLists =
@@ -40,9 +48,11 @@ const UserShow = (props) => {
                 <p>{list.name}</p>
                 {props.user.id !== props.currentUser.id ? (
                   props.currentUser.followingLists.includes(list.id) ? (
-                    <button>Unfollow</button>
+                    <button onClick={(e) => unfollowListHandler(e, list.id)}>
+                      Unfollow
+                    </button>
                   ) : (
-                    <button onClick={(e) => followListHandler(e)}>
+                    <button onClick={(e) => followListHandler(e, list.id)}>
                       Follow
                     </button>
                   )

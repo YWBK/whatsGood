@@ -1,5 +1,10 @@
 import { connect } from "react-redux";
-import { fetchUser, unfollowUser } from "../../actions/user_actions";
+import {
+  fetchUser,
+  unfollowUser,
+  unfollowList,
+  followList,
+} from "../../actions/user_actions";
 import UserShow from "./user_show";
 
 const mSTP = (state, prevProps) => {
@@ -16,6 +21,8 @@ const mDTP = (dispatch) => {
     fetchUser: (userId) => dispatch(fetchUser(userId)),
     unfollowUser: (userIdBeingFollowed, userId) =>
       dispatch(unfollowUser(userIdBeingFollowed, userId)),
+    unfollowList: (listId, userId) => dispatch(unfollowList(listId, userId)),
+    followList: (listId, userId) => dispatch(followList(listId, userId)),
   };
 };
 
