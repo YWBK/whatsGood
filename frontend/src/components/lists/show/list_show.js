@@ -36,8 +36,9 @@ class ListShow extends React.Component {
         }
     }
 
-
-
+    isMyList() {
+        return this.state.list.ownerId === this.props.currentUserId;
+    }
     handleSnackClose(event, reason) {
         if (reason === "clickaway") {
             return;
@@ -103,14 +104,14 @@ class ListShow extends React.Component {
                                     </div>
                                 </div>
                                 <div className='list-info-right'>
-                                    <Button
+                                    {this.isMyList() && <Button
                                         onClick={() => {
                                             this.setState({ listDeleteConfirmDialogOpen: true })
                                         }}
                                         variant="outlined"
                                         startIcon={<DeleteIcon />}>
                                         Delete
-                                    </Button>
+                                    </Button>}
                                 </div>
                             </div>
                             <div>
@@ -132,12 +133,11 @@ class ListShow extends React.Component {
                                 ))}
                             </div>
                             <div>
-                                <ListItemSearch
-                                    userId={this.state.list.ownerId}
-                                    addItem={this.props.addItemToList} />
-                                {/* <ItemCompose
-                                    listId={this.props.match.params.listId}
-                                    userId={this.state.list.ownerId} /> */}
+                                {
+                                    this.isMyList() && <ListItemSearch
+                                        userId={this.state.list.ownerId}
+                                        addItem={this.props.addItemToList} />
+                                }
                             </div>
 
                         </div>

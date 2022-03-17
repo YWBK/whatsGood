@@ -8,6 +8,7 @@ import { withRouter } from "react-router-dom";
 const mapStateToProps = (state) => {
     return {
         allLists: Object.assign({}, state.entities.lists.all),
+        currentUserId: state.session.user.id,
     };
 };
 
