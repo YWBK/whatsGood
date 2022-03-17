@@ -4,6 +4,7 @@ import ListShow from './list_show';
 
 
 const mapStateToProps = (state) => {
+    // debugger
     return {
         allLists: Object.assign({}, state.entities.lists.all)
     };

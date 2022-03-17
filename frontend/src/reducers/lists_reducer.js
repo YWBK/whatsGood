@@ -10,10 +10,13 @@ const ListsReducer = (
   switch (action.type) {
     case RECEIVE_LIST:
       const list = action.list.data;
-      newState.all[list._id] = list;
+      list.id = list._id;
+      delete list._id;
+      list.ownerId = list.owner._id ? list.owner._id : list.owner;
+      newState.all[list.id] = list;
+
       return newState;
     case RECEIVE_USER:
-      //   debugger;
 
       const combinedLists = [
         ...action.user.data.myLists,
@@ -32,10 +35,8 @@ const ListsReducer = (
         newList.id = list._id;
 
         if (!newState.all[newList.id]) newState.all[newList.id] = newList;
-        // debugger;
       }
 
-      // debugger;
       return newState;
     default:
       return state;
