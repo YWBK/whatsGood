@@ -115,7 +115,9 @@ function SearchBar2({ history }) {
       filterSelectedOptions
       value={value}
       onChange={(event, newValue) => {
-        setOptions(newValue ? [newValue, ...options] : options);
+        history.push({
+          pathname: `/items/${newValue.id}`
+        })
         setValue(newValue);
       }}
       onInputChange={(event, newInputValue) => {
@@ -139,7 +141,7 @@ function SearchBar2({ history }) {
       )}
       renderOption={(props, option) => {
         return (
-          <li {...props} key={option.id} onClick={handleSelect}>
+          <li {...props} key={option.id} >
             <Grid container alignItems="center" >
               <Grid item >
                 <Box
