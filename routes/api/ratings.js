@@ -29,7 +29,6 @@ const Rating = require("../../models/Rating")
 //     res.send(error.message)
 //   }
 
-   
 
 // })
 
