@@ -9,7 +9,6 @@ export const receiveNewItem = (item, listId) => ({
 })
 
 export const addItemToList = (volumeId, listId, userId) => dispatch => {
-    console.log({ volumeId, listId, userId });
     createBook({ volumeId, listId, userId })
         .then(item => {
             console.log(item);

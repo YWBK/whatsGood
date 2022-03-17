@@ -64,7 +64,7 @@ function AlignItemsList(props) {
                                 {`${props.book.subtitle}`}
                             </Typography>
                             <br />
-                            {`by ${props.book.authors.map(author => `${author} `)}`}
+                            {`by ${props.book.authors.map(author => `${author}`)}`}
 
                         </React.Fragment>
                     }

@@ -21,7 +21,7 @@ export default function ItemCompose(props) {
         props.addItemToList(volumeId, listId, userId);
     }
 
-
+    // to be replaced once we have % data from backend
     const updateRating = (rating) => {
         setItemRating(rating);
     }
