@@ -27,13 +27,7 @@ const ItemsShowItem = (props) => {
       </div>
       <div>
         <p>Categories: </p>
-        <ul>
-          {item.categories.map((category, index) => (
-            <li key={index} className="items-show-item__category">
-              {category}
-            </li>
-          ))}
-        </ul>
+        <p className="items-show-item__category">{item.categories[0]}</p>
       </div>
       <div>
         <p className="items-show-item__pct">

@@ -21,6 +21,11 @@ export default function ItemsShowSynopsis({synopsis}) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const parse = require("html-react-parser");
+  const description = parse(synopsis);
+
+//   debugger;
+
   return (
     <div>
       <Button variant="outlined" size="small" onClick={handleOpen}>
@@ -33,9 +38,7 @@ export default function ItemsShowSynopsis({synopsis}) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-description">
-            {synopsis}
-          </Typography>
+          <div className="items-show-item__synopsis">{description}</div>
         </Box>
       </Modal>
     </div>
