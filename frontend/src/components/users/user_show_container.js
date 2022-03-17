@@ -4,6 +4,7 @@ import {
   unfollowUser,
   unfollowList,
   followList,
+  followUser,
 } from "../../actions/user_actions";
 import UserShow from "./user_show";
 
@@ -23,6 +24,8 @@ const mDTP = (dispatch) => {
       dispatch(unfollowUser(userIdBeingFollowed, userId)),
     unfollowList: (listId, userId) => dispatch(unfollowList(listId, userId)),
     followList: (listId, userId) => dispatch(followList(listId, userId)),
+    followUser: (userIdBeingFollowed, userId) =>
+      dispatch(followUser(userIdBeingFollowed, userId)),
   };
 };
 

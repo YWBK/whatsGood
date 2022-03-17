@@ -17,10 +17,14 @@ const UserShow = (props) => {
   }, [props.match.params.userId]);
 
   const followListHandler = (e, listId) => {
-    // debugger;
     e.preventDefault();
     e.stopPropagation();
     props.followList(listId, props.currentUserId);
+  };
+
+  const followUserHandler = (e) => {
+    e.preventDefault();
+    props.followUser(props.user.id, props.currentUserId);
   };
 
   const unfollowUserHandler = (e) => {
@@ -80,7 +84,10 @@ const UserShow = (props) => {
             Unfollow {props.user.username}
           </button>
         ) : (
-          <button className="user-show__follow-unfollow">
+          <button
+            className="user-show__follow-unfollow"
+            onClick={(e) => followUserHandler(e)}
+          >
             Follow {props.user.username}
           </button>
         )}
