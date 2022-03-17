@@ -24,19 +24,20 @@ router.post("/book", (req, res, next) =>{
 
 
 
-router.post("/books_and_users", async (req, res, next) => {
-  const searchParams = !req.body ?  res.send('searchString is blank') : req.body.searchString.split(" ").join("+");
-  const searchKeyWords = req.body.searchString.toLowerCase()
+router.get("/books_and_users", async (req, res, next) => {
+  const searchParams = !req.query ?  res.send('searchString is blank') : req.query.searchString.split(" ").join("+");
+  const searchKeyWords = req.query.searchString.toLowerCase()
+  debugger
 
   try {
-    let consolidatedData = {}
+    let consolidatedData = {}    
     
     const googleResponse = await axio.get(`https://www.googleapis.com/books/v1/volumes?q=${searchParams}Type=books&key=${keys.googleApiKey}`)
-    
-    consolidatedData.googleData = googleResponse
+    consolidatedData.googleData = (googleResponse.data.items)
     
     const users = await User.find()
     const allUsers = JSON.parse(JSON.stringify(users))
+    
     let backendUserData = []
 
     for (let i = 0; i < allUsers.length; i++) {
@@ -48,16 +49,14 @@ router.post("/books_and_users", async (req, res, next) => {
         }              
       }      
     }
-
+    
     consolidatedData.backendUserData = backendUserData;
+  
     res.send(consolidatedData)
-    // res.json(consolidatedData)
 
-  } catch (error) {
+    } catch (error) {
     res.send(error.message)
   }
-      
-    
 })
 
 
