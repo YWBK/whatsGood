@@ -228,10 +228,9 @@ router.get('/:id', async (req, res) => {
 
 //user follows a list
 router.post('/followlist', async (req, res) =>{
-    debugger
     const listId = req.body.listId
     const userId = req.body.userId
-    // debugger
+
   try {
     await User.findOneAndUpdate({
         _id: userId
@@ -240,6 +239,7 @@ router.post('/followlist', async (req, res) =>{
             followingLists: listId
         }
     })
+   
     await List.findOneAndUpdate({
         _id: listId
     },{
@@ -248,6 +248,10 @@ router.post('/followlist', async (req, res) =>{
         }
     })
 
+    const list = await List.findOne({
+        _id: listId
+    })
+    
     //add to activity model      
     const newActivity = await new Activity({
             activityName: "FOLLOW_LIST",
@@ -255,11 +259,9 @@ router.post('/followlist', async (req, res) =>{
             userId: userId,
             listId: listId,
     })
-
     await newActivity.save()
 
-
-    res.send("Successfully followed the list")
+    res.json(list)
   } catch (error) {
       res.json(error.message)
   }
