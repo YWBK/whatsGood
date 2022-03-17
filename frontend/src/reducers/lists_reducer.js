@@ -10,7 +10,11 @@ const ListsReducer = (
   switch (action.type) {
     case RECEIVE_LIST:
       const list = action.list.data;
-      newState.all[list._id] = list;
+      list.id = list._id;
+      delete list._id;
+      list.ownerId = list.owner._id ? list.owner._id : list.owner;
+      newState.all[list.id] = list;
+
       return newState;
     case RECEIVE_USER:
 

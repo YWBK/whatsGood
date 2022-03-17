@@ -8,12 +8,13 @@ import { withRouter } from "react-router-dom";
 
 function SideNavList({ history, formType, currentUserId, list, listIds, fetch }) {
 
-
     const handleClick = (id, type, e) => {
         e.preventDefault();
         switch(type) {
           case 'list':
-            history.push(`/lists/${id}`);
+            history.push({ 
+              pathname: `/lists/${id}`
+          });
             break;
           case 'user':
             history.push(`/users/${id}`);
@@ -31,6 +32,8 @@ function SideNavList({ history, formType, currentUserId, list, listIds, fetch })
                 return 'Following Lists';
             case 'following-users':
                 return 'Following Users';
+            default:
+              return null;
         }
     }
 
@@ -42,6 +45,8 @@ function SideNavList({ history, formType, currentUserId, list, listIds, fetch })
                 return 450;
             case 'following-users':
                 return 380;
+            default:
+              return null;
         }
     }
 

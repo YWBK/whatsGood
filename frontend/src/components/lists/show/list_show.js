@@ -16,22 +16,36 @@ class ListShow extends React.Component {
     }
 
     componentWillMount() {
+        // debugger
         const listId = this.props.match.params.listId;
         // debugger
         if (!this.props.allLists[listId]) {
+            debugger
             this.props.fetchList(listId);
         }
     }
 
-    // Called when component props changes.
+    componentDidMount() {
+        debugger
+    }
+
+    // Called when component propos changes.
     componentDidUpdate(prevProps) {
         // debugger
 
         const isLocationChanged = prevProps.match.params.listId !== this.props.match.params.listId;
         const listId = this.props.match.params.listId;
-        if (!this.state.list || isLocationChanged) {
-            this.setState({ list: this.props.allLists[listId] });
+        debugger
+        const getListContent = async () => {
+            if (isLocationChanged) {
+                // debugger
+                await this.props.fetchList(listId)
+            }
+            if (!this.state.list || isLocationChanged) {
+                this.setState({ list: this.props.allLists[listId] });
+            }
         }
+        getListContent();
     }
 
     render() {
