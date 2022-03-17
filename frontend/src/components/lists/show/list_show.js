@@ -1,9 +1,6 @@
 import React from "react";
 import "./list_show.css";
 import ListShowItem from "./list_show_item";
-import ItemCompose from "../../items/item_compose_container"
-import ListItemSearch from './list_item_search';
-import Snackbar from '@mui/material/Snackbar';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Dialog from '@mui/material/Dialog';
