@@ -17,3 +17,12 @@ export const popularScore = (userId, bookId) => {
       }
     })
 };
+
+
+export const removeBookFromList = (userId, bookId, listId) =>{
+  return axios.post("api/books/remove_book_from_list",{
+     listId: listId,
+     userId: userId,
+     bookId: bookId
+  })
+}
