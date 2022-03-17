@@ -6,7 +6,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 import ModalForm from '../modal/modal';
 import { withRouter } from "react-router-dom";
 
-function SideNavList({ history, formType, currentUserId, list, listIds, fetch }) {
+function SideNavList({ history, formType, list, currentUserId, addList }) {
 
     const handleClick = (id, type, e) => {
         e.preventDefault();
@@ -56,7 +56,7 @@ function SideNavList({ history, formType, currentUserId, list, listIds, fetch })
       >
         <ListSubheader sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <span>{ listHeader(formType)}</span>
-          { formType === 'my-lists' ? <ModalForm /> : null }
+          { formType === 'my-lists' ? <ModalForm currentUserId={currentUserId} addList={addList} /> : null }
         </ListSubheader>
         {list.map((item) => {
             if (!item) return null;
