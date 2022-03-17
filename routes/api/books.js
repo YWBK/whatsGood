@@ -25,6 +25,8 @@ router.post("/", async(req, res)=>{
     if (!JSON.parse(JSON.stringify(existedBook))){
       const book = await new Book({
         volumeId: req.body.volumeId,
+        userId: req.body.userId,
+        listId: req.body.listId,
       })
       
       //if book not found in Book model, create a book
@@ -60,7 +62,7 @@ router.post("/", async(req, res)=>{
 
         await newActivity.save()
   
-        res.send("The book has successfully added to the list")        
+        JSON.parse(JSON.stringify(existedBook)) ? res.json(existedBook): res.json(createdBook)
       } catch (error) {
         res.json(error.message)
       }
@@ -97,7 +99,8 @@ router.post("/", async(req, res)=>{
         })
 
         await newActivity.save()
-        res.send("The book has successfully added to the list")
+        JSON.parse(JSON.stringify(existedBook)) ? res.json(existedBook): res.json(createdBook)
+        
       } catch (error) {
         res.json(error.message)
       }     

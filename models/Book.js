@@ -13,12 +13,12 @@ const BookSchema = new Schema({
     default: 0
   }],
   
-  userID:[{
+  userId:[{
     type: Schema.Types.ObjectId,
     ref: 'User' 
   }],
 
-  listID:[{
+  listId:[{
     type: Schema.Types.ObjectId,
     ref: 'List' 
   }],
