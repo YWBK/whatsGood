@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import SideNav from "./side_nav";
 import { fetchUser } from '../../actions/user_actions';
-import { fetchList } from '../../actions/list_actions';
+import { fetchList, addList } from '../../actions/list_actions';
 
 const mSTP = (state) => {
 
@@ -55,7 +55,8 @@ const followingUsers = Object.values(state.entities.users[currentUserId].followi
 const mDTP = (dispatch) => {
   return ({
     fetchUser: userId => dispatch(fetchUser(userId)),
-    fetchList: listId => dispatch(fetchList(listId))
+    fetchList: listId => dispatch(fetchList(listId)),
+    addList: data => dispatch(addList(data))
   })
 };
 
