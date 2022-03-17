@@ -39,11 +39,11 @@ function SideNavList({ history, formType, list, currentUserId, addList }) {
   const listHeight = (formType) => {
     switch (formType) {
       case "my-lists":
-        return "max-content";
+        return "25vh";
       case "following-lists":
-        return 450;
+        return "35vh";
       case "following-users":
-        return 380;
+        return "25vh";
       default:
         return null;
     }

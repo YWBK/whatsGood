@@ -2,6 +2,7 @@ import React from 'react';
 import './list_show.css';
 import ListShowItem from "./list_show_item";
 import ItemCompose from "../../items/item_compose_container"
+import ListItemSearch from './list_item_search';
 import Snackbar from '@mui/material/Snackbar';
 
 class ListShow extends React.Component {
@@ -14,9 +15,8 @@ class ListShow extends React.Component {
             list: this.props.allLists[listId],
             snackOpen: false
         }
-
         this.handleSnackClose = this.handleSnackClose.bind(this);
-    }
+    }   
 
     componentWillMount() {
         const listId = this.props.match.params.listId;
@@ -86,9 +86,12 @@ class ListShow extends React.Component {
                                 ))}
                             </div>
                             <div>
-                                <ItemCompose
+                                <ListItemSearch 
+                                    userId={this.state.list.ownerId}
+                                    addItem={this.props.addItemToList} />
+                                {/* <ItemCompose
                                     listId={this.props.match.params.listId}
-                                    userId={this.state.list.ownerId} />
+                                    userId={this.state.list.ownerId} /> */}
                             </div>
 
                         </div>
