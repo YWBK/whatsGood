@@ -10,6 +10,7 @@ import LoginFormContainer from "./session/login_form_container";
 import SignupForm1Container from "./session/signup_form_container";
 import ListShowContainer from "./lists/show/list_show_container";
 import UserShowContainer from "./users/user_show_container";
+import ItemsShow from "./items/items_show";
 
 import "./reset.css";
 
@@ -31,6 +32,11 @@ const App = () => (
           exact
           path="/users/:userId"
           component={UserShowContainer}
+        />
+        <ProtectedRoute
+          exact
+          path="/items/:itemId"
+          component={ItemsShow}
         />
       </Switch>
     </div>
