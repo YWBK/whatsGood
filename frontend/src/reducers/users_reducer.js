@@ -39,11 +39,11 @@ const UsersReducer = (oldState = {}, action) => {
       // debugger;
       return newState;
     case REMOVE_USER:
-      const currentUser = newState[action.data.userId];
-      const userIdBeingFollowed = action.data.userIdBeingFollowed;
-
-      currentUser.followingLists = currentUser.followingUsers.filter(
-        (user) => user.id !== userIdBeingFollowed
+      
+      newState[action.data.userId].followingUsers = newState[
+        action.data.userId
+      ].followingUsers.filter(
+        (user) => user.id !== action.data.userIdBeingFollowed
       );
 
       return newState;
