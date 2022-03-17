@@ -18,6 +18,11 @@ const ActivitySchema = new Schema({
     ref: 'User' 
   }],
 
+  userIdBeingFollowed:[{
+    type: Schema.Types.ObjectId,
+    ref: 'User' 
+  }],
+
   bookId:[{
     type: Schema.Types.ObjectId,
     ref: 'Book' 
