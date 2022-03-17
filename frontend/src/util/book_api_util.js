@@ -7,3 +7,13 @@ export const createBook = (data) =>{
     data
   })
 }
+
+
+export const popularScore = (userId, bookId) => {
+    return axios.get('/api/books/popular_score', {
+      params:{
+        userId: userId,
+        bookId: bookId    
+      }
+    })
+};

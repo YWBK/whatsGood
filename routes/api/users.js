@@ -273,12 +273,17 @@ router.post('/unfollowlist', async (req, res) =>{
             followingLists: listId
         }
     })
+
     await List.findOneAndUpdate({
         _id: listId
     },{
         $pull:{
             followers: userId
         }
+    })
+
+    const list = await List.findOne({
+        _id: listId
     })
 
     //add to activity model      
@@ -291,7 +296,7 @@ router.post('/unfollowlist', async (req, res) =>{
 
     await newActivity.save()
 
-    res.send("Successfully unfollowed the list")
+    res.json(list)
   } catch (error) {
       res.json(error.message)
   }
@@ -312,7 +317,11 @@ router.post('/followuser', async (req, res) =>{
             followingUsers: userIdBeingFollowed
         }
     })
-  
+
+    const user = await User.findOne({
+         _id: userId
+    })
+
     //add to activity model      
     const newActivity = await new Activity({
             activityName: "FOLLOW_USER",
@@ -323,7 +332,7 @@ router.post('/followuser', async (req, res) =>{
 
     await newActivity.save()
 
-    res.send("Successfully followed the user")
+    res.json(user)
   } catch (error) {
       res.json(error.message)
   }
@@ -344,7 +353,11 @@ router.post('/unfollowuser', async (req, res) =>{
             followingUsers: userIdBeingFollowed
         }
     })
-  
+
+    const user = await User.findOne({
+        _id: userId
+    })
+
     //add to activity model      
     const newActivity = await new Activity({
             activityName: "UNFOLLOW_USER",
@@ -352,18 +365,13 @@ router.post('/unfollowuser', async (req, res) =>{
             userId: userId,
             userIdBeingFollowed: userIdBeingFollowed
     })
-
     await newActivity.save()
     
-    res.send("Successfully unfollowed the user")
+    res.json(user)
   } catch (error) {
       res.json(error.message)
   }
 })
-
-
-
-
 
 
 module.exports = router;
