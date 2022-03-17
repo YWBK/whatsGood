@@ -12,8 +12,19 @@ const List = require("../../models/List")
 const Activity = require("../../models/Activity")
 
 
-router.post("/", async (req, res) => {
- 
+router.get("/", async (req, res) => {
+  const fieldName = req.query.fieldName;
+  const value = req.query.value
+
+  // try {
+  //   const results = await Activity.find({
+  //     fieldName: {$match: value}
+  //   })
+  //   res.json(results)
+  // } catch (error) {
+  //   res.send(error.message)
+  // }
+  // debugger
 })
 
 
