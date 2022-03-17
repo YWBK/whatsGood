@@ -7,11 +7,26 @@ import SideNavList from './side_nav_list';
 
 const drawerWidth = 240;
 
-export default function SideNav({ loggedIn, currentUserId, myLists, followingLists, followingUsers, fetchUser }) {
+export default function SideNav({ 
+  loggedIn, 
+  currentUserId,
+  myLists, 
+  followingLists, 
+  followingUsers,
+  myListIds,
+  followingListIds,
+  followingUserIds, 
+  fetchUser, 
+  fetchList }) {
   
   React.useEffect(() => {
-    fetchUser(currentUserId)
-}, [currentUserId]);
+    const getNavContent = async () => {
+      await fetchUser(currentUserId)
+      return;
+    }
+    getNavContent();
+
+}, [fetchUser, currentUserId]);
 
   if (!loggedIn) return <div></div>
   if (!myLists) return <div></div>
@@ -37,7 +52,8 @@ export default function SideNav({ loggedIn, currentUserId, myLists, followingLis
           formType={'my-lists'}
           currentUserId={currentUserId}
           list={myLists}
-          fetchUser={fetchUser}
+          listIds={myListIds}
+          fetch={fetchList}
         />
         <Divider />
           <SideNavList 
@@ -45,7 +61,9 @@ export default function SideNav({ loggedIn, currentUserId, myLists, followingLis
             formType='following-lists'
             currentUserId={currentUserId}
             list={followingLists}
-            fetchUser={fetchUser}
+            listIds={followingListIds}
+            fetch={fetchList}
+
           />
         <Divider />
         <SideNavList 
@@ -53,7 +71,8 @@ export default function SideNav({ loggedIn, currentUserId, myLists, followingLis
           formType='following-users'
           currentUserId={currentUserId}
           list={followingUsers}
-          fetchUser={fetchUser}
+          listIds={followingUserIds}
+          fetch={fetchUser}
         />
       </Box>
     </Drawer>

@@ -6,8 +6,15 @@ const UserShow = (props) => {
   useEffect(() => {
     // props.fetchUser("623163debe6f6b61d32195c7");
     // debugger
-    props.fetchUser(props.match.params.userId);
-    props.fetchUser(props.currentUserId);
+    // const getUserContent = async () => {
+    //   await props.fetchUser(props.currentUserId);
+    //   props.fetchUser(props.match.params.userId);
+    //   return;
+    // }
+
+    // getUserContent();
+    props.fetchUser(props.currentUserId)
+      .then(() => props.fetchUser(props.match.params.userId));
   }, [props.match.params.userId]);
   // useEffect(() => props.fetchUser(props.currentUserId), []);
 

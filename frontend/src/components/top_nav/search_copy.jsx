@@ -42,6 +42,7 @@ export default function SearchBar2() {
   );
 
   React.useEffect(() => {
+    // debugger
     let active = true;
 
     if (inputValue === '') {
@@ -70,6 +71,8 @@ export default function SearchBar2() {
 
     return () => {
       active = false;
+      setValue(null);
+      setInputValue('');
     };
   }, [value, inputValue, fetch]);
 
