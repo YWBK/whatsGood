@@ -12,7 +12,8 @@ export const addItemToList = (volumeId, listId, userId) => dispatch => {
     console.log({ volumeId, listId, userId });
     createBook({ volumeId, listId, userId })
         .then(item => {
-            dispatch(receiveNewItem(item, listId))
+            console.log(item);
+            dispatch(receiveNewItem(item.data, listId))
         })
         .catch(err => console.log(err))
     // For ui only test    
