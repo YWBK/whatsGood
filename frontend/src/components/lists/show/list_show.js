@@ -20,13 +20,9 @@ class ListShow extends React.Component {
         const listId = this.props.match.params.listId;
         // debugger
         if (!this.props.allLists[listId]) {
-            debugger
+            // debugger
             this.props.fetchList(listId);
         }
-    }
-
-    componentDidMount() {
-        debugger
     }
 
     // Called when component propos changes.
@@ -35,7 +31,7 @@ class ListShow extends React.Component {
 
         const isLocationChanged = prevProps.match.params.listId !== this.props.match.params.listId;
         const listId = this.props.match.params.listId;
-        debugger
+        // debugger
         const getListContent = async () => {
             if (isLocationChanged) {
                 // debugger
