@@ -1,7 +1,10 @@
 import { RECEIVE_LIST } from "../actions/list_actions";
-import { RECEIVE_USER } from "../actions/user_actions";
+import {
+  RECEIVE_USER,
+  REMOVE_LIST_FOLLOW,
+  ADD_LIST_FOLLOW,
+} from "../actions/user_actions";
 import { RECEIVE_NEW_ITEM } from "../actions/item_actions";
-
 
 const ListsReducer = (
   state = { all: {}, list: {}, new: undefined },
@@ -19,7 +22,6 @@ const ListsReducer = (
 
       return newState;
     case RECEIVE_USER:
-
       const combinedLists = [
         ...action.user.data.myLists,
         ...action.user.data.followingLists,
@@ -49,6 +51,17 @@ const ListsReducer = (
       }
       return newState;
 
+    case ADD_LIST_FOLLOW:
+      newState.all[action.data.listId].followers.push(action.data.userId);
+      return newState;
+
+    case REMOVE_LIST_FOLLOW:
+
+      newState.all[action.data.listId].followers = newState.all[
+        action.data.listId
+      ].followers.filter((followerId) => followerId !== action.data.userId);
+      
+      return newState;
     default:
       return state;
   }
