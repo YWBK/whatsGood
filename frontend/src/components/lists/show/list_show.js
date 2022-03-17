@@ -2,7 +2,7 @@ import React from 'react';
 import './list_show.css';
 import ListShowItem from "./list_show_item";
 import ItemCompose from "../../items/item_compose_container"
-
+import Snackbar from '@mui/material/Snackbar';
 
 class ListShow extends React.Component {
     constructor(props) {
@@ -12,7 +12,10 @@ class ListShow extends React.Component {
 
         this.state = {
             list: this.props.allLists[listId],
+            snackOpen: false
         }
+
+        this.handleSnackClose = this.handleSnackClose.bind(this);
     }
 
     componentWillMount() {
@@ -37,6 +40,14 @@ class ListShow extends React.Component {
         getListContent();
     }
 
+    handleSnackClose(event, reason) {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        this.setState({ snackOpen: false });
+    };
+
     render() {
         return <>
             {
@@ -58,7 +69,20 @@ class ListShow extends React.Component {
                             </div>
                             <div>
                                 {this.state.list.bookItems.map(book => (
-                                    <ListShowItem book={book} key={book._id} />
+                                    <ListShowItem
+                                        book={book}
+                                        key={book._id}
+                                        listId={this.state.id}
+                                        removeBookFromList={
+                                            () => {
+                                                this.props.removeItemFromList(
+                                                    this.state.list.ownerId,
+                                                    book._id,
+                                                    this.props.match.params.listId
+                                                );
+                                                this.setState({ snackOpen: true });
+                                            }
+                                        } />
                                 ))}
                             </div>
                             <div>
@@ -70,7 +94,16 @@ class ListShow extends React.Component {
                         </div>
                     </div>
                 )
-            }</>;
+            }
+
+            <Snackbar
+                open={this.state.snackOpen}
+                autoHideDuration={6000}
+                onClose={this.handleSnackClose}
+                message="Your book is deleted from this list!"
+            />
+
+        </>;
 
     }
 }
