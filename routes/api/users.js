@@ -14,27 +14,27 @@ const validateLoginInput = require('../../validation/login');
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
 //test to add/push items to []
-router.get('/add_to_my_lists', async (req, res) =>{
-        const list = "62312e6e48d198674ad7ef77"
-        
-        await User.findOneAndUpdate({
-             _id: "6230e58ee8ace707b68fee77",
-        },{
-            $addToSet: {
-                favCategories: "horror",
-            },
-        })
+router.get('/add_to_my_lists', async (req, res) => {
+    const list = "62312e6e48d198674ad7ef77"
 
-        const user = await User.findOne({
-            _id: "6230e58ee8ace707b68fee77",
-        })
-        res.send(user)
+    await User.findOneAndUpdate({
+        _id: "6230e58ee8ace707b68fee77",
+    }, {
+        $addToSet: {
+            favCategories: "horror",
+        },
+    })
+
+    const user = await User.findOne({
+        _id: "6230e58ee8ace707b68fee77",
+    })
+    res.send(user)
 })
 
 
 router.get('/current', passport
-    .authenticate('jwt', { session: false }), (req, res) => { 
-        res.json({ 
+    .authenticate('jwt', { session: false }), (req, res) => {
+        res.json({
             id: req.user.id,
             username: req.user.username,
             email: req.user.email
@@ -49,7 +49,7 @@ router.post('/signup', (req, res) => {
     if (!isValid) {
         return res.status(400).json(errors);
     }
-    User.find({ $or:[{email: req.body.email}, {username: req.body.username }]})
+    User.find({ $or: [{ email: req.body.email }, { username: req.body.username }] })
         .then(users => {
             if (users.length > 0) {
                 users.forEach(user => {
@@ -71,11 +71,11 @@ router.post('/signup', (req, res) => {
                         newUser
                             .save()
                             .then(user => {
-                                const payload = { id: user.id, username: user.username};
+                                const payload = { id: user.id, username: user.username };
 
                                 jwt.sign(
-                                    payload, 
-                                    keys.secretOrKey, 
+                                    payload,
+                                    keys.secretOrKey,
                                     { expiresIn: 3600 },
                                     (err, token) => {
                                         res.json({
@@ -104,7 +104,7 @@ router.post('/login', (req, res) => {
     }
     const password = req.body.password;
 
-    User.find({ $or:[{email}, {username}]})
+    User.find({ $or: [{ email }, { username }] })
         .then(users => {
             if (users.length < 1) {
                 if (email) {
@@ -120,10 +120,10 @@ router.post('/login', (req, res) => {
                 .compare(password, user.password)
                 .then(isMatch => {
                     if (isMatch) {
-                        const payload = { 
-                            id: user.id, 
-                            username: user.username, 
-                            myLists: user.myLists, 
+                        const payload = {
+                            id: user.id,
+                            username: user.username,
+                            myLists: user.myLists,
                             followingLists: user.followingLists,
                             followingUsers: user.followingUsers
                         };
@@ -139,7 +139,7 @@ router.post('/login', (req, res) => {
                                 });
                             });
                     } else {
-                        return res.status(400).json({password: 'Incorrect password'});
+                        return res.status(400).json({ password: 'Incorrect password' });
                     }
                 })
         })
@@ -148,224 +148,226 @@ router.post('/login', (req, res) => {
 // http://localhost:5000/api/users/6230e58ee8ace707b68fee77
 //user show that contains myList, followingLists and followerUsers
 router.get('/:id', async (req, res) => {
-    try{
+    try {
         const userId = req.params.id;
         const user = await User.findById(userId)
             .populate({
                 path: "followingLists",
                 model: "List",
-                populate:{
+                populate: {
                     path: "bookItems",
                     model: "Book"
-                },  
+                },
             })
             .populate({
                 path: "followingLists",
                 model: "List",
-                populate:{
+                populate: {
                     path: "followers",
                     model: "User"
-                },  
+                },
             })
             .populate({
                 path: "followingLists",
                 model: "List",
-                populate:{
+                populate: {
                     path: "owner",
                     model: "User"
-                },  
+                },
             })
 
             .populate({
                 path: "myLists",
                 model: "List",
-                populate:{
+                populate: {
                     path: "followers",
                     model: "User"
-                },                        
-            })    
+                },
+            })
             .populate({
                 path: "myLists",
                 model: "List",
-                populate:{
+                populate: {
                     path: "bookItems",
                     model: "Book"
                 },
-               
-            })    
+
+            })
 
             .populate({
                 path: "followingUsers",
                 model: "User",
-                populate:{
+                populate: {
                     path: "myLists",
                     model: "User"
                 },
-            })    
+            })
             .populate({
                 path: "followingUsers",
                 model: "User",
-                populate:{
+                populate: {
                     path: "followingLists",
                     model: "List"
                 },
-            })    
+            })
             .populate({
                 path: "followingUsers",
                 model: "User",
-                populate:{
+                populate: {
                     path: "followingUsers",
                     model: "User"
                 },
-            })    
-        
+            })
+
         res.json(user)
     } catch (e) {
         res.status(404).json({ user: 'No user found' })
-    }  
+    }
 })
 
 
 //user follows a list
-router.post('/followlist', async (req, res) =>{
+router.post('/followlist', async (req, res) => {
     const listId = req.body.listId
     const userId = req.body.userId
 
-  try {
-    await User.findOneAndUpdate({
-        _id: userId
-    },{
-        $addToSet:{
-            followingLists: listId
-        }
-    })
-   
-    await List.findOneAndUpdate({
-        _id: listId
-    },{
-        $addToSet:{
-            followers: userId
-        }
-    })
+    try {
+        await User.findOneAndUpdate({
+            _id: userId
+        }, {
+            $addToSet: {
+                followingLists: listId
+            }
+        })
 
-    const list = await List.findOne({
-        _id: listId
-    })
-    
-    //add to activity model      
-    const newActivity = await new Activity({
+        await List.findOneAndUpdate({
+            _id: listId
+        }, {
+            $addToSet: {
+                followers: userId
+            }
+        })
+
+        const list = await List.findOne({
+            _id: listId
+        })
+
+        //add to activity model      
+        const newActivity = await new Activity({
             activityName: "FOLLOW_LIST",
             actionType: "followed",
             userId: userId,
             listId: listId,
-    })
-    await newActivity.save()
+        })
+        await newActivity.save()
 
-    res.json(list)
-  } catch (error) {
-      res.json(error.message)
-  }
+        res.json(list)
+    } catch (error) {
+        res.json(error.message)
+    }
 })
 
 
 //user unfollows a list
-router.post('/unfollowlist', async (req, res) =>{
+router.post('/unfollowlist', async (req, res) => {
     const listId = req.body.listId
     const userId = req.body.userId
-  try {
-    await User.findOneAndUpdate({
-        _id: userId
-    },{
-        $pull:{
-            followingLists: listId
-        }
-    })
-    await List.findOneAndUpdate({
-        _id: listId
-    },{
-        $pull:{
-            followers: userId
-        }
-    })
 
-    //add to activity model      
-    const newActivity = await new Activity({
+    try {
+        await User.findOneAndUpdate({
+            _id: userId
+        }, {
+            $pull: {
+                followingLists: listId
+            }
+        })
+
+        await List.findOneAndUpdate({
+            _id: listId
+        }, {
+            $pull: {
+                followers: userId
+            }
+        })
+
+        //add to activity model      
+        const newActivity = await new Activity({
             activityName: "UNFOLLOW_LIST",
             actionType: "unfollowed",
             userId: userId,
             listId: listId,
-    })
+        })
 
-    await newActivity.save()
+        await newActivity.save()
 
-    res.send("Successfully unfollowed the list")
-  } catch (error) {
-      res.json(error.message)
-  }
+        res.send("Successfully unfollowed the list")
+    } catch (error) {
+        res.json(error.message)
+    }
 })
 
 
 
 
 //user follows a user
-router.post('/followuser', async (req, res) =>{
+router.post('/followuser', async (req, res) => {
     const userIdBeingFollowed = req.body.userIdBeingFollowed
     const userId = req.body.userId
-  try {
-    await User.findOneAndUpdate({
-        _id: userId
-    },{
-        $addToSet:{
-            followingUsers: userIdBeingFollowed
-        }
-    })
-  
-    //add to activity model      
-    const newActivity = await new Activity({
+    try {
+        await User.findOneAndUpdate({
+            _id: userId
+        }, {
+            $addToSet: {
+                followingUsers: userIdBeingFollowed
+            }
+        })
+
+        //add to activity model      
+        const newActivity = await new Activity({
             activityName: "FOLLOW_USER",
             actionType: "followed",
             userId: userId,
             userIdBeingFollowed: userIdBeingFollowed
-    })
+        })
 
-    await newActivity.save()
+        await newActivity.save()
 
-    res.send("Successfully followed the user")
-  } catch (error) {
-      res.json(error.message)
-  }
+        res.send("Successfully followed the user")
+    } catch (error) {
+        res.json(error.message)
+    }
 })
 
 
 
 //user unfollows a user
-router.post('/unfollowuser', async (req, res) =>{
+router.post('/unfollowuser', async (req, res) => {
     const userIdBeingFollowed = req.body.userIdBeingFollowed
     const userId = req.body.userId
-    
-  try {
-    await User.findOneAndUpdate({
-        _id: userId
-    },{
-        $pull:{
-            followingUsers: userIdBeingFollowed
-        }
-    })
-  
-    //add to activity model      
-    const newActivity = await new Activity({
+
+    try {
+        await User.findOneAndUpdate({
+            _id: userId
+        }, {
+            $pull: {
+                followingUsers: userIdBeingFollowed
+            }
+        })
+
+        //add to activity model      
+        const newActivity = await new Activity({
             activityName: "UNFOLLOW_USER",
             actionType: "unfollowed",
             userId: userId,
             userIdBeingFollowed: userIdBeingFollowed
-    })
+        })
 
-    await newActivity.save()
-    
-    res.send("Successfully unfollowed the user")
-  } catch (error) {
-      res.json(error.message)
-  }
+        await newActivity.save()
+
+        res.send("Successfully unfollowed the user")
+    } catch (error) {
+        res.json(error.message)
+    }
 })
 
 

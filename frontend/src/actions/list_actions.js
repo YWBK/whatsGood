@@ -17,31 +17,11 @@ export const fetchList = listId => dispatch => (
         .catch(err => console.log(err))
 );
 
+
 export const addList = data => dispatch => (
     createList(data)
-        .then( createdList => {
+        .then(createdList => {
             return dispatch(receiveList(createdList))
         })
         .catch(err => console.log(err))
 )
-
-// export const receiveTweets = tweets => ({
-//     type: RECEIVE_TWEETS,
-//     tweets
-// });
-// export const receiveNewTweet = tweet => ({
-//     type: RECEIVE_NEW_TWEET,
-//     tweet
-// })
-// export const fetchTweets = () => dispatch => (
-//     getTweets()
-//         .then(tweets => dispatch(receiveTweets(tweets)))
-//         .catch(err => console.log(err))
-// );
-
-
-// export const composeTweet = data => dispatch => (
-//     writeTweet(data)
-//         .then(tweet => dispatch(receiveNewTweet(tweet)))
-//         .catch(err => console.log(err))
-// );
