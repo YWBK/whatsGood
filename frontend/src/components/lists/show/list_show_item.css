@@ -1,0 +1,18 @@
+.percentage-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+.percentage-inner-box {
+  display: flex;
+  flex-direction: row;
+  width: 60px;
+}
+
+.book-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

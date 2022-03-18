@@ -1,11 +1,76 @@
 .list-outer-box {
-  height: 100vh;
-  width: 100%;
+  max-height: 80vh;
+  width: -webkit-fill-available;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
 .list-inner-box {
-  margin-top: 100px;
+  width: 70%;
+}
+
+.list-show-des {
+  font-size: 18px;
+  font-weight: 400;
+  padding-bottom: 8px;
+}
+
+.list-show-author {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.list-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid grey;
+  padding-bottom: 20px;
+  width: 90%;
+}
+
+.list-info-left h2 {
+  font-size: 28px;
+  font-weight: 600;
+  padding-bottom: 18px;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 99vh;
+  width: -webkit-fill-available;
+  /* background-color: #f0ead2; */
+}
+
+.list-outer-box h2 {
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+}
+
+.list-description,
+.list-date,
+.list-owner {
+  margin-bottom: 0.3em;
+}
+
+.list-description {
+  margin-bottom: 10px;
+}
+
+.list-owner {
+  color: darkgray;
+}
+
+.list-items {
+  max-height: 50vh;
+  overflow: auto;
+}
+
+.search-box {
+  margin-top: 30px;
 }
