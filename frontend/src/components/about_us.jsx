@@ -33,7 +33,7 @@ export default function AboutUs() {
         aria-describedby="modal-modal-description"
         sx={{ zIndex: 15000 }}
       >
-        <Box sx={style} className="about-us__container">
+        <Box sx={style} className="about-us__container" onClick={e => e.stopPropagation()}>
           <div className="about__ethan">
             <img
               src="/ethan_profile.png"
