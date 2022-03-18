@@ -74,7 +74,9 @@ function AlignItemsList(props) {
         <List sx={{ width: "100%" }}>
             <ListItem alignItems="flex-start" sx={{ minWidth: 300, width: 400 }}>
                 <ListItemAvatar>
-                    <Avatar alt="Book1" src={`${props.book.imageLinks.thumbnail}`} />
+                    <Avatar alt="Book1" variant="square"
+                        sx={{ width: 45, height: 60 }}
+                        src={`${props.book.imageLinks.thumbnail}`} />
                 </ListItemAvatar>
                 <ListItemText
                     primary={`${props.book.title}`}
