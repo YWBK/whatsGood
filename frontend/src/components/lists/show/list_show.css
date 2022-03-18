@@ -43,6 +43,7 @@
   align-items: center;
   height: 99vh;
   width: -webkit-fill-available;
+  /* background-color: #f0ead2; */
 }
 
 .list-outer-box h2 {

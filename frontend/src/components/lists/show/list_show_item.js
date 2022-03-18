@@ -54,7 +54,7 @@ class ListShowItem extends React.Component {
 
                         <div>
                             <IconButton
-                                sx={{ marginLeft: 10, marginTop: 3 }}
+                                sx={{ marginTop: 3 }}
                                 aria-label="delete"
                                 size='large'
                                 onClick={this.onDelete}>
@@ -72,7 +72,7 @@ export default ListShowItem;
 function AlignItemsList(props) {
     return (
         <List sx={{ width: "100%" }}>
-            <ListItem alignItems="flex-start" sx={{ width: 500 }}>
+            <ListItem alignItems="flex-start" sx={{ minWidth: 300, width: 400 }}>
                 <ListItemAvatar>
                     <Avatar alt="Book1" src={`${props.book.imageLinks.thumbnail}`} />
                 </ListItemAvatar>
