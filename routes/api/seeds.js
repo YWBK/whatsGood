@@ -160,6 +160,8 @@ router.get('/add_following_users', async (req, res) => {
 
 
 router.get('/add_books', async (req, res) => {
+    await Book.deleteMany( {} )
+
    const allBooks = [
      "yyBMEAAAQBAJ",
      "xTk8DwAAQBAJ",
@@ -187,7 +189,7 @@ router.get('/add_books', async (req, res) => {
         volumeId: allBooks[i],
         listId: firstList
       })    
-     newBook.save() 
+     await newBook.save() 
   }
   
   //find all books created
@@ -197,24 +199,24 @@ router.get('/add_books', async (req, res) => {
   //find all bookIds
   const allBookIds = []
   for (let i = 0; i < parsedAllBooks.length; i++) {
+  
       allBookIds.push(parsedAllBooks[i]._id)
   }
-  
   let result = {};
   let addedToBookItems = [];
   let addedToInLists = [];
-  debugger
   //add these ten books to the firstList's bookItem bucket, and add this list to all the books' inList bucket
-  for (let x = 0; x < allBookIds.length; x++) {        
-      await List.findOneAndUpdate({
-        _id: firstList
-      },{
-        $addToSet:{
-          bookItems: allBookIds[x]
-        }
-      });
-
-      await Book.findOneAndUpdate({
+  for (let x = 0; x < allBookIds.length; x++) {  
+      
+    await List.findOneAndUpdate({
+      _id: firstList
+    },{
+      $addToSet:{
+        bookItems: allBookIds[x]
+      }
+    });
+    
+    await Book.findOneAndUpdate({
         _id: allBookIds[x]
       },{
         $addToSet:{
