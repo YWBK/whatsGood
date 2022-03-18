@@ -1,0 +1,12 @@
+.splash__bg {
+    display: flex;
+    flex-direction: column;
+    height: 99vh;
+    width: -webkit-fill-available;
+    justify-content: center;
+    align-items: center;
+}
+
+.splash {
+    
+}
