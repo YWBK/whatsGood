@@ -31,8 +31,7 @@ const TopNavMain = ({ loggedIn, logout, currUserId }) => {
                     component="div"
                     sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
                   >
-                    {/* logo pending */}
-                    wG
+                    <img src="/whatsGood.png" alt="logo" height="50" />
                   </Typography>
                 </IconButton>
               </Link>

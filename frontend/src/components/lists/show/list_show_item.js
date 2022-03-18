@@ -9,19 +9,13 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import BasicRating from "./rating"
-import { Button } from "@mui/material";
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
+
 
 class ListShowItem extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            book: null
-        };
-        this.onDelete = this.onDelete.bind(this);
-
+    constructor() {
+        super();
+        this.state = { book: null };
     }
 
     componentDidMount() {
@@ -31,27 +25,18 @@ class ListShowItem extends React.Component {
         });
     }
 
-    onDelete() {
-        this.props.removeBookFromList();
-    }
-
     render() {
         const { book } = this.props;
 
         return (
             <>
                 {
-                    this.state.book && <><Link
+                    this.state.book && <Link
                         to={`/items/${book.volumeId}`}
                     // target="_blank"
                     >
                         <AlignItemsList book={this.state.book.volumeInfo} />
                     </Link>
-                        <IconButton aria-label="delete"
-
-                            onClick={this.onDelete}>
-                            <DeleteIcon />
-                        </IconButton></>
                 }
             </>
         );
@@ -79,13 +64,12 @@ function AlignItemsList(props) {
                                 {`${props.book.subtitle}`}
                             </Typography>
                             <br />
-                            {`by ${props.book.authors.map(author => `${author}`)}`}
+                            {`by ${props.book.authors.map(author => `${author} `)}`}
 
                         </React.Fragment>
                     }
                 />
                 <BasicRating book={props.book} />
-
             </ListItem>
 
             <Divider variant="inset" component="li" />
