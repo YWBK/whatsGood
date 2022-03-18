@@ -32,7 +32,7 @@
 
 .list-info-left h2 {
   font-size: 28px;
-  font-weight: 500;
+  font-weight: 600;
   padding-bottom: 18px;
 }
 
@@ -43,11 +43,12 @@
   align-items: center;
   height: 99vh;
   width: -webkit-fill-available;
+  /* background-color: #f0ead2; */
 }
 
 .list-outer-box h2 {
   font-size: 1.75rem;
-  font-weight: 300;
+  font-weight: 500;
   margin-bottom: 0.5em;
 }
 
@@ -55,6 +56,14 @@
 .list-date,
 .list-owner {
   margin-bottom: 0.3em;
+}
+
+.list-description {
+  margin-bottom: 10px;
+}
+
+.list-owner {
+  color: darkgray;
 }
 
 .list-items {

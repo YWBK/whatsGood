@@ -133,7 +133,9 @@ class ListShow extends React.Component {
                                             } />
                                     ))}
                                 </div>
-                                <Divider variant="fullWidth" sx={{ marginTop: 3, color: 'black' }} />
+                                {
+                                    this.state.list.bookItems.length > 0 && <Divider variant="fullWidth" sx={{ marginTop: 3, color: 'black' }} />
+                                }
 
                             </div>
 
