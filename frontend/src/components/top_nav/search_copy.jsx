@@ -121,14 +121,15 @@ function SearchBar2({ history }) {
                 </InputAdornment>
             ),
           }}
-          sx={{ input: { color: 'white' }}}
+          sx={{ input: { color: 'white' } }}
           label="Search" 
           fullWidth />
       )}
       renderOption={(props, option) => {
         return (
+          // <li {...props} key={option.id} >
           <li {...props} key={option.id} >
-            <Grid container alignItems="center" >
+            <Grid container alignItems="center" sx={{backgroundColor: '#F5F1E0' }}>
               <Grid item >
                 <Box
                   sx={{ color: 'text.primary', mr: 2 }}

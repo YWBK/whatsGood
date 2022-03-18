@@ -40,7 +40,6 @@ export default function SideNav({
         [`& .MuiDrawer-paper`]: {
           width: drawerWidth,
           boxSizing: "border-box",
-          // zIndex: -1,
           overflow: "hidden",
         },
       }}
@@ -48,10 +47,13 @@ export default function SideNav({
       <Toolbar />
       <Box 
         sx={{ 
+          marginTop: '2vh',
           display: "flex", 
           flexDirection: "column", 
           justifyContent: "space-evenly", 
           height: "100vh",
+          // backgroundColor: '#DDE5B6'
+          backgroundColor: '#F0EAD2'
           }}
         
       >

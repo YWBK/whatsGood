@@ -15,7 +15,7 @@ const TopNavMain = ({ loggedIn, logout, currUserId }) => {
     <div className="top-nav-main__container">
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
-          <Toolbar sx={{ justifyContent: "space-between" }}>
+          <Toolbar sx={{ justifyContent: "space-between", minHeight: '8vh' }}>
             <div style={{ display: "flex", alignItems: "center" }}>
               <Link to={"/"}>
                 <IconButton
