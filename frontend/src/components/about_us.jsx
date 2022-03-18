@@ -8,10 +8,10 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  //   width: 400,
   bgcolor: "#F0EAD2",
   border: "2px solid #000",
   boxShadow: 24,
+  zIndex: 20000,
   p: 4,
 };
 
@@ -41,21 +41,27 @@ export default function AboutUs() {
               className="about-img"
             />
             <p>Ethan Gumin</p>
-            <img
-              src="/angellist_icon.svg"
-              alt="ethan angel list"
-              className="social-img"
-            />
-            <img
-              src="/linkedin_icon.svg"
-              alt="ethan linkedin"
-              className="social-img"
-            />
-            <img
-              src="/github_icon.svg"
-              alt="ethan github"
-              className="social-img"
-            />
+            <a href="https://angel.co/u/ethan-gumin">
+              <img
+                src="/angellist_icon.svg"
+                alt="ethan angel list"
+                className="social-img"
+              />
+            </a>
+            <a href="https://www.linkedin.com/in/ethan-gumin-2959b996/">
+              <img
+                src="/linkedin_icon.svg"
+                alt="ethan linkedin"
+                className="social-img"
+              />
+            </a>
+            <a href="https://github.com/ethangumin">
+              <img
+                src="/github_icon.svg"
+                alt="ethan github"
+                className="social-img"
+              />
+            </a>
           </div>
           <div className="about__katie">
             <img
@@ -64,21 +70,27 @@ export default function AboutUs() {
               className="about-img"
             />
             <p>Katie Hang</p>
-            <img
-              src="/angellist_icon.svg"
-              alt="katie angel list"
-              className="social-img"
-            />
-            <img
-              src="/linkedin_icon.svg"
-              alt="katie linkedin"
-              className="social-img"
-            />
-            <img
-              src="/github_icon.svg"
-              alt="katie github"
-              className="social-img"
-            />
+            <a href="">
+              <img
+                src="/angellist_icon.svg"
+                alt="katie angel list"
+                className="social-img"
+              />
+            </a>
+            <a href="https://www.linkedin.com/in/yuchen-katie-hang-443b27a4/">
+              <img
+                src="/linkedin_icon.svg"
+                alt="katie linkedin"
+                className="social-img"
+              />
+            </a>
+            <a href="https://github.com/johnda911">
+              <img
+                src="/github_icon.svg"
+                alt="katie github"
+                className="social-img"
+              />
+            </a>
           </div>
           <div className="about__bill">
             <img
@@ -87,21 +99,27 @@ export default function AboutUs() {
               className="about-img"
             />
             <p>Bill Kim</p>
-            <img
-              src="/angellist_icon.svg"
-              alt="bill angel list"
-              className="social-img"
-            />
-            <img
-              src="/linkedin_icon.svg"
-              alt="bill linkedin"
-              className="social-img"
-            />
-            <img
-              src="/github_icon.svg"
-              alt="bill github"
-              className="social-img"
-            />
+            <a href="https://angel.co/u/yong-woo-kim-1">
+              <img
+                src="/angellist_icon.svg"
+                alt="bill angel list"
+                className="social-img"
+              />
+            </a>
+            <a href="https://www.linkedin.com/in/bill-kim-88987a42/">
+              <img
+                src="/linkedin_icon.svg"
+                alt="bill linkedin"
+                className="social-img"
+              />
+            </a>
+            <a href="https://github.com/YWBK">
+              <img
+                src="/github_icon.svg"
+                alt="bill github"
+                className="social-img"
+              />
+            </a>
           </div>
           <div className="about__steven">
             <img
@@ -110,21 +128,27 @@ export default function AboutUs() {
               className="about-img"
             />
             <p>Steven Wu</p>
-            <img
-              src="/angellist_icon.svg"
-              alt="steven angel list"
-              className="social-img"
-            />
-            <img
-              src="/linkedin_icon.svg"
-              alt="steven linkedin"
-              className="social-img"
-            />
-            <img
-              src="/github_icon.svg"
-              alt="steven github"
-              className="social-img"
-            />
+            <a href="https://angel.co/u/steven-wu-31">
+              <img
+                src="/angellist_icon.svg"
+                alt="steven angel list"
+                className="social-img"
+              />
+            </a>
+            <a href="https://www.linkedin.com/in/steven-wu-cams-29814136/">
+              <img
+                src="/linkedin_icon.svg"
+                alt="steven linkedin"
+                className="social-img"
+              />
+            </a>
+            <a href="https://github.com/swusteven">
+              <img
+                src="/github_icon.svg"
+                alt="steven github"
+                className="social-img"
+              />
+            </a>
           </div>
         </Box>
       </Modal>
