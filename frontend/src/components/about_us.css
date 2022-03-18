@@ -1,0 +1,51 @@
+.about-us__container {
+  /* font-size: 1.2rem; */
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  width: 50%;
+  max-width: 550px;
+}
+
+.about-us__container p {
+  font-size: 1.2rem;
+  padding: 0.15em 0;
+}
+
+.about-img {
+  height: 80px;
+  border-radius: 50%;
+}
+
+.social-img {
+  height: 30px;
+  margin: 0.2em 0.15em 0;
+}
+
+@media (max-width: 915px) {
+  .about__ethan {
+    grid-area: ethan;
+  }
+
+  .about__katie {
+    grid-area: katie;
+  }
+
+  .about__bill {
+    grid-area: bill;
+  }
+
+  .about__steven {
+    grid-area: steven;
+  }
+
+  .about-us__container {
+    display: grid;
+    grid-template-areas:
+      "ethan katie"
+      "bill steven";
+    grid-row-gap: 1.15em;
+    width: 70%;
+    max-width: 250px;
+  }
+}
