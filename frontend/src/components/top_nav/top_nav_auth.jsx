@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 import "./top_nav.css";
+import { ClassNames } from "@emotion/react";
 
 const TopNavAuth = () => {
   return (
@@ -23,13 +24,21 @@ const TopNavAuth = () => {
                 sx={{ mr: 2 }}
               >
                 <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                  {/* logo pending */}
-                  wG
+                  <img src="/logo_orange.png" alt="logo" height="50" />
                 </Typography>
               </IconButton>
             </Link>
             <Link to="/signup">
-              <Button color="inherit">Login / Sign Up</Button>
+              <Button 
+                sx={{
+                  backgroundColor: 'rgba(13,14,70,255)',
+                  '&:hover': {
+                    backgroundColor:'rgba(80,52,255,255)'
+                  }
+                }}
+                variant="contained"
+                disableElevation  
+                color="inherit">Login / Sign Up</Button>
             </Link>
           </Toolbar>
         </AppBar>

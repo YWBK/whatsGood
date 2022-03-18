@@ -27,7 +27,7 @@ router.post("/book", (req, res, next) =>{
 router.get("/books_and_users", async (req, res, next) => {
   const searchParams = !req.query ?  res.send('searchString is blank') : req.query.searchString.split(" ").join("+");
   const searchKeyWords = req.query.searchString.toLowerCase()
-  debugger
+  // debugger
 
   try {
     let consolidatedData = {}    

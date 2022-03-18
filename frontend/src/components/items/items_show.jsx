@@ -93,9 +93,9 @@ const ItemsShow = (props) => {
           Add to list
         </Button>
       </div>
-      <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
-        <DialogTitle>Add this book to my list</DialogTitle>
-        <DialogContent>
+      <Dialog disableEscapeKeyDown open={open} onClose={handleClose} >
+        <DialogTitle sx={{bgcolor: 'rgba(245,246,248,255)'}}>Add this book to my list</DialogTitle>
+        <DialogContent sx={{bgcolor: 'rgba(245,246,248,255)'}}>
           <Box component="form" sx={{ display: "flex", flexWrap: "wrap" }}>
             <FormControl sx={{ m: 1, minWidth: 180 }}>
               <InputLabel id="demo-dialog-select-label">List</InputLabel>
@@ -113,7 +113,7 @@ const ItemsShow = (props) => {
             </FormControl>
           </Box>
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{bgcolor: 'rgba(245,246,248,255)'}}>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleAdd}>Add</Button>
         </DialogActions>

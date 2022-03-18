@@ -83,7 +83,7 @@ function SearchBar2({ history }) {
         color: "white",
       },
       "& .MuiInput-underline:after": {
-        borderBottomColor: "yellow",
+        borderBottomColor: "rgba(13,14,70,255)",
       },
       "& .MuiOutlinedInput-root": {
         "& fieldset": {
@@ -93,7 +93,7 @@ function SearchBar2({ history }) {
           borderColor: "white",
         },
         "&.Mui-focused fieldset": {
-          borderColor: "yellow",
+          borderColor: "rgba(13,14,70,255)",
         },
       },
     },
