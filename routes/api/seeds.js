@@ -203,7 +203,7 @@ router.get('/add_books', async (req, res) => {
   let result = {};
   let addedToBookItems = [];
   let addedToInLists = [];
-  debugger
+//   debugger
   //add these ten books to the firstList's bookItem bucket, and add this list to all the books' inList bucket
   for (let x = 0; x < allBookIds.length; x++) {        
       await List.findOneAndUpdate({
