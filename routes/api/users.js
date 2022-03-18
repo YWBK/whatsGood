@@ -14,24 +14,6 @@ const List = require('../../models/List');
 
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
-//test to add/push items to []
-router.get('/add_to_my_lists', async (req, res) => {
-    const list = "62312e6e48d198674ad7ef77"
-
-    await User.findOneAndUpdate({
-        _id: "6230e58ee8ace707b68fee77",
-    }, {
-        $addToSet: {
-            favCategories: "horror",
-        },
-    })
-
-    const user = await User.findOne({
-        _id: "6230e58ee8ace707b68fee77",
-    })
-    res.send(user)
-})
-
 
 router.get('/current', passport
     .authenticate('jwt', { session: false }), (req, res) => {
@@ -46,10 +28,10 @@ router.get('/current', passport
 
 router.post('/signup', (req, res) => {
     const { errors, isValid } = validateSignupInput(req.body);
-
     if (!isValid) {
         return res.status(400).json(errors);
     }
+    
     User.find({ $or: [{ email: req.body.email }, { username: req.body.username }] })
         .then(users => {
             if (users.length > 0) {
@@ -57,6 +39,7 @@ router.post('/signup', (req, res) => {
                     (user.username === req.body.username) ? errors.username = 'Username is taken' : null;
                     (user.email === req.body.email) ? errors.email = 'Email is taken' : null;
                 })
+                
                 res.status(400).json(errors);
             } else {
                 const newUser = new User({
@@ -86,6 +69,7 @@ router.post('/signup', (req, res) => {
                                     })
                             })
                             .catch(err => console.log(err));
+                            
                     })
                 })
             }
@@ -402,7 +386,7 @@ router.post('/remove_a_list', async (req, res) => {
         //iterate through all the users who have this list in their followingLists bucket and delete the list
         for (let i = 0; i < listParsed.followers.length; i++) {
             const listFollowerId = listParsed.followers[i]
-            debugger
+            // debugger
             await User.findByIdAndUpdate({
                 _id: listFollowerId
             },{

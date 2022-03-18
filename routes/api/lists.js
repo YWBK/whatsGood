@@ -25,9 +25,9 @@ router.post("/", async (req, res) => {
   })))
   
   if (JSON.parse(JSON.stringify(existedList))){
-    debugger
+    // debugger
     if (JSON.parse(JSON.stringify(existedList)).owner === req.body.owner){ 
-      debugger
+      // debugger
     return res.status(400).send('List already existed, please use a different name')
   }}
   

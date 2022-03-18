@@ -9,11 +9,11 @@ export const createBook = (data) =>{
 }
 
 
-export const popularScore = (userId, bookId) => {
+export const popularScore = (userId, volumeId) => {
     return axios.get('/api/books/popular_score', {
       params:{
         userId: userId,
-        bookId: bookId    
+        volumeId: volumeId    
       }
     })
 };
