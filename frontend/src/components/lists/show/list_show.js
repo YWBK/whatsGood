@@ -90,85 +90,87 @@ class ListShow extends React.Component {
         return <>
             {
                 this.state.list && (
-                    <div className="list-outer-box">
-                        <div className='list-inner-box'>
-                            <div className='list-info'>
-                                <div className='list-info-left'>
-                                    <h2>{this.state.list.name}</h2>
-                                    <div className='list-show-des'>
-                                        {this.state.list.description}
-                                    </div>
-                                    <div className='list-show-author'>
-                                        {(this.state.list.owner && this.state.list.owner.username) ? `by ${this.state.list.owner.username}` : ""
-                                        }
-                                    </div>
-                                </div>
-                                <div className='list-info-right'>
-                                    {this.isMyList() && <Button
-                                        onClick={() => {
-                                            this.setState({ listDeleteConfirmDialogOpen: true })
-                                        }}
-                                        variant="outlined"
-                                        startIcon={<DeleteIcon />}>
-                                        Delete
-                                    </Button>}
-                                </div>
-                            </div>
-                            <div>
-                                {this.state.list.bookItems.map(book => (
-                                    <ListShowItem
-                                        book={book}
-                                        key={book._id}
-                                        listId={this.state.id}
-                                        removeBookFromList={
-                                            () => {
-                                                this.props.removeItemFromList(
-                                                    this.state.list.ownerId,
-                                                    book._id,
-                                                    this.props.match.params.listId
-                                                );
-                                                this.setState({ snackOpen: true });
+                    <div className="list-container">
+                        <div className="list-outer-box">
+                            <div className='list-inner-box'>
+                                <div className='list-info'>
+                                    <div className='list-info-left'>
+                                        <h2>{this.state.list.name}</h2>
+                                        <div className='list-description'>
+                                            {this.state.list.description}
+                                        </div>
+                                        <div className='list-owner'>
+                                            {(this.state.list.owner && this.state.list.owner.username) ? `by ${this.state.list.owner.username}` : ""
                                             }
-                                        } />
-                                ))}
-                            </div>
-                            <div>
-                                {
-                                    this.isMyList() && <ListItemSearch
-                                        userId={this.state.list.ownerId}
-                                        addItem={this.props.addItemToList} />
-                                }
+                                        </div>
+                                    </div>
+                                    <div className='list-info-right'>
+                                        {this.isMyList() && <Button
+                                            onClick={() => {
+                                                this.setState({ listDeleteConfirmDialogOpen: true })
+                                            }}
+                                            variant="outlined"
+                                            startIcon={<DeleteIcon />}>
+                                            Delete
+                                        </Button>}
+                                    </div>
+                                </div>
+                                <div className="list-items">
+                                    {this.state.list.bookItems.map(book => (
+                                        <ListShowItem
+                                            book={book}
+                                            key={book._id}
+                                            listId={this.state.id}
+                                            removeBookFromList={
+                                                () => {
+                                                    this.props.removeItemFromList(
+                                                        this.state.list.ownerId,
+                                                        book._id,
+                                                        this.props.match.params.listId
+                                                    );
+                                                    this.setState({ snackOpen: true });
+                                                }
+                                            } />
+                                    ))}
+                                </div>
+
+
                             </div>
 
+                            <Dialog
+                                open={this.state.listDeleteConfirmDialogOpen}
+                                onClose={this.handleDeleteConfirmDialogClose}
+                                aria-labelledby="alert-dialog-title"
+                                aria-describedby="alert-dialog-description"
+                            >
+                                <DialogTitle id="alert-dialog-title">
+                                    {`Do you want to delete ${this.state.list.name}?`}
+                                </DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText id="alert-dialog-description">
+                                        You won't be able to restore this once deleted.
+                                    </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={this.handleDeleteConfirmDialogClose}>Cancel</Button>
+                                    <Button onClick={this.onDeleteList} autoFocus>
+                                        Delete
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
                         </div>
-
-                        <Dialog
-                            open={this.state.listDeleteConfirmDialogOpen}
-                            onClose={this.handleDeleteConfirmDialogClose}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description"
-                        >
-                            <DialogTitle id="alert-dialog-title">
-                                {`Do you want to delete ${this.state.list.name}?`}
-                            </DialogTitle>
-                            <DialogContent>
-                                <DialogContentText id="alert-dialog-description">
-                                    You won't be able to restore this once deleted.
-                                </DialogContentText>
-                            </DialogContent>
-                            <DialogActions>
-                                <Button onClick={this.handleDeleteConfirmDialogClose}>Cancel</Button>
-                                <Button onClick={this.onDeleteList} autoFocus>
-                                    Delete
-                                </Button>
-                            </DialogActions>
-                        </Dialog>
+                        <div>
+                            {
+                                this.isMyList() && <ListItemSearch
+                                    userId={this.state.list.ownerId}
+                                    addItem={this.props.addItemToList} />
+                            }
+                        </div>
                     </div>
                 )
             }
         </>
     }
-
 
 }
 
