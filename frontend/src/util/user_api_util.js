@@ -5,33 +5,40 @@ export const fetchUser = (userId) => {
 };
 
 
-export const followList = (listId, userId) =>{
+export const followList = (listId, userId) => {
   return axios.post("api/users/followlist", {
-      listId: listId,
-      userId: userId
-    })
-}
-
-
-export const unfollowList = (listId, userId) =>{
-  return axios.post("api/users/unfollowlist",{
-     listId: listId,
-     userId: userId
+    listId: listId,
+    userId: userId
   })
 }
 
 
-export const followUser = (userIdBeingFollowed, userId ) =>{
+export const unfollowList = (listId, userId) => {
+  return axios.post("api/users/unfollowlist", {
+    listId: listId,
+    userId: userId
+  })
+}
+
+
+export const followUser = (userIdBeingFollowed, userId) => {
   return axios.post("api/users/followuser", {
-    userIdBeingFollowed:userIdBeingFollowed,
+    userIdBeingFollowed: userIdBeingFollowed,
     userId: userId
   })
 }
 
 
-export const unfollowUser = (userIdBeingFollowed, userId) =>{
+export const unfollowUser = (userIdBeingFollowed, userId) => {
   return axios.post("api/users/unfollowuser", {
-    userIdBeingFollowed:userIdBeingFollowed,
+    userIdBeingFollowed: userIdBeingFollowed,
     userId: userId
   })
+}
+
+export const removeUserList = (listId, userId) => {
+  return axios.post("api/users/remove_a_list", {
+    userId,
+    listId
+  });
 }
