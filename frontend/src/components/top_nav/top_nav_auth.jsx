@@ -24,16 +24,16 @@ const TopNavAuth = () => {
                 sx={{ mr: 2 }}
               >
                 <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                  <img src="/whatsGood.png" alt="logo" height="50" />
+                  <img src="/logo_orange.png" alt="logo" height="50" />
                 </Typography>
               </IconButton>
             </Link>
             <Link to="/signup">
               <Button 
                 sx={{
-                  backgroundColor: '#6C584C',
+                  backgroundColor: 'rgba(13,14,70,255)',
                   '&:hover': {
-                    backgroundColor:'#ADC178'
+                    backgroundColor:'rgba(80,52,255,255)'
                   }
                 }}
                 variant="contained"
