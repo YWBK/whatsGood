@@ -28,7 +28,7 @@ whatsGood, is a platform for users to share lists of books. Users can create the
 
 ### Backend Routing 
 
-MongoDB is a NoSQL database.
+As our application is built based on relational data structure, the below snippet illustrates that backend provides three-level deep relationship data object that reference documents in other collection for frontend API requests, which significantly reduced the need to make multiple API calls and frontend has all necessary data accessible.
 
 ```js
 router.get('/:id', async (req, res) => {
