@@ -115,9 +115,9 @@ router.post("/", async(req, res)=>{
 // two people in user's followUser list and one has that book. 50%
 router.get('/popular_score', async(req, res) =>{
   const userId  = req.query.userId;
-  const bookId  = req.query.bookId;
+  const volumeId  = req.query.volumeId;
   const book = await Book.findOne({
-    _id: bookId
+    volumeId: volumeId
   }).populate({
     path: "inLists",
     model: "List"
