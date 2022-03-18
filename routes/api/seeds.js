@@ -203,12 +203,31 @@ router.get('/add_books', async (req, res) => {
   let result = {};
   let addedToBookItems = [];
   let addedToInLists = [];
+  debugger
+  //add these ten books to the firstList's bookItem bucket, and add this list to all the books' inList bucket
+  for (let x = 0; x < allBookIds.length; x++) {        
+      await List.findOneAndUpdate({
+        _id: firstList
+      },{
+        $addToSet:{
+          bookItems: allBookIds[x]
+        }
+      });
+
+      await Book.findOneAndUpdate({
+        _id: allBookIds[x]
+      },{
+        $addToSet:{
+          inLists: firstList
+        }
+      })
+  };
 
   //iterate through all other lists (excluded the first list that created all the books)
   for (let j = 0; j < allOtherLists.length; j++) {
     const currentList = allOtherLists[j]._id
     
-    for (let counter = 0; counter < 10; counter++) {
+    for (let counter = 0; counter < 5; counter++) {
           //picked a bookId          
           const randNum = Math.floor(Math.random() * allBookIds.length);
           const pickedBookId = allBookIds[randNum]
@@ -237,7 +256,7 @@ router.get('/add_books', async (req, res) => {
   }
     
   result.book = addedToBookItems;
-  result.list = addedToInLists  
+  result.list = addedToInLists;  
   res.send(result)
   
 });
