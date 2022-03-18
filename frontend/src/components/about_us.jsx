@@ -8,7 +8,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  bgcolor: "#F0EAD2",
+  bgcolor: "rgba(245,246,248,255)",
   border: "2px solid #000",
   boxShadow: 24,
   zIndex: 20000,
