@@ -12,6 +12,8 @@ import BasicRating from "./rating"
 import { Button } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import './list_show_item.css';
 
 class ListShowItem extends React.Component {
 
@@ -41,7 +43,8 @@ class ListShowItem extends React.Component {
         return (
             <>
                 {
-                    this.state.book && <>
+                    this.state.book &&
+                    <div className="book-row">
                         <Link
                             to={`/items/${book.volumeId}`}
                         // target="_blank"
@@ -49,11 +52,16 @@ class ListShowItem extends React.Component {
                             <AlignItemsList book={this.state.book.volumeInfo} />
                         </Link>
 
-                        <IconButton aria-label="delete"
-
-                            onClick={this.onDelete}>
-                            <DeleteIcon />
-                        </IconButton></>
+                        <div>
+                            <IconButton
+                                sx={{ marginLeft: 10, marginTop: 3 }}
+                                aria-label="delete"
+                                size='large'
+                                onClick={this.onDelete}>
+                                <DeleteIcon />
+                            </IconButton>
+                        </div>
+                    </div>
                 }
             </>
         );
@@ -63,8 +71,8 @@ export default ListShowItem;
 
 function AlignItemsList(props) {
     return (
-        <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-            <ListItem alignItems="flex-start">
+        <List sx={{ width: "100%" }}>
+            <ListItem alignItems="flex-start" sx={{ width: 500 }}>
                 <ListItemAvatar>
                     <Avatar alt="Book1" src={`${props.book.imageLinks.thumbnail}`} />
                 </ListItemAvatar>
@@ -86,13 +94,18 @@ function AlignItemsList(props) {
                         </React.Fragment>
                     }
                 />
-                <BasicRating book={props.book} />
+                {/* <div className="percentage-box">
+                    <div className="percentage-inner-box">
+                        <div className="percentage-number">90%</div>
+                        <div><ThumbUpIcon fontSize='large' /></div>
+                    </div>
+                </div> */}
 
             </ListItem>
 
-            <Divider variant="inset" component="li" />
+            <Divider variant="fullWidth" component="li" />
 
-        </List>
+        </List >
     );
 }
 

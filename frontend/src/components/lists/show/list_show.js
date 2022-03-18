@@ -11,7 +11,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import ItemCompose from "../../items/item_compose_container";
 import ListItemSearch from "./list_item_search";
 import Snackbar from "@mui/material/Snackbar";
-
+import Divider from "@mui/material/Divider";
 
 class ListShow extends React.Component {
     constructor(props) {
@@ -133,7 +133,7 @@ class ListShow extends React.Component {
                                             } />
                                     ))}
                                 </div>
-
+                                <Divider variant="fullWidth" sx={{ marginTop: 3, color: 'black' }} />
 
                             </div>
 
@@ -159,7 +159,7 @@ class ListShow extends React.Component {
                                 </DialogActions>
                             </Dialog>
                         </div>
-                        <div>
+                        <div className="search-box">
                             {
                                 this.isMyList() && <ListItemSearch
                                     userId={this.state.list.ownerId}
