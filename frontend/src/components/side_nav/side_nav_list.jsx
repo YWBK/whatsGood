@@ -57,7 +57,7 @@ function SideNavList({ history, formType, list, currentUserId, addList }) {
         display: "flex", 
         justifyContent: "space-between",
         // backgroundColor: '#ADC178'
-        backgroundColor: '#A98467'
+        backgroundColor: 'rgba(178,177,255,255)'
       }}>
         <span>{listHeader(formType)}</span>
         {formType === "my-lists" ? (

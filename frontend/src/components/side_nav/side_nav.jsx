@@ -53,7 +53,7 @@ export default function SideNav({
           justifyContent: "space-evenly", 
           height: "100vh",
           // backgroundColor: '#DDE5B6'
-          backgroundColor: '#F0EAD2'
+          backgroundColor: 'rgba(245,246,248,255)'
           }}
         
       >

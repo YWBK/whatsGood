@@ -19,11 +19,11 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#6C584C',
-      dark: '#ADC178',
+      main: 'rgba(13,14,70,255)',
+      dark: 'rgba(80,52,255,255)',
     },
     secondary: {
-      main: '#ADC178',
+      main: 'rgba(80,52,255,255)',
 
     },
     contrastThreshold: 3,
@@ -31,7 +31,7 @@ const theme = createTheme({
   },
   button: {
     '&:hover': {
-      backgroundColor: '#ADC178'
+      backgroundColor: 'rgba(80,52,255,255)'
     }
   }
 });

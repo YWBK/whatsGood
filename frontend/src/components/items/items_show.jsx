@@ -94,8 +94,8 @@ const ItemsShow = (props) => {
         </Button>
       </div>
       <Dialog disableEscapeKeyDown open={open} onClose={handleClose} >
-        <DialogTitle sx={{bgcolor: '#F5F1E0'}}>Add this book to my list</DialogTitle>
-        <DialogContent sx={{bgcolor: '#F5F1E0'}}>
+        <DialogTitle sx={{bgcolor: 'rgba(245,246,248,255)'}}>Add this book to my list</DialogTitle>
+        <DialogContent sx={{bgcolor: 'rgba(245,246,248,255)'}}>
           <Box component="form" sx={{ display: "flex", flexWrap: "wrap" }}>
             <FormControl sx={{ m: 1, minWidth: 180 }}>
               <InputLabel id="demo-dialog-select-label">List</InputLabel>
@@ -107,13 +107,13 @@ const ItemsShow = (props) => {
                 input={<OutlinedInput label="List" />}
               >
                 {myLists.map((list) => (
-                  <MenuItem sx={{bgcolor: '#F5F1E0'}} value={list.id}>{list.name}</MenuItem>
+                  <MenuItem value={list.id}>{list.name}</MenuItem>
                 ))}
               </Select>
             </FormControl>
           </Box>
         </DialogContent>
-        <DialogActions sx={{bgcolor: '#F5F1E0'}}>
+        <DialogActions sx={{bgcolor: 'rgba(245,246,248,255)'}}>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleAdd}>Add</Button>
         </DialogActions>
