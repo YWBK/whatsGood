@@ -1,5 +1,5 @@
 .list-outer-box {
-  height: 80vh;
+  max-height: 80vh;
   width: -webkit-fill-available;
   display: flex;
   flex-direction: row;
@@ -27,6 +27,7 @@
   justify-content: space-between;
   border-bottom: 1px solid grey;
   padding-bottom: 20px;
+  width: 90%;
 }
 
 .list-info-left h2 {
@@ -44,16 +45,6 @@
   width: -webkit-fill-available;
 }
 
-.list-outer-box {
-  font-size: 1.25rem;
-  max-height: 68vh;
-  /* overflow: auto; */
-  margin: 1em 0;
-  padding: 1em;
-  border: 1px solid rgba(0, 0, 0, 0.363);
-  border-radius: 3px;
-}
-
 .list-outer-box h2 {
   font-size: 1.75rem;
   font-weight: 300;
@@ -69,4 +60,8 @@
 .list-items {
   max-height: 50vh;
   overflow: auto;
+}
+
+.search-box {
+  margin-top: 30px;
 }
