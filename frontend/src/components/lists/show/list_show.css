@@ -1,5 +1,5 @@
 .list-outer-box {
-  height: 100vh;
+  height: 80vh;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -7,5 +7,66 @@
 }
 
 .list-inner-box {
-  margin-top: 100px;
+  width: 70%;
+}
+
+.list-show-des {
+  font-size: 18px;
+  font-weight: 400;
+  padding-bottom: 8px;
+}
+
+.list-show-author {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.list-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid grey;
+  padding-bottom: 20px;
+}
+
+.list-info-left h2 {
+  font-size: 28px;
+  font-weight: 500;
+  padding-bottom: 18px;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 99vh;
+  width: -webkit-fill-available;
+}
+
+.list-outer-box {
+  font-size: 1.25rem;
+  max-height: 68vh;
+  /* overflow: auto; */
+  margin: 1em 0;
+  padding: 1em;
+  border: 1px solid rgba(0, 0, 0, 0.363);
+  border-radius: 3px;
+}
+
+.list-outer-box h2 {
+  font-size: 1.75rem;
+  font-weight: 300;
+  margin-bottom: 0.5em;
+}
+
+.list-description,
+.list-date,
+.list-owner {
+  margin-bottom: 0.3em;
+}
+
+.list-items {
+  max-height: 50vh;
+  overflow: auto;
 }

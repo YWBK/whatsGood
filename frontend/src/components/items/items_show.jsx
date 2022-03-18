@@ -38,8 +38,11 @@ const ItemsShow = (props) => {
     const myListIds = state.session.user.myLists;
     if (myLists.length === 0 && myListIds.length > 0) {
       const lists = [];
-      myListIds.forEach((id) => lists.push(state.entities.lists.all[id]));
-      console.log("setting state list");
+      myListIds.forEach((id) => {
+        if (id in state.entities.lists.all) {
+          lists.push(state.entities.lists.all[id]);
+        }
+      });
       setMyLists(lists);
     }
     setOpen(true);
