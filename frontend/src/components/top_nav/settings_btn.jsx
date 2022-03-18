@@ -99,7 +99,6 @@ export default function SettingsBtn(props) {
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
           <SettingsIcon />
-          {/* About Us */}
           <AboutUs />
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
