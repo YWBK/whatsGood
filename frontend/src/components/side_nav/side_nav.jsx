@@ -54,6 +54,8 @@ export default function SideNav({
           height: "100vh",
           // backgroundColor: '#DDE5B6'
           backgroundColor: 'rgba(245,246,248,255)'
+          // backgroundColor: 'rgba(13,14,70,255)',
+          // color: 'white'
           }}
         
       >
