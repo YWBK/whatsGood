@@ -10,6 +10,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 // import { logoutUser } from "../../actions/session_actions";
+import AboutUs from "../about_us";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -98,7 +99,7 @@ export default function SettingsBtn(props) {
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
           <SettingsIcon />
-          My Preferences
+          <AboutUs />
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem onClick={handleClose} disableRipple>
