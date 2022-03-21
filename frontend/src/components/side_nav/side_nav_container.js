@@ -51,18 +51,22 @@ const mSTP = (state) => {
       return null;
     }
   });
-  const followingUsers = Object.values(
-    state.entities.users[currentUserId].followingUsers
-  ).map((user) => {
-    if (user.id !== currentUserId) {
-      return {
-        id: user.id,
-        username: user.username,
-      };
-    } else {
-      return null;
-    }
-  });
+  const followingUsers =
+    state.entities.users[currentUserId] &&
+    state.entities.users[currentUserId].followingUsers !== null
+      ? Object.values(state.entities.users[currentUserId].followingUsers).map(
+          (user) => {
+            if (user.id !== currentUserId) {
+              return {
+                id: user.id,
+                username: user.username,
+              };
+            } else {
+              return null;
+            }
+          }
+        )
+      : null;
 
   return {
     loggedIn: state.session.isAuthenticated,
