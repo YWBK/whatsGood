@@ -41,7 +41,7 @@ function SideNavList({ history, formType, list, currentUserId, addList }) {
       case "my-lists":
         return "25vh";
       case "following-lists":
-        return "35vh";
+        return "39vh";
       case "following-users":
         return "25vh";
       default:
@@ -53,7 +53,16 @@ function SideNavList({ history, formType, list, currentUserId, addList }) {
     <List
       sx={{ height: listHeight(formType), overflow: "auto", paddingTop: 0 }}
     >
-      <ListSubheader sx={{ display: "flex", justifyContent: "space-between" }}>
+      <ListSubheader sx={{
+        display: "flex", 
+        justifyContent: "space-between",
+        // backgroundColor: '#ADC178'
+        // backgroundColor: 'rgba(80,52,255,255)',
+        // backgroundColor: 'rgba(70,71,112,255)',
+        backgroundColor: 'rgba(178,177,255,255)',
+        // color: 'white'
+        
+      }}>
         <span>{listHeader(formType)}</span>
         {formType === "my-lists" ? (
           <ModalForm currentUserId={currentUserId} addList={addList} />

@@ -386,7 +386,7 @@ router.post('/remove_a_list', async (req, res) => {
         //iterate through all the users who have this list in their followingLists bucket and delete the list
         for (let i = 0; i < listParsed.followers.length; i++) {
             const listFollowerId = listParsed.followers[i]
-            debugger
+            // debugger
             await User.findByIdAndUpdate({
                 _id: listFollowerId
             },{

@@ -17,13 +17,9 @@ import './list_show_item.css';
 
 class ListShowItem extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            book: null
-        };
-        this.onDelete = this.onDelete.bind(this);
-
+    constructor() {
+        super();
+        this.state = { book: null };
     }
 
     componentDidMount() {
@@ -31,10 +27,6 @@ class ListShowItem extends React.Component {
         fetchSingleBook(volumeId).then(res => {
             this.setState({ book: res.data });
         });
-    }
-
-    onDelete() {
-        this.props.removeBookFromList();
     }
 
     render() {
@@ -91,7 +83,7 @@ function AlignItemsList(props) {
                                 {`${props.book.subtitle}`}
                             </Typography>
                             <br />
-                            {`by ${props.book.authors.map(author => `${author}`)}`}
+                            {`by ${props.book.authors.map(author => `${author} `)}`}
 
                         </React.Fragment>
                     }

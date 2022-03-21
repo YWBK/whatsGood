@@ -95,7 +95,8 @@ const UserShow = (props) => {
         <ul className="user-show__list-container">{userLists}</ul>
       </div>
     ) : (
-      console.log("no other user")
+      null
+      // console.log("no other user")
     );
 
   const loggedInUserView =

@@ -40,13 +40,25 @@ export default function SideNav({
         [`& .MuiDrawer-paper`]: {
           width: drawerWidth,
           boxSizing: "border-box",
-          // zIndex: -1,
           overflow: "hidden",
         },
       }}
     >
       <Toolbar />
-      <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "space-evenly",  height: "100vh" }}>
+      <Box 
+        sx={{ 
+          marginTop: '2vh',
+          display: "flex", 
+          flexDirection: "column", 
+          justifyContent: "space-evenly", 
+          height: "100vh",
+          // backgroundColor: '#DDE5B6'
+          backgroundColor: 'rgba(245,246,248,255)'
+          // backgroundColor: 'rgba(13,14,70,255)',
+          // color: 'white'
+          }}
+        
+      >
         <SideNavList
           className="side-nav-my-lists"
           formType={"my-lists"}

@@ -14,35 +14,58 @@ import UserShowContainer from "./users/user_show_container";
 import ItemsShow from "./items/items_show";
 
 import "./reset.css";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: 'rgba(13,14,70,255)',
+      dark: 'rgba(80,52,255,255)',
+    },
+    secondary: {
+      main: 'rgba(80,52,255,255)',
+
+    },
+    contrastThreshold: 3,
+    tonalOffset: 0.2,
+  },
+  button: {
+    '&:hover': {
+      backgroundColor: 'rgba(80,52,255,255)'
+    }
+  }
+});
 
 const App = () => (
-  <div>
-    <TopNavContainer />
-    <div className='main-content' style={{ display: "flex" }}>
-      <SideNavContainer />
-      <Switch>
-        {/* <AuthRoute exact path="/" component={MainPage} /> */}
-        <AuthRoute exact path="/login" component={LoginFormContainer} />
-        <AuthRoute exact path="/signup" component={SignupForm1Container} />
-        <ProtectedRoute
-          exact
-          path="/lists/:listId"
-          component={ListShowContainer}
-        />
-        <ProtectedRoute
-          exact
-          path="/users/:userId"
-          component={UserShowContainer}
-        />
-        <ProtectedRoute
-          exact
-          path="/items/:itemId"
-          component={ItemsShow}
-        />
-        <AuthRoute exact path="/" component={MainPage} />
-      </Switch>
+  <ThemeProvider theme={theme}>
+    <div>
+      <TopNavContainer />
+      <div className='main-content' style={{ display: "flex" }}>
+        <SideNavContainer />
+        <Switch>
+          {/* <AuthRoute exact path="/" component={MainPage} /> */}
+          <AuthRoute exact path="/login" component={LoginFormContainer} />
+          <AuthRoute exact path="/signup" component={SignupForm1Container} />
+          <ProtectedRoute
+            exact
+            path="/lists/:listId"
+            component={ListShowContainer}
+          />
+          <ProtectedRoute
+            exact
+            path="/users/:userId"
+            component={UserShowContainer}
+          />
+          <ProtectedRoute
+            exact
+            path="/items/:itemId"
+            component={ItemsShow}
+          />
+          <AuthRoute exact path="/" component={MainPage} />
+        </Switch>
+      </div>
     </div>
-  </div>
+  </ThemeProvider>
 );
 
 export default App;

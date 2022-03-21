@@ -1,0 +1,49 @@
+.splash__bg {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10em;
+  width: -webkit-fill-available;
+  justify-content: center;
+  align-items: center;
+}
+
+.splash {
+  width: 80%;
+  max-width: 825px;
+}
+
+.splash__intro {
+  text-align: center;
+  margin-bottom: 7em;
+}
+
+.splash__intro h1 {
+  font-size: 2rem;
+  font-weight: 100;
+  margin-bottom: 0.7em;
+}
+
+.splash__section {
+  display: flex;
+  justify-content: space-around;
+  /* width: 50%; */
+  /* border: 1px solid black; */
+}
+
+.splash__section h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.35em;
+}
+
+.splash__section p {
+    font-size: 1.2rem;
+    line-height: 1.17;
+}
+
+.splash__text,
+.splash__img {
+  /* border: 1px solid black; */
+  height: 33vh;
+  width: 46%;
+  margin-bottom: 4em;
+}
