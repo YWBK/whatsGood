@@ -15,8 +15,8 @@ class MainPage extends React.Component {
             </Link>
           </div>
           <div className="splash__section">
-            <img src="follow_list.png" className="splash__img" />
-            <div className="splash__text">
+            <img src="follow_lists.png" className="splash__img" />
+            <div className="splash__text" style={{ paddingTop: "3.5em" }}>
               <h2>Follow Lists</h2>
               <p>
                 Bookmark your favorite lists. Make sure you always have a high
@@ -35,10 +35,10 @@ class MainPage extends React.Component {
                 least one of their lists.
               </p>
             </div>
-            <img src="/follow_user.png" className="splash__img" />
+            <img src="/follow_users.png" className="splash__img" />
           </div>
           <div className="splash__section">
-            <img src="/add_list.png" className="splash__img" />
+            <img src="/create_lists.png" className="splash__img" />
             <div className="splash__text">
               <h2>Create lists</h2>
               <p>Utilize the Google Books API to create custom book lists.</p>
