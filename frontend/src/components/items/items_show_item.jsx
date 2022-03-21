@@ -3,7 +3,9 @@ import React from "react";
 import ItemsShowSynopsis from "./items_show_synopsis";
 
 const ItemsShowItem = (props) => {
+  // debugger;
   const item = props.item ? props.item.volumeInfo : null;
+  const popScore = props.popScore ? props.popScore : "0%";
 
   const itemDisplay = item ? (
     <div className="items-show-item">
@@ -26,12 +28,15 @@ const ItemsShowItem = (props) => {
         <p className="items-show-item__date">{item.publishedDate}</p>
       </div>
       <div>
-        <p>Categories: </p>
-        <p className="items-show-item__category">{item.categories[0]}</p>
+        <p>{item.categories ? "Categories:" : ""}</p>
+        <p className="items-show-item__category">
+          {item.categories ? item.categories[0] : ""}
+        </p>
       </div>
       <div>
         <p className="items-show-item__pct">
-          <b>90%</b> of the users you follow have this book in their lists.
+          <b>{popScore}</b> of the users you follow have this book in their
+          lists.
         </p>
       </div>
       <div>

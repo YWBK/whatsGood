@@ -8,9 +8,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import ItemCompose from "../../items/item_compose_container";
 import ListItemSearch from "./list_item_search";
-import Snackbar from "@mui/material/Snackbar";
+// import Snackbar from "@mui/material/Snackbar";
 import Divider from "@mui/material/Divider";
 
 class ListShow extends React.Component {
@@ -44,9 +43,9 @@ class ListShow extends React.Component {
             return;
         }
 
-
         this.setState({ snackOpen: false });
     }
+
     componentWillMount() {
         const listId = this.props.match.params.listId;
         if (!this.props.allLists[listId]) {
@@ -122,6 +121,8 @@ class ListShow extends React.Component {
                                             book={book}
                                             key={book._id}
                                             listId={this.state.id}
+                                            listOwnerId={this.state.list.ownerId}
+                                            currentUserId={this.props.currentUserId}
                                             removeBookFromList={
                                                 () => {
                                                     this.props.removeItemFromList(
