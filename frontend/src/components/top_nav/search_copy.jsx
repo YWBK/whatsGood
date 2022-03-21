@@ -7,6 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import throttle from "lodash/throttle";
+import debounce from "lodash/debounce";
 import { fetchBooksAndUsers } from "../../util/search_util";
 import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
@@ -18,7 +19,7 @@ function SearchBar2({ history }) {
 
   const fetch = React.useMemo(
     () =>
-      throttle((request) => {
+      debounce((request) => {
         fetchBooksAndUsers(request).then((json) => {
           return setOptions(
             Object.values(json.data)
@@ -53,7 +54,22 @@ function SearchBar2({ history }) {
       return undefined;
     }
 
-    fetch(inputValue);
+    // fetch(inputValue);
+    fetch({ input: inputValue }, (results) => {
+      if (active) {
+        let newOptions = [];
+
+        if (value) {
+          newOptions = [value];
+        }
+
+        if (results) {
+          newOptions = [...newOptions, ...results];
+        }
+
+        setOptions(newOptions);
+      }
+    });
 
     return () => {
       active = false;
@@ -91,6 +107,7 @@ function SearchBar2({ history }) {
       filterSelectedOptions
       value={value}
       onChange={(event, newValue) => {
+        // debugger
         if (newValue.username) {
           history.push({
             pathname: `/users/${newValue.id}`,
@@ -105,23 +122,27 @@ function SearchBar2({ history }) {
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
       }}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          variant="outlined"
-          InputProps={{
-            ...params.InputProps,
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon sx={{ color: "white" }} />
-              </InputAdornment>
-            ),
-          }}
-          sx={{ input: { color: "white" } }}
-          label="Search"
-          fullWidth
-        />
-      )}
+      renderInput={(params) => {
+        // debugger
+        return (
+          <TextField
+            {...params}
+            variant="outlined"
+            InputProps={{
+              ...params.InputProps,
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon sx={{ color: "white" }} />
+                </InputAdornment>
+              ),
+            }}
+            sx={{ input: { color: "white" } }}
+            label="Search"
+            fullWidth
+          />
+        )
+      }
+      }
       renderOption={(props, option) => {
         return (
           <li {...props} key={option.id}>
