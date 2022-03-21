@@ -77,28 +77,6 @@ function SearchBar2({ history }) {
     return authorsResult;
   };
 
-  const WhiteBorderTextField = withStyles({
-    root: {
-      "& label.Mui-focused": {
-        color: "white",
-      },
-      "& .MuiInput-underline:after": {
-        borderBottomColor: "rgba(13,14,70,255)",
-      },
-      "& .MuiOutlinedInput-root": {
-        "& fieldset": {
-          borderColor: "white",
-        },
-        "&:hover fieldset": {
-          borderColor: "white",
-        },
-        "&.Mui-focused fieldset": {
-          borderColor: "rgba(13,14,70,255)",
-        },
-      },
-    },
-  })(TextField);
-
   return (
     <Autocomplete
       id="top-search"
@@ -128,7 +106,7 @@ function SearchBar2({ history }) {
         setInputValue(newInputValue);
       }}
       renderInput={(params) => (
-        <WhiteBorderTextField
+        <TextField
           {...params}
           variant="outlined"
           InputProps={{
