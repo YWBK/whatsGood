@@ -5,7 +5,7 @@ class ListShowItem extends React.Component {
 
     constructor() {
         super();
-        // this.state = { book: null };
+        this.state = { active: true, listName: '' };
     }
 
     componentDidMount() {
