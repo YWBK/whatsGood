@@ -96,6 +96,7 @@ class ListShow extends React.Component {
                                 <div className='list-info'>
                                     <div className='list-info-left'>
                                         <h2>{this.state.list.name}</h2>
+                                        {/* <ListNameModify/> */}
                                         <div className='list-description'>
                                             {this.state.list.description}
                                         </div>
