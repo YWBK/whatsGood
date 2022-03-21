@@ -12,7 +12,7 @@ import BasicRating from "./rating"
 import { Button } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+// import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import './list_show_item.css';
 
 class ListShowItem extends React.Component {
@@ -20,6 +20,7 @@ class ListShowItem extends React.Component {
     constructor() {
         super();
         this.state = { book: null };
+        this.onDelete = this.onDelete.bind(this);
     }
 
     componentDidMount() {
@@ -29,8 +30,14 @@ class ListShowItem extends React.Component {
         });
     }
 
+    onDelete() {
+        const { removeBookFromList } = this.props;
+        removeBookFromList();
+    }
+
     render() {
         const { book } = this.props;
+        const { listOwnerId, currentUserId } = this.props;
 
         return (
             <>
@@ -39,19 +46,20 @@ class ListShowItem extends React.Component {
                     <div className="book-row">
                         <Link
                             to={`/items/${book.volumeId}`}
-                        // target="_blank"
                         >
                             <AlignItemsList book={this.state.book.volumeInfo} />
                         </Link>
 
                         <div>
-                            <IconButton
-                                sx={{ marginTop: 3 }}
-                                aria-label="delete"
-                                size='large'
-                                onClick={this.onDelete}>
-                                <DeleteIcon />
-                            </IconButton>
+                            {listOwnerId === currentUserId &&
+                                <IconButton
+                                    sx={{ marginTop: 3 }}
+                                    aria-label="delete"
+                                    size='large'
+                                    onClick={this.onDelete}>
+                                    <DeleteIcon />
+                                </IconButton>
+                            }
                         </div>
                     </div>
                 }
