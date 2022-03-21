@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const keys = require("../../config/keys")
 const axio = require("axios")
-const User = require("../../models/User")
+const User = require("../../models/User");
+const List = require("../../models/List");
 
 router.post("/", (req, res, next) => {
   const searchParams = !req.body ?  res.send('searchString is blank') : req.body.searchString.split(" ").join("+");
@@ -24,7 +25,7 @@ router.post("/book", (req, res, next) =>{
 
 
 
-router.get("/books_and_users", async (req, res, next) => {
+router.get("/books_users_lists", async (req, res, next) => {
   const searchParams = !req.query ?  res.send('searchString is blank') : req.query.searchString.split(" ").join("+");
   const searchKeyWords = req.query.searchString.toLowerCase()
   debugger
@@ -49,8 +50,24 @@ router.get("/books_and_users", async (req, res, next) => {
         }              
       }      
     }
-    
     consolidatedData.backendUserData = backendUserData;
+    
+
+    const lists = await List.find()
+    const allLists = JSON.parse(JSON.stringify(lists))
+    
+    let backendListData = []
+
+    for (let i = 0; i < allLists.length; i++) {
+      const listname = allLists[i].name.split(" ");
+      for (let j = 0; j < listname.length; j++) {
+        if (searchKeyWords.includes(listname[j].toLowerCase())){
+          backendListData.push(allLists[i]);
+          break
+        }              
+      }      
+    }    
+    consolidatedData.backendListData = backendListData;
   
     res.send(consolidatedData)
 

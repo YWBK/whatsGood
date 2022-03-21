@@ -171,7 +171,6 @@ router.get('/add_books', async (req, res) => {
      "p1b1jFzCV6IC",
      "S-ErDgAAQBAJ",
      "_4YvPwAACAAJ",
-     "J1Z2oAEACAAJ",
      "mZB1PwAACAAJ",
    ]
 
