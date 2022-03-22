@@ -1,10 +1,12 @@
 import * as React from "react";
 import './list_name.css';
+import { withRouter } from 'react-router-dom';
 
 class ListName extends React.Component {
 
     constructor(props) {
         super(props);
+        // debugger
         this.state = { listName: this.props.listName, listDescription: this.props.listDescription };
 
         this.updateListName = this.updateListName.bind(this);
@@ -47,6 +49,23 @@ class ListName extends React.Component {
     componentWillUnmount() {
         // document.removeEventListener('mousedown', this.handleOuterClick);
         document.removeEventListener('mousedown', this.onKeyDown);
+        // debugger
+    }
+
+    componentDidUpdate(prevProps) {
+        const newList = this.props.allLists[this.props.match.params.listId];
+        const newListName = newList.name;
+        const newListDesc = newList.description;
+        const locationChanged = 
+            prevProps.match.params.listId !== this.props.match.params.listId;
+        if (locationChanged) {
+            this.setState({ 
+                listName: newListName, 
+                listDescription: newListDesc
+            })
+        } else {
+            return null;
+        }
     }
 
     render() {
@@ -83,7 +102,7 @@ class ListName extends React.Component {
         );
     }
 }
-export default ListName;
+export default withRouter(ListName);
 
 
 
