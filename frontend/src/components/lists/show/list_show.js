@@ -126,10 +126,10 @@ class ListShow extends React.Component {
                                     </div>
                                 </div>
                                 <div className="list-items">
-                                    {this.state.list.bookItems.map(book => (
+                                    {this.state.list.bookItems.map((book, i) => (
                                         <ListShowItem
                                             book={book}
-                                            key={book._id}
+                                            key={i}
                                             listId={this.state.id}
                                             listOwnerId={this.state.list.ownerId}
                                             currentUserId={this.props.currentUserId}
