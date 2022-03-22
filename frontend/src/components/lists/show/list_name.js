@@ -6,9 +6,8 @@ class ListName extends React.Component {
 
     constructor(props) {
         super(props);
-        // debugger
         this.state = { listName: this.props.listName, listDescription: this.props.listDescription };
-
+        
         this.updateListName = this.updateListName.bind(this);
         this.updateListDescription = this.updateListDescription.bind(this);
         // this.handleOuterClick = this.handleOuterClick.bind(this);
@@ -53,6 +52,7 @@ class ListName extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
+        // debugger
         const newList = this.props.allLists[this.props.match.params.listId];
         const newListName = newList.name;
         const newListDesc = newList.description;
@@ -74,8 +74,8 @@ class ListName extends React.Component {
         return (
             <>
                 {
-                    listOwnerId === currentUserId &&
-                    <div>
+                    listOwnerId === currentUserId 
+                    ? <div>
                         <div className='list-name'>
                             <input
                                 type='text'
@@ -97,6 +97,22 @@ class ListName extends React.Component {
                                 onClick={e => e.stopPropagation()} />
                         </div>
                     </div>
+                    : <div>
+                    <div className='following-list-name'>
+                        <input
+                            type='text'
+                            className="following-list-name-input"
+                            value={this.state.listName}
+                            disabled />
+                    </div>
+                    <div className='following-list-description'>
+                        <input
+                            type='text'
+                            className="following-list-description-input" 
+                            value={this.state.listDescription}
+                            disabled />
+                    </div>
+                </div>
                 }
             </>
         );
