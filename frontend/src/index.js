@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (decodedUser.exp < currentTime) {
             store.dispatch(logout());
             // to be update once we have the modol
-            window.location.href = '/login';
+            // window.location.href = '/login';
         }
     } else {
         store = configureStore({});

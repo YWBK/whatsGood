@@ -100,6 +100,7 @@ class ListShow extends React.Component {
                                             listId={this.state.list.id}
                                             listOwnerId={this.state.list.ownerId}
                                             currentUserId={this.props.currentUserId}
+                                            allLists={this.props.allLists}
                                             listName={this.state.list.name}
                                             listDescription={this.state.list.description}
                                             updateName={this.props.updateName}
