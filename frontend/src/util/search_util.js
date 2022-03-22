@@ -23,8 +23,8 @@ export const fetchSingleBook = (volumeId) => {
 }
 
 
-export const fetchBooksAndUsers = (str) =>{
-  return axios.get('/api/search/books_and_users',{
+export const fetchBooksUsersLists = (str) =>{
+  return axios.get('/api/search/books_users_lists',{
     params:{
       searchString: str
     }

@@ -45,21 +45,21 @@ export default function AboutUs() {
               className="about-img"
             />
             <p>Ethan Gumin</p>
-            <a href="https://angel.co/u/ethan-gumin">
+            <a href="https://angel.co/u/ethan-gumin" target="_blank"> 
               <img
                 src="/angellist_icon.svg"
                 alt="ethan angel list"
                 className="social-img"
               />
             </a>
-            <a href="https://www.linkedin.com/in/ethan-gumin-2959b996/">
+            <a href="https://www.linkedin.com/in/ethan-gumin-2959b996/" target="_blank">
               <img
                 src="/linkedin_icon.svg"
                 alt="ethan linkedin"
                 className="social-img"
               />
             </a>
-            <a href="https://github.com/ethangumin">
+            <a href="https://github.com/ethangumin" target="_blank">
               <img
                 src="/github_icon.svg"
                 alt="ethan github"
@@ -74,21 +74,21 @@ export default function AboutUs() {
               className="about-img"
             />
             <p>Katie Hang</p>
-            <a href="">
+            <a href="https://angel.co/u/katie-yuchen-hang" target="_blank">
               <img
                 src="/angellist_icon.svg"
                 alt="katie angel list"
                 className="social-img"
               />
             </a>
-            <a href="https://www.linkedin.com/in/yuchen-katie-hang-443b27a4/">
+            <a href="https://www.linkedin.com/in/yuchen-katie-hang-443b27a4/" target="_blank">
               <img
                 src="/linkedin_icon.svg"
                 alt="katie linkedin"
                 className="social-img"
               />
             </a>
-            <a href="https://github.com/johnda911">
+            <a href="https://github.com/johnda911" target="_blank">
               <img
                 src="/github_icon.svg"
                 alt="katie github"
@@ -103,21 +103,21 @@ export default function AboutUs() {
               className="about-img"
             />
             <p>Bill Kim</p>
-            <a href="https://angel.co/u/yong-woo-kim-1">
+            <a href="https://angel.co/u/ywbk" target="_blank">
               <img
                 src="/angellist_icon.svg"
                 alt="bill angel list"
                 className="social-img"
               />
             </a>
-            <a href="https://www.linkedin.com/in/bill-kim-88987a42/">
+            <a href="https://www.linkedin.com/in/ywbk/" target="_blank">
               <img
                 src="/linkedin_icon.svg"
                 alt="bill linkedin"
                 className="social-img"
               />
             </a>
-            <a href="https://github.com/YWBK">
+            <a href="https://github.com/YWBK" target="_blank">
               <img
                 src="/github_icon.svg"
                 alt="bill github"
@@ -132,21 +132,21 @@ export default function AboutUs() {
               className="about-img"
             />
             <p>Steven Wu</p>
-            <a href="https://angel.co/u/steven-wu-31">
+            <a href="https://angel.co/u/steven-wu-31" target="_blank">
               <img
                 src="/angellist_icon.svg"
                 alt="steven angel list"
                 className="social-img"
               />
             </a>
-            <a href="https://www.linkedin.com/in/steven-wu-29814136/">
+            <a href="https://www.linkedin.com/in/steven-wu-29814136/" target="_blank">
               <img
                 src="/linkedin_icon.svg"
                 alt="steven linkedin"
                 className="social-img"
               />
             </a>
-            <a href="https://github.com/swusteven">
+            <a href="https://github.com/swusteven" target="_blank">
               <img
                 src="/github_icon.svg"
                 alt="steven github"
