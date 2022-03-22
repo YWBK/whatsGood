@@ -33,7 +33,11 @@ export default function AboutUs() {
         aria-describedby="modal-modal-description"
         sx={{ zIndex: 15000 }}
       >
-        <Box sx={style} className="about-us__container" onClick={e => e.stopPropagation()}>
+        <Box
+          sx={style}
+          className="about-us__container"
+          onClick={(e) => e.stopPropagation()}
+        >
           <div className="about__ethan">
             <img
               src="/ethan_profile.png"
@@ -135,7 +139,7 @@ export default function AboutUs() {
                 className="social-img"
               />
             </a>
-            <a href="https://www.linkedin.com/in/steven-wu-cams-29814136/">
+            <a href="https://www.linkedin.com/in/steven-wu-29814136/">
               <img
                 src="/linkedin_icon.svg"
                 alt="steven linkedin"
