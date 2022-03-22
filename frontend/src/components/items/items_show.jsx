@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useStore } from "react-redux";
 import ItemsShowItem from "./items_show_item";
 import { fetchSingleBook } from "../../util/search_util";
+import { popularScore } from "../../util/book_api_util";
 import Button from "@mui/material/Button";
 import "./items_show.css";
 import Box from "@mui/material/Box";
@@ -21,6 +22,7 @@ const ItemsShow = (props) => {
   // get redux store
   const store = useStore();
   const [item, setItem] = useState(null);
+  const [popScore, setPopScore] = useState(null);
   const [open, setOpen] = useState(false);
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [myLists, setMyLists] = useState([]);
@@ -29,6 +31,10 @@ const ItemsShow = (props) => {
   useEffect(() => {
     fetchSingleBook(props.match.params.itemId).then((book) => {
       setItem(book.data);
+    });
+    const currentUserId = store.getState().session.user.id;
+    popularScore(currentUserId, props.match.params.itemId).then((score) => {
+      setPopScore(score.data);
     });
   }, [myLists, props.match.params.itemId]);
 
@@ -83,7 +89,7 @@ const ItemsShow = (props) => {
   return (
     <div className="items-show__container">
       <div className="items-show">
-        <ItemsShowItem item={item} />
+        <ItemsShowItem item={item} popScore={popScore} />
         <Button
           variant="contained"
           sx={{ marginTop: "2em", width: "max-content" }}
@@ -93,9 +99,11 @@ const ItemsShow = (props) => {
           Add to list
         </Button>
       </div>
-      <Dialog disableEscapeKeyDown open={open} onClose={handleClose} >
-        <DialogTitle sx={{bgcolor: 'rgba(245,246,248,255)'}}>Add this book to my list</DialogTitle>
-        <DialogContent sx={{bgcolor: 'rgba(245,246,248,255)'}}>
+      <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
+        <DialogTitle sx={{ bgcolor: "rgba(245,246,248,255)" }}>
+          Add this book to my list
+        </DialogTitle>
+        <DialogContent sx={{ bgcolor: "rgba(245,246,248,255)" }}>
           <Box component="form" sx={{ display: "flex", flexWrap: "wrap" }}>
             <FormControl sx={{ m: 1, minWidth: 180 }}>
               <InputLabel id="demo-dialog-select-label">List</InputLabel>
@@ -113,7 +121,7 @@ const ItemsShow = (props) => {
             </FormControl>
           </Box>
         </DialogContent>
-        <DialogActions sx={{bgcolor: 'rgba(245,246,248,255)'}}>
+        <DialogActions sx={{ bgcolor: "rgba(245,246,248,255)" }}>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleAdd}>Add</Button>
         </DialogActions>

@@ -23,7 +23,10 @@ class SignupForm1 extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.signedIn === true) {
       // to be changed once done with login modol
-      this.props.history.push("/login");
+      // this.props.history.push("/login");
+    } else if (nextProps.currentUser === true) {
+      // once authenticated, redirect to main page
+      this.props.history.push("/");
     }
     // debugger;
     this.setState({ errors: nextProps.errors });
@@ -40,8 +43,8 @@ class SignupForm1 extends React.Component {
     e.preventDefault();
 
     const demoUser = {
-      emailOrUsername: 'DemoUser',
-      password: '123456'
+      emailOrUsername: "DemoUser",
+      password: "123456",
     };
 
     this.props.login(demoUser);
@@ -56,7 +59,12 @@ class SignupForm1 extends React.Component {
       password2: this.state.password2,
     };
 
-    this.props.signup(user, this.props.history);
+    this.props.signup(user, this.props.history).then(() => {
+      this.props.login({
+        emailOrUsername: user.username,
+        password: user.password,
+      });
+    });
   }
 
   renderErrors() {
@@ -140,7 +148,11 @@ class SignupForm1 extends React.Component {
           <div className="signup-form__demo-login">
             <div>
               <p>Or sign in as a </p>
-              <Button onClick={this.handleDemoLogin} variant="contained" sx={{ margin: "0.5em 0" }}>
+              <Button
+                onClick={this.handleDemoLogin}
+                variant="contained"
+                sx={{ margin: "0.5em 0" }}
+              >
                 Demo User
               </Button>
             </div>

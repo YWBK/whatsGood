@@ -1,0 +1,43 @@
+.list-name-input {
+  border: 0;
+  background-color: transparent;
+  font-size: 28px;
+  font-weight: 600;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  min-width: 1em;
+  width: auto;
+}
+
+.list-name-input:hover {
+  cursor: pointer;
+}
+
+.list-name-input input[type="text"] {
+  width: 100%;
+}
+
+.list-name-input:focus {
+  border: 2px black;
+  outline-style: dashed;
+  outline-width: 3px;
+  /* background-color: yellow; */
+}
+
+.list-description-input {
+  border: 0;
+  background-color: transparent;
+  font-size: 20px;
+  font-weight: 500;
+  width: auto;
+}
+
+.list-description-input:hover {
+  cursor: pointer;
+}
+
+.list-description-input:focus {
+  border: 2px black;
+  outline-style: dashed;
+  outline-width: 3px;
+}

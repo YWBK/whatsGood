@@ -427,4 +427,90 @@ router.post('/remove_a_list', async (req, res) => {
 
 
 
+
+router.post('/update_list_name', async (req, res) => {
+    const userId = req.body.userId;
+    const listId = req.body.listId;
+    const listName = req.body.newlistName;
+    try { 
+        //find all users have this list
+        const list = await List.findOne({
+            _id: listId
+        });
+
+        const listParsed = JSON.parse(JSON.stringify(list))
+
+        //can't update a list created by someone else
+        if (listParsed.owner !== userId){
+            return res.status(400).send("Can't update a list created by someone else")
+        }
+
+        //update the list from list owner / current user's mylist bucket
+        const updatedlist = await List.findOneAndUpdate({
+            _id: listId
+        },{
+            name: listName
+        }, {
+            new: true
+        });
+        
+        //add to activity model 
+        const newActivity = await new Activity({
+            activityName: "UPDATE_LIST",
+            actionType: "updated",
+            userId: userId,
+            listId: listId
+        })
+        await newActivity.save()
+
+        res.json(updatedlist)
+    } catch (error) {
+        res.json(error.message)
+    }
+})
+
+
+
+router.post('/update_list_description', async (req, res) => {
+    const userId = req.body.userId;
+    const listId = req.body.listId;
+    const listDescription = req.body.newlistDescription;
+    try { 
+        //find all users have this list
+        const list = await List.findOne({
+            _id: listId
+        });
+
+        const listParsed = JSON.parse(JSON.stringify(list))
+
+        //can't update a list created by someone else
+        if (listParsed.owner !== userId){
+            return res.status(400).send("Can't update a list created by someone else")
+        }
+
+        //update the list from list owner / current user's mylist bucket
+        const updatedlist = await List.findOneAndUpdate({
+            _id: listId
+        },{
+            description: listDescription
+        }, {
+            new: true
+        });
+        
+        //add to activity model 
+        const newActivity = await new Activity({
+            activityName: "UPDATE_LIST",
+            actionType: "updated",
+            userId: userId,
+            listId: listId
+        })
+        await newActivity.save()
+
+        res.json(updatedlist)
+    } catch (error) {
+        res.json(error.message)
+    }
+})
+
+
 module.exports = router;

@@ -30,11 +30,11 @@
   width: 90%;
 }
 
-.list-info-left h2 {
+/* .list-info-left h2 {
   font-size: 28px;
   font-weight: 600;
   padding-bottom: 18px;
-}
+} */
 
 .list-container {
   display: flex;
@@ -43,7 +43,6 @@
   align-items: center;
   height: 99vh;
   width: -webkit-fill-available;
-  /* background-color: #f0ead2; */
 }
 
 .list-outer-box h2 {
@@ -52,7 +51,6 @@
   margin-bottom: 0.5em;
 }
 
-.list-description,
 .list-date,
 .list-owner {
   margin-bottom: 0.3em;
