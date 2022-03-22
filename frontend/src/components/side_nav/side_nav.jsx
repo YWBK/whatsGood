@@ -22,10 +22,10 @@ export default function SideNav({
 }) {
   React.useEffect(() => {
     const getNavContent = async () => {
-      await fetchUser(currentUserId);
+      fetchUser(currentUserId);
       return;
     };
-    getNavContent();
+    return currentUserId ? getNavContent() : null;
   }, [fetchUser, currentUserId]);
 
   if (!loggedIn) return <div></div>;
