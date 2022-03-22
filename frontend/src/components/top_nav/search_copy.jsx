@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import throttle from "lodash/throttle";
 import debounce from "lodash/debounce";
-import { fetchBooksAndUsers } from "../../util/search_util";
+import { fetchBooksUsersLists } from "../../util/search_util";
 import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -20,7 +20,7 @@ function SearchBar2({ history }) {
   const fetch = React.useMemo(
     () =>
       debounce((request) => {
-        fetchBooksAndUsers(request).then((json) => {
+        fetchBooksUsersLists(request).then((json) => {
           return setOptions(
             Object.values(json.data)
               .reverse()
