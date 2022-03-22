@@ -1,6 +1,7 @@
 import React from "react";
 import "./list_show.css";
 import ListShowItem from "./list_show_item";
+import ListName from "./list_name";
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Dialog from '@mui/material/Dialog';
@@ -94,10 +95,19 @@ class ListShow extends React.Component {
                             <div className='list-inner-box'>
                                 <div className='list-info'>
                                     <div className='list-info-left'>
-                                        <h2>{this.state.list.name}</h2>
-                                        <div className='list-description'>
+                                        {/* <h2>{this.state.list.name}</h2> */}
+                                        <ListName
+                                            listId={this.state.list.id}
+                                            listOwnerId={this.state.list.ownerId}
+                                            currentUserId={this.props.currentUserId}
+                                            listName={this.state.list.name}
+                                            listDescription={this.state.list.description}
+                                            updateName={this.props.updateName}
+                                            updateDescription={this.props.updateDescription}
+                                        />
+                                        {/* <div className='list-description'>
                                             {this.state.list.description}
-                                        </div>
+                                        </div> */}
                                         <div className='list-owner'>
                                             {(this.state.list.owner && this.state.list.owner.username) ? `by ${this.state.list.owner.username}` : ""
                                             }

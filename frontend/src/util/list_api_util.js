@@ -15,18 +15,19 @@ export const getList = (listId) => {
   })
 }
 
+export const updateListName = (listId, userId, newlistName) => {
+  return axios.post("api/users/update_list_name", {
+    userId,
+    listId,
+    newlistName
+  });
+}
 
 
-
-// export const getListItems = () => {
-//     return axios.get('/api/lists')
-// };
-
-// export const getUserListItems = id => {
-//     return axios.get(`/api/user/${id}/lists`)
-// };
-
-// // to confirm with backend
-// export const writeListItem = data => {
-//     return axios.post('/api/lists/', data)
-// }
+export const updateListDescription = (listId, userId, newlistDescription) => {
+  return axios.post("api/users/update_list_description", {
+    userId,
+    listId,
+    newlistDescription
+  });
+}
