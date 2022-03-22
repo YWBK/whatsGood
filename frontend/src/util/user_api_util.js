@@ -44,19 +44,3 @@ export const removeUserList = (listId, userId) => {
 }
 
 
-export const updateListName = (listId, userId, newlistName) => {
-  return axios.post("api/users/update_list_name", {
-    userId,
-    listId,
-    newlistName
-  });
-}
-
-
-export const updateListDescription = (listId, userId, newlistDescription) => {
-  return axios.post("api/users/update_list_description", {
-    userId,
-    listId,
-    newlistDescription
-  });
-}
