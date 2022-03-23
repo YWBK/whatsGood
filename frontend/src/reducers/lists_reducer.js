@@ -18,8 +18,9 @@ const ListsReducer = (
       list.id = list._id;
       delete list._id;
       list.ownerId = list.owner._id ? list.owner._id : list.owner;
+      list.ownerName = list.owner.username ? list.owner.username : null;
       newState.all[list.id] = list;
-
+      
       return newState;
     case REMOVE_LIST:
       if (action.listId in newState.all) {
