@@ -70,13 +70,24 @@ class ListShowItem extends React.Component {
 export default ListShowItem;
 
 function AlignItemsList(props) {
+    const getImgUrl = () => {
+        return props.book.imageLinks?.thumbnail ? props.book.imageLinks.thumbnail : "/no_img.jpeg";
+    }
+    const getAuthor = () => {
+        return props.book.authors ? `by ${props.book.authors.map(author => `${author} `)}` : "by anonymous author";
+    }
+    const getSubtitle = () => {
+        return props.book.subtitle ? props.book.subtitle : "";
+    }
+
     return (
         <List sx={{ width: "100%" }}>
             <ListItem alignItems="flex-start" sx={{ minWidth: 300, width: 400 }}>
                 <ListItemAvatar>
                     <Avatar alt="Book1" variant="square"
                         sx={{ width: 45, height: 60, marginRight: 5 }}
-                        src={`${props.book.imageLinks.thumbnail}`} />
+                        src={getImgUrl()}
+                    />
                 </ListItemAvatar>
                 <ListItemText
                     primary={`${props.book.title}`}
@@ -88,10 +99,10 @@ function AlignItemsList(props) {
                                 variant="body2"
                                 color="text.primary"
                             >
-                                {`${props.book.subtitle}`}
+                                {getSubtitle()}
                             </Typography>
                             <br />
-                            {`by ${props.book.authors.map(author => `${author} `)}`}
+                            {getAuthor()}
 
                         </React.Fragment>
                     }
