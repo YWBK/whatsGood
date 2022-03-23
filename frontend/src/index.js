@@ -11,7 +11,6 @@ import { logout } from './actions/session_actions';
 import { followList } from "./util/user_api_util"
 import { popularScore } from "./util/book_api_util"
 import { removeBookFromList } from "./util/book_api_util"
-import { fetchBooksAndUsers } from "./util/search_util"
 import { seeds } from "./util/seed_apil_util"
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -27,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (decodedUser.exp < currentTime) {
             store.dispatch(logout());
             // to be update once we have the modol
-            window.location.href = '/login';
+            // window.location.href = '/login';
         }
     } else {
         store = configureStore({});
@@ -43,5 +42,4 @@ window.searchbar = fetchBooks
 window.followList = followList
 window.popularScore = popularScore
 window.removeBookFromList = removeBookFromList
-window.fetchBooksAndUsers = fetchBooksAndUsers
 window.seedUsers = seeds

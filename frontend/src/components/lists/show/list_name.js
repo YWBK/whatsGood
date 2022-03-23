@@ -1,12 +1,13 @@
 import * as React from "react";
 import './list_name.css';
+import { withRouter } from 'react-router-dom';
 
 class ListName extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = { listName: this.props.listName, listDescription: this.props.listDescription };
-
+        
         this.updateListName = this.updateListName.bind(this);
         this.updateListDescription = this.updateListDescription.bind(this);
         // this.handleOuterClick = this.handleOuterClick.bind(this);
@@ -47,6 +48,24 @@ class ListName extends React.Component {
     componentWillUnmount() {
         // document.removeEventListener('mousedown', this.handleOuterClick);
         document.removeEventListener('mousedown', this.onKeyDown);
+        // debugger
+    }
+
+    componentDidUpdate(prevProps) {
+        // debugger
+        const newList = this.props.allLists[this.props.match.params.listId];
+        const newListName = newList.name;
+        const newListDesc = newList.description;
+        const locationChanged = 
+            prevProps.match.params.listId !== this.props.match.params.listId;
+        if (locationChanged) {
+            this.setState({ 
+                listName: newListName, 
+                listDescription: newListDesc
+            })
+        } else {
+            return null;
+        }
     }
 
     render() {
@@ -55,8 +74,8 @@ class ListName extends React.Component {
         return (
             <>
                 {
-                    listOwnerId === currentUserId &&
-                    <div>
+                    listOwnerId === currentUserId 
+                    ? <div>
                         <div className='list-name'>
                             <input
                                 type='text'
@@ -78,12 +97,28 @@ class ListName extends React.Component {
                                 onClick={e => e.stopPropagation()} />
                         </div>
                     </div>
+                    : <div>
+                    <div className='following-list-name'>
+                        <input
+                            type='text'
+                            className="following-list-name-input"
+                            value={this.state.listName}
+                            disabled />
+                    </div>
+                    <div className='following-list-description'>
+                        <input
+                            type='text'
+                            className="following-list-description-input" 
+                            value={this.state.listDescription}
+                            disabled />
+                    </div>
+                </div>
                 }
             </>
         );
     }
 }
-export default ListName;
+export default withRouter(ListName);
 
 
 
