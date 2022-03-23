@@ -70,6 +70,7 @@ function SideNavList({ history, formType, list, currentUserId, addList }) {
       </ListSubheader>
       {list.map((item) => {
         if (!item) return null;
+        // debugger
         return (
           <ListItem
             button
