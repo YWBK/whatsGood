@@ -1,6 +1,7 @@
-.list-name-input {
+.list-name-input, .following-list-name-input {
   border: 0;
   background-color: transparent;
+  color: inherit;
   font-size: 28px;
   font-weight: 600;
   padding-top: 9px;
@@ -24,9 +25,10 @@
   /* background-color: yellow; */
 }
 
-.list-description-input {
+.list-description-input, .following-list-description-input {
   border: 0;
   background-color: transparent;
+  color: inherit;
   font-size: 20px;
   font-weight: 500;
   width: -webkit-fill-available;
