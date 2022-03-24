@@ -112,14 +112,14 @@ router.get('/:id', async (req, res) => {
 
 ## Feature
 
-### Search bar with throttled API requests
+### Search bar with debounced API requests
 
-Users can use the search bar to search for books or other users. The search bar throttles the API request and maps through the JSON response. When user clicks user or book, they are taken to the approriate show page.
+Users can use the search bar to search for books or other users. The search bar debounces the API request and maps through the JSON response. When user clicks user or book, they are taken to the approriate show page.
 
 ```js
   const fetch = React.useMemo(
     () =>
-      throttle((request) => {
+      debounce((request) => {
         fetchBooksAndUsers(request)
           .then(json => {
             return setOptions(Object

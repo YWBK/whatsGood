@@ -51,24 +51,21 @@ function ListItemSearch({ userId, addItem, match }) {
       return undefined;
     }
 
-    fetch( inputValue , 
-    //   (results) => {
-    //   debugger
-    //   if (active) {
-    //     let newOptions = [];
+    fetch(inputValue, (results) => {
+      if (active) {
+        let newOptions = [];
 
-    //     if (value) {
-    //       newOptions = [value];
-    //     }
+        if (value) {
+          newOptions = [value];
+        }
 
-    //     if (results) {
-    //       newOptions = [...newOptions, ...results];
-    //     }
+        if (results) {
+          newOptions = [...newOptions, ...results];
+        }
 
-    //     setOptions(newOptions);
-    //   }
-    // }
-    );
+        setOptions(newOptions);
+      }
+    });
 
     return () => {
       active = false;

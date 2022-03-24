@@ -1,6 +1,7 @@
 import React from "react";
 import "./list_show.css";
 import ListShowItem from "./list_show_item";
+import ListName from "./list_name";
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Dialog from '@mui/material/Dialog';
@@ -94,10 +95,20 @@ class ListShow extends React.Component {
                             <div className='list-inner-box'>
                                 <div className='list-info'>
                                     <div className='list-info-left'>
-                                        <h2>{this.state.list.name}</h2>
-                                        <div className='list-description'>
+                                        {/* <h2>{this.state.list.name}</h2> */}
+                                        <ListName
+                                            listId={this.state.list.id}
+                                            listOwnerId={this.state.list.ownerId}
+                                            currentUserId={this.props.currentUserId}
+                                            allLists={this.props.allLists}
+                                            listName={this.state.list.name}
+                                            listDescription={this.state.list.description}
+                                            updateName={this.props.updateName}
+                                            updateDescription={this.props.updateDescription}
+                                        />
+                                        {/* <div className='list-description'>
                                             {this.state.list.description}
-                                        </div>
+                                        </div> */}
                                         <div className='list-owner'>
                                             {(this.state.list.owner && this.state.list.owner.username) ? `by ${this.state.list.owner.username}` : ""
                                             }
@@ -115,10 +126,10 @@ class ListShow extends React.Component {
                                     </div>
                                 </div>
                                 <div className="list-items">
-                                    {this.state.list.bookItems.map(book => (
+                                    {this.state.list.bookItems.map((book, i) => (
                                         <ListShowItem
                                             book={book}
-                                            key={book._id}
+                                            key={i}
                                             listId={this.state.id}
                                             listOwnerId={this.state.list.ownerId}
                                             currentUserId={this.props.currentUserId}

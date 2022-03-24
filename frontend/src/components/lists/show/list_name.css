@@ -1,0 +1,45 @@
+.list-name-input, .following-list-name-input {
+  border: 0;
+  background-color: transparent;
+  color: inherit;
+  font-size: 28px;
+  font-weight: 600;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  min-width: 1em;
+  width: auto;
+}
+
+.list-name-input:hover {
+  cursor: pointer;
+}
+
+.list-name-input input[type="text"] {
+  width: 100%;
+}
+
+.list-name-input:focus {
+  border: 2px black;
+  outline-style: dashed;
+  outline-width: 3px;
+  /* background-color: yellow; */
+}
+
+.list-description-input, .following-list-description-input {
+  border: 0;
+  background-color: transparent;
+  color: inherit;
+  font-size: 20px;
+  font-weight: 500;
+  width: -webkit-fill-available;
+}
+
+.list-description-input:hover {
+  cursor: pointer;
+}
+
+.list-description-input:focus {
+  border: 2px black;
+  outline-style: dashed;
+  outline-width: 3px;
+}
