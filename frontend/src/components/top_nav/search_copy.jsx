@@ -6,15 +6,13 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import throttle from "lodash/throttle";
 import debounce from "lodash/debounce";
 import { fetchBooksUsersLists } from "../../util/search_util";
 import { withRouter } from "react-router-dom";
-import { withStyles } from "@material-ui/core/styles";
 
 function SearchBar2({ history }) {
   const [value, setValue] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState("Harry Potter");
+  const [inputValue, setInputValue] = React.useState("");
   const [options, setOptions] = React.useState([]);
 
   const fetch = React.useMemo(
@@ -54,7 +52,6 @@ function SearchBar2({ history }) {
       return undefined;
     }
 
-    // fetch(inputValue);
     fetch(inputValue, (results) => {
       if (active) {
         let newOptions = [];
@@ -98,7 +95,7 @@ function SearchBar2({ history }) {
       id="top-search"
       sx={{ width: 300 }}
       getOptionLabel={(option) => {
-        return typeof option.id === "string" ? option.id : null;
+        return typeof option.id === "string" ? (option.volumeInfo ? option.volumeInfo.title : option.username) : '';
       }}
       filterOptions={(x) => x}
       options={options}
@@ -107,7 +104,6 @@ function SearchBar2({ history }) {
       filterSelectedOptions
       value={value}
       onChange={(event, newValue) => {
-        // debugger
         if (newValue.username) {
           history.push({
             pathname: `/users/${newValue.id}`,
@@ -117,13 +113,13 @@ function SearchBar2({ history }) {
             pathname: `/items/${newValue.id}`,
           });
         }
-        setValue(newValue);
+        setValue(null);
+        setInputValue("");
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
       }}
       renderInput={(params) => {
-        // debugger
         return (
           <TextField
             {...params}

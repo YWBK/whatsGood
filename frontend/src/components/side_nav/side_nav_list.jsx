@@ -9,6 +9,7 @@ import { withRouter } from "react-router-dom";
 function SideNavList({ history, formType, list, currentUserId, addList }) {
   const handleClick = (id, type, e) => {
     e.preventDefault();
+    if (history.location.pathname === `/lists/${id}`) return null;
     switch (type) {
       case "list":
         history.push({
