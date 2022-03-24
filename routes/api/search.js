@@ -28,12 +28,26 @@ router.post("/book", (req, res, next) =>{
 router.get("/books_users_lists", async (req, res, next) => {
   const searchParams = !req.query ?  res.send('searchString is blank') : req.query.searchString.split(" ").join("+");
   const searchKeyWords = req.query.searchString.toLowerCase()
-  // debugger
+  
+  const randomKey = Math.floor(Math.random() * 5)
+  let googleKey = keys.googleApiKey
+  
+  if (randomKey === 0) {
+    googleKey = keys.googleApiKey;
+  } else if (randomKey === 1){
+    googleKey = keys.googleApiKey_1;
+  } else if (randomKey === 2) {
+    googleKey = keys.googleApiKey_2;
+  } else if (randomKey === 3){
+    googleKey = keys.googleApiKey_3;
+  } else {
+    googleKey = keys.googleApiKey_4;
+  }
 
   try {
     let consolidatedData = {}    
     
-    const googleResponse = await axio.get(`https://www.googleapis.com/books/v1/volumes?q=${searchParams}Type=books&key=${keys.googleApiKey}`)
+    const googleResponse = await axio.get(`https://www.googleapis.com/books/v1/volumes?q=${searchParams}Type=books&key=${googleKey}`)
     consolidatedData.googleData = (googleResponse.data.items)
     
     const users = await User.find()
@@ -75,6 +89,8 @@ router.get("/books_users_lists", async (req, res, next) => {
     res.send(error.message)
   }
 })
+
+
 
 
 module.exports = router
