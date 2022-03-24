@@ -44,8 +44,7 @@ class LoginForm extends React.Component {
             emailOrUsername: this.state.emailOrUsername,
             password: this.state.password
         }
-
-        this.props.login(user);
+        this.props.login(user)
     }
 
     // Render the session errors if there are any

@@ -44,8 +44,12 @@ const addListFollow = (listId, userId) => ({
 });
 
 export const fetchUser = (userId) => (dispatch) => {
+  // debugger;
   return UserApiUtil.fetchUser(userId)
-    .then((user) => dispatch(receiveUser(user)))
+    .then((user) => {
+      // debugger;
+      dispatch(receiveUser(user))
+    })
     .catch((err) => console.log(err));
 };
 
