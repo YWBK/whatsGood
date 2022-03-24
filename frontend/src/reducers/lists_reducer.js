@@ -5,6 +5,12 @@ import {
   ADD_LIST_FOLLOW,
 } from "../actions/user_actions";
 import { RECEIVE_NEW_ITEM, ITEM_REMOVED_FROM_LIST } from "../actions/item_actions";
+import {
+  RECEIVE_CURRENT_USER,
+  RECEIVE_USER_LOGOUT,
+  RECEIVE_USER_SIGN_IN
+} from '../actions/session_actions';
+
 
 const ListsReducer = (
   state = { all: {}, list: {}, new: undefined },
@@ -28,6 +34,7 @@ const ListsReducer = (
       }
       return newState;
     case RECEIVE_USER:
+      debugger
       const combinedLists = [
         ...action.user.data.myLists,
         ...action.user.data.followingLists,
@@ -43,7 +50,7 @@ const ListsReducer = (
         newList.ownerId = list.owner._id ? list.owner._id : list.owner;
         newList.ownerName = list.owner.username ? list.owner.username : null;
         newList.id = list._id;
-
+        debugger
         if (!newState.all[newList.id]) newState.all[newList.id] = newList;
       }
 
@@ -73,6 +80,11 @@ const ListsReducer = (
         action.data.listId
       ].followers.filter((followerId) => followerId !== action.data.userId);
 
+      return newState;
+    case RECEIVE_USER_LOGOUT:
+      newState.all = null;
+      newState.list = null;
+      newState.new = null;
       return newState;
     default:
       return state;

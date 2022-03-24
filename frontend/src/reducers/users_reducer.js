@@ -5,6 +5,11 @@ import {
   ADD_LIST_FOLLOW,
   ADD_USER_FOLLOW,
 } from "../actions/user_actions";
+import {
+  RECEIVE_CURRENT_USER,
+  RECEIVE_USER_LOGOUT,
+  RECEIVE_USER_SIGN_IN
+} from '../actions/session_actions';
 
 const UsersReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
@@ -69,6 +74,8 @@ const UsersReducer = (oldState = {}, action) => {
       newState[action.data.userId].followingLists.push(action.data.listId);
 
       return newState;
+    case RECEIVE_USER_LOGOUT:
+      return null;
     default:
       return oldState;
   }
