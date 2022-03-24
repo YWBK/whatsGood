@@ -51,7 +51,7 @@ function ListItemSearch({ userId, addItem, match }) {
       return undefined;
     }
 
-    fetch({ input: inputValue }, (results) => {
+    fetch(inputValue, (results) => {
       if (active) {
         let newOptions = [];
 

@@ -55,7 +55,7 @@ function SearchBar2({ history }) {
     }
 
     // fetch(inputValue);
-    fetch({ input: inputValue }, (results) => {
+    fetch(inputValue, (results) => {
       if (active) {
         let newOptions = [];
 
