@@ -75,7 +75,7 @@ const UsersReducer = (oldState = {}, action) => {
 
       return newState;
     case RECEIVE_USER_LOGOUT:
-      return null;
+      return {};
     default:
       return oldState;
   }

@@ -9,11 +9,19 @@ import {
 import UserShow from "./user_show";
 
 const mSTP = (state, prevProps) => {
-  debugger
-  if (!state.entities.users)
-  return { currentUserId: state.session.user.id};
+  // debugger
+  // if (!state.entities.users)
+  // return { currentUserId: state.session.user.id};
+
+  if(!!state.entities.users === false){
+    // debugger;
+    return {
+      currentUser: state.session.user,
+      currentUserId: state.session.user._id
+    }
+  }
   
-  debugger
+  // debugger
   return {
     currentUser: state.entities.users[state.session.user.id],
     currentUserId: state.session.user.id,

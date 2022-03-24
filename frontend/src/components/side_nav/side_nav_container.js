@@ -5,6 +5,7 @@ import { fetchUser } from "../../actions/user_actions";
 import { fetchList, addList } from "../../actions/list_actions";
 
 const mSTP = (state) => {
+  // debugger;
   if (!state.session.isAuthenticated)
     return { loggedIn: state.session.isAuthenticated };
   const currentUserId = state.session.user.id;
