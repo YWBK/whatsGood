@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect, withRouter } from 'react-router-dom';
+import { fetchUser } from "../actions/user_actions";
+
 
 // Passed in from parent component or from mapStateToProps
-const Auth = ({ component: Component, path, loggedIn, exact, currentUserId }) => (
+const Auth = ({ component: Component, path, loggedIn, exact, currentUserId, fetchUser }) => (
     <Route path={path} exact={exact} render={(props) => (
         !loggedIn ? (
             <Component {...props} />
@@ -12,6 +14,17 @@ const Auth = ({ component: Component, path, loggedIn, exact, currentUserId }) =>
             <Redirect to={`/users/${currentUserId}`} />
         )
     )} />
+    // <Route path={path} exact={exact} render={(props) => {
+    //     if (!loggedIn) {
+    //         return <Component {...props} />
+    //     } else {
+
+    //         return fetchUser(currentUserId)
+    //             .then(() => {
+    //                 return <Redirect to={`/users/${currentUserId}`} />
+    //             })
+    //     }
+    // }} />
 );
 
 const Protected = ({ component: Component, loggedIn, ...rest }) => (
@@ -40,6 +53,10 @@ const mapStateToProps = state => {
     });
 };
 
-export const AuthRoute = withRouter(connect(mapStateToProps)(Auth));
+const mDTP = dispatch => ({
+    fetchUser: userId => dispatch(fetchUser(userId))
+})
+
+export const AuthRoute = withRouter(connect(mapStateToProps, mDTP)(Auth));
 
 export const ProtectedRoute = withRouter(connect(mapStateToProps)(Protected));

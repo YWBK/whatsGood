@@ -5,10 +5,15 @@ import { fetchUser } from "../../actions/user_actions";
 import { fetchList, addList } from "../../actions/list_actions";
 
 const mSTP = (state) => {
+  // debugger;
   if (!state.session.isAuthenticated)
     return { loggedIn: state.session.isAuthenticated };
   const currentUserId = state.session.user.id;
   const allLists = state.entities.lists.all;
+  // debugger
+  if (!state.entities.users) 
+    return { loggedIn: state.session.isAuthenticated};
+  // debugger
   if (Object.keys(state.entities.users).length < 1)
     return {
       loggedIn: state.session.isAuthenticated,
@@ -17,6 +22,7 @@ const mSTP = (state) => {
 
   // debugger;
   const followingLists = Object.values(allLists).map((list) => {
+    // debugger
     if (state.entities.users[currentUserId].followingLists.includes(list.id)) {
       return {
         id: list.id,
