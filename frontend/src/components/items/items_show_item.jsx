@@ -6,6 +6,8 @@ const ItemsShowItem = (props) => {
   // debugger;
   const item = props.item ? props.item.volumeInfo : null;
   const popScore = props.popScore ? props.popScore : "0%";
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+  const hasAuthors = !!item?.authors;
 
   const itemDisplay = item ? (
     <div className="items-show-item">
@@ -16,11 +18,13 @@ const ItemsShowItem = (props) => {
       <div>
         <p>Author(s): </p>
         <ul>
-          {item.authors.map((author, index) => (
-            <li key={index} className="items-show-item__author">
-              {author}
-            </li>
-          ))}
+          {hasAuthors &&
+            item.authors.map((author, index) => (
+              <li key={index} className="items-show-item__author">
+                {author}
+              </li>
+            ))}
+          {!hasAuthors && <li>anonymous author</li>}
         </ul>
       </div>
       <div>
@@ -43,7 +47,9 @@ const ItemsShowItem = (props) => {
         {/* <Button variant="outlined" size="small">
           Synopsis
         </Button> */}
-        <ItemsShowSynopsis synopsis={item.description} />
+        {item.description && (
+          <ItemsShowSynopsis synopsis={item.description ?? ""} />
+        )}
       </div>
     </div>
   ) : (
