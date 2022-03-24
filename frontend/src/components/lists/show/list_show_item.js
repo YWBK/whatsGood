@@ -16,6 +16,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import './list_show_item.css';
 
 class ListShowItem extends React.Component {
+    // https://stackoverflow.com/questions/53949393/cant-perform-a-react-state-update-on-an-unmounted-component
+    _isMounted = false;
 
     constructor() {
         super();
@@ -23,10 +25,17 @@ class ListShowItem extends React.Component {
         this.onDelete = this.onDelete.bind(this);
     }
 
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+
     componentDidMount() {
+        this._isMounted = true;
         const { volumeId } = this.props.book;
         fetchSingleBook(volumeId).then(res => {
-            this.setState({ book: res.data });
+            if (this._isMounted) {
+                this.setState({ book: res.data });
+            }
         });
     }
 
@@ -71,7 +80,7 @@ export default ListShowItem;
 
 function AlignItemsList(props) {
     const getImgUrl = () => {
-        return props.book.imageLinks?.thumbnail ? props.book.imageLinks.thumbnail : "/no_img.jpeg";
+        return props.book.imageLinks?.thumbnail ? props.book.imageLinks.thumbnail : "/no_image.jpeg";
     }
     const getAuthor = () => {
         return props.book.authors ? `by ${props.book.authors.map(author => `${author} `)}` : "by anonymous author";
