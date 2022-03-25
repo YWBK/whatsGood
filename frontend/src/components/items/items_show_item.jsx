@@ -39,7 +39,7 @@ const ItemsShowItem = (props) => {
       </div>
       <div>
         <p className="items-show-item__pct">
-          <b>{popScore}</b> of the users you follow have this book in their
+          <b>{popScore}%</b> of the users you follow have this book in their
           lists.
         </p>
       </div>
