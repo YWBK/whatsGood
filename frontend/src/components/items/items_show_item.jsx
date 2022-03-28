@@ -5,7 +5,7 @@ import ItemsShowSynopsis from "./items_show_synopsis";
 const ItemsShowItem = (props) => {
   // debugger;
   const item = props.item ? props.item.volumeInfo : null;
-  const popScore = props.popScore ? props.popScore : "0%";
+  const popScore = props.popScore ? props.popScore : "0";
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
   const hasAuthors = !!item?.authors;
 
