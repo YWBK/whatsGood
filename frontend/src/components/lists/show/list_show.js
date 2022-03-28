@@ -128,21 +128,21 @@ class ListShow extends React.Component {
                                 <div className="list-items">
                                     {this.state.list.bookItems.map((book, i) => (
                                         <ListShowItem
-                                            book={book}
-                                            key={i}
-                                            listId={this.state.id}
-                                            listOwnerId={this.state.list.ownerId}
-                                            currentUserId={this.props.currentUserId}
-                                            removeBookFromList={
-                                                () => {
-                                                    this.props.removeItemFromList(
-                                                        this.state.list.ownerId,
-                                                        book._id,
-                                                        this.props.match.params.listId
-                                                    );
-                                                    this.setState({ snackOpen: true });
-                                                }
-                                            } />
+                                        book={book}
+                                        key={book._id ? book._id : book} // results in a warning that keys are not unique ?
+                                        listId={this.state.id}
+                                        listOwnerId={this.state.list.ownerId}
+                                        currentUserId={this.props.currentUserId}
+                                        removeBookFromList={
+                                            () => {
+                                                this.props.removeItemFromList(
+                                                    this.state.list.ownerId,
+                                                    book._id,
+                                                    this.props.match.params.listId
+                                                );
+                                                this.setState({ snackOpen: true });
+                                            }
+                                        } />
                                     ))}
                                 </div>
                                 {
