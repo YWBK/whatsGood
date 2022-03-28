@@ -34,7 +34,8 @@ const ItemsShow = (props) => {
     });
     const currentUserId = store.getState().session.user.id;
     popularScore(currentUserId, props.match.params.itemId).then((score) => {
-      setPopScore(score.data);
+      // debugger;
+      setPopScore(parseInt(score.data));
     });
   }, [myLists, props.match.params.itemId]);
 

@@ -2,30 +2,26 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import InputAdornment from '@mui/material/InputAdornment';
-import SearchIcon from "@mui/icons-material/Search";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
-import throttle from 'lodash/throttle';
+import debounce from 'lodash/debounce';
 import { fetchBooks } from '../../../util/search_util';
 import { withRouter } from 'react-router-dom';
 
 function ListItemSearch({ userId, addItem, match }) {
   const [value, setValue] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState('Harry Potter');
+  const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState([]);
 
-  const styles = theme => ({
-    multilineColor: {
-      color: 'white'
-    }
-  });
+  // const styles = theme => ({
+  //   multilineColor: {
+  //     color: 'white'
+  //   }
+  // });
 
   const fetch = React.useMemo(
     () =>
-      throttle((request) => {
+      debounce((request) => {
         fetchBooks(request)
           .then(json => {
             return setOptions(Object
@@ -43,7 +39,6 @@ function ListItemSearch({ userId, addItem, match }) {
   );
 
   React.useEffect(() => {
-    // debugger
     let active = true;
 
     if (inputValue === '') {
@@ -90,18 +85,13 @@ function ListItemSearch({ userId, addItem, match }) {
     return authorsResult;
   } 
 
- const handleSelect = () => {
-   debugger
- }
-
   return (
     <Autocomplete
       id="top-search"
       sx={{ width: 300 }}
       getOptionLabel={(option) => {
-        // will need to refactor this code once itemShow is ready
         return (
-          typeof option.volumeInfo.title === 'string' ? option.id : null
+          typeof option.id === 'string' ? option.volumeInfo.title : ''
         )
       }
       }
@@ -112,10 +102,12 @@ function ListItemSearch({ userId, addItem, match }) {
       filterSelectedOptions
       value={value}
       onChange={(event, newValue) => {
-        const volumeId = newValue.id;
-        const listId = match.params.listId;
-        const ownerId = userId;
-        addItem(volumeId, listId, ownerId);
+        if (newValue) {
+          const volumeId = newValue.id;
+          const listId = match.params.listId;
+          const ownerId = userId;
+          addItem(volumeId, listId, ownerId);
+        }
         setValue(newValue);
       }}
       onInputChange={(event, newInputValue) => {
