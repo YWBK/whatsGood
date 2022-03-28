@@ -12,6 +12,7 @@ import { followList } from "./util/user_api_util"
 import { popularScore } from "./util/book_api_util"
 import { removeBookFromList } from "./util/book_api_util"
 import { seeds } from "./util/seed_apil_util"
+import {fetchBooksUsersLists, fetchSingleBook} from "./util/search_util"
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;
@@ -38,8 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.axios = axios
-window.searchbar = fetchBooks
+window.fetchBooks = fetchBooks
 window.followList = followList
 window.popularScore = popularScore
 window.removeBookFromList = removeBookFromList
 window.seedUsers = seeds
+window.fetchBooksUsersLists = fetchBooksUsersLists
+window.fetchSingleBook = fetchSingleBook
