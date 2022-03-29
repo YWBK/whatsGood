@@ -63,6 +63,7 @@
 
 .list-owner {
   color: darkgray;
+  cursor: pointer;
 }
 
 .list-items {
