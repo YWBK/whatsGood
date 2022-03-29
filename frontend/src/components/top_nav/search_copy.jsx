@@ -40,7 +40,7 @@ function SearchBar2({ history }) {
               })
           );
         });
-      }, 200),
+      }, 300),
     []
   );
 
@@ -140,6 +140,7 @@ function SearchBar2({ history }) {
       }
       }
       renderOption={(props, option) => {
+        if (!option) return;
         return (
           <li {...props} key={option?.id}>
             <Grid container alignItems="center">

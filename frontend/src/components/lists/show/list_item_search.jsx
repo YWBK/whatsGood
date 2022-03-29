@@ -34,7 +34,7 @@ function ListItemSearch({ userId, addItem, match }) {
               })
             )
           });
-      }, 200),
+      }, 300),
     [],
   );
 
@@ -121,6 +121,7 @@ function ListItemSearch({ userId, addItem, match }) {
           fullWidth />
       )}
       renderOption={(props, option) => {
+        if (!option) return;
         return (
           <li {...props} key={option.id} >
             <Grid container alignItems="center" >
