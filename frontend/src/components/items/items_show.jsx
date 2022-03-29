@@ -27,6 +27,7 @@ const ItemsShow = (props) => {
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [myLists, setMyLists] = useState([]);
   const [selectedList, setSelectedList] = useState("");
+  const [snackBarMessage, setSnackBarMessage] = useState("");
 
   useEffect(() => {
     fetchSingleBook(props.match.params.itemId).then((book) => {
@@ -82,7 +83,8 @@ const ItemsShow = (props) => {
       )
     );
     handleClose();
-    // listName = state.entities.lists.all[selectedList].name;
+    const listName = state.entities.lists.all[selectedList].name;
+    setSnackBarMessage(listName);
     setSnackBarOpen(true);
   };
 
@@ -132,8 +134,8 @@ const ItemsShow = (props) => {
         open={snackBarOpen}
         autoHideDuration={6000}
         onClose={handleSnackBarClose}
-        message="Successfully added to your list"
-        // message={`Successfully added to your ${listName}`}
+        // message="Successfully added to your list"
+        message={`Successfully added to your ${snackBarMessage}`}
       />
     </div>
   );
