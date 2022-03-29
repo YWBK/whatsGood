@@ -42,15 +42,13 @@ const ItemsShow = (props) => {
   const handleClickOpen = () => {
     // get global state from store.
     const state = store.getState();
-    const myListIds = state.session.user.myLists;
-    if (myLists.length === 0 && myListIds.length > 0) {
-      const lists = [];
-      myListIds.forEach((id) => {
-        if (id in state.entities.lists.all) {
-          lists.push(state.entities.lists.all[id]);
-        }
-      });
-      setMyLists(lists);
+    const currentUserId = state.session.user.id;
+    const allLists = Object.values(state.entities.lists.all);
+    const filteredLists = allLists.filter(
+      (list) => list.ownerId === currentUserId
+    );
+    if (myLists.length === 0 && filteredLists.length > 0) {
+      setMyLists(filteredLists);
     }
     setOpen(true);
   };
@@ -84,6 +82,7 @@ const ItemsShow = (props) => {
       )
     );
     handleClose();
+    // listName = state.entities.lists.all[selectedList].name;
     setSnackBarOpen(true);
   };
 
@@ -116,7 +115,9 @@ const ItemsShow = (props) => {
                 input={<OutlinedInput label="List" />}
               >
                 {myLists.map((list) => (
-                  <MenuItem value={list.id}>{list.name}</MenuItem>
+                  <MenuItem key={list.id} value={list.id}>
+                    {list.name}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -132,6 +133,7 @@ const ItemsShow = (props) => {
         autoHideDuration={6000}
         onClose={handleSnackBarClose}
         message="Successfully added to your list"
+        // message={`Successfully added to your ${listName}`}
       />
     </div>
   );
