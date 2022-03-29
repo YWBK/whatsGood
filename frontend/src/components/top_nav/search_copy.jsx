@@ -95,7 +95,7 @@ function SearchBar2({ history }) {
       id="top-search"
       sx={{ width: 300 }}
       getOptionLabel={(option) => {
-        return typeof option.id === "string" ? (option.volumeInfo ? option.volumeInfo.title : option.username) : '';
+        return typeof option?.id === "string" ? (option.volumeInfo ? option.volumeInfo.title : option.username) : '';
       }}
       filterOptions={(x) => x}
       options={options}
@@ -141,21 +141,21 @@ function SearchBar2({ history }) {
       }
       renderOption={(props, option) => {
         return (
-          <li {...props} key={option.id}>
+          <li {...props} key={option?.id}>
             <Grid container alignItems="center">
               <Grid item>
                 <Box sx={{ color: "text.primary", mr: 2 }} />
               </Grid>
               <Grid item xs>
                 <Typography variant="body3" color="text.primary">
-                  {option.volumeInfo
+                  {option?.volumeInfo
                     ? option.volumeInfo.title
-                    : option.username
+                    : option?.username
                     ? option.username
                     : null}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {option.volumeInfo
+                  {option?.volumeInfo
                     ? authors(option.volumeInfo.authors)
                     : null}
                 </Typography>
