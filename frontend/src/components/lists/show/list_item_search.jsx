@@ -108,7 +108,7 @@ function ListItemSearch({ userId, addItem, match }) {
           const ownerId = userId;
           addItem(volumeId, listId, ownerId);
         }
-        setValue(newValue);
+        setValue('');
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
