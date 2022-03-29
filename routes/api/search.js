@@ -6,22 +6,33 @@ const User = require("../../models/User");
 const List = require("../../models/List");
 
 router.post("/", async (req, res) => {
-  const randomKey = Math.floor(Math.random() * 5)
+ const randomKey = Math.floor(Math.random() * 10)
   let googleKey = keys.googleApiKey
 
   if (randomKey === 0) {
     googleKey = keys.googleApiKey;
-  } else if (randomKey === 1) {
+  } else if (randomKey === 1){
     googleKey = keys.googleApiKey_1;
   } else if (randomKey === 2) {
     googleKey = keys.googleApiKey_2;
-  } else if (randomKey === 3) {
+  } else if (randomKey === 3){
     googleKey = keys.googleApiKey_3;
-  } else {
+  } else if (randomKey === 4){
     googleKey = keys.googleApiKey_4;
+  } else if (randomKey === 5) {
+    googleKey = keys.googleApiKey_5;
+  } else if (randomKey === 6){
+    googleKey = keys.googleApiKey_6;
+  } else if (randomKey === 7){
+    googleKey = keys.googleApiKey_7;
+  } else if (randomKey === 8) {
+    googleKey = keys.googleApiKey_8;    
+  } else {
+    googleKey = keys.googleApiKey_9;
   }
-  const searchParams = !req.body ? res.send('searchString is blank') : req.body.searchString.split(" ").join("+");
-
+  
+  const searchParams = !req.body ?  res.send('searchString is blank') : req.body.searchString.split(" ").join("+");
+  
   try {
     const response = await axio.get(`https://www.googleapis.com/books/v1/volumes?q=${searchParams}Type=books&key=${googleKey}`)
     res.send(response.data.items)
@@ -30,20 +41,30 @@ router.post("/", async (req, res) => {
   }
 })
 
-router.post("/book", async (req, res) => {
-  const randomKey = Math.floor(Math.random() * 5)
+router.post("/book", async (req, res) =>{
+ const randomKey = Math.floor(Math.random() * 10)
   let googleKey = keys.googleApiKey
 
   if (randomKey === 0) {
     googleKey = keys.googleApiKey;
-  } else if (randomKey === 1) {
+  } else if (randomKey === 1){
     googleKey = keys.googleApiKey_1;
   } else if (randomKey === 2) {
     googleKey = keys.googleApiKey_2;
-  } else if (randomKey === 3) {
+  } else if (randomKey === 3){
     googleKey = keys.googleApiKey_3;
-  } else {
+  } else if (randomKey === 4){
     googleKey = keys.googleApiKey_4;
+  } else if (randomKey === 5) {
+    googleKey = keys.googleApiKey_5;
+  } else if (randomKey === 6){
+    googleKey = keys.googleApiKey_6;
+  } else if (randomKey === 7){
+    googleKey = keys.googleApiKey_7;
+  } else if (randomKey === 8) {
+    googleKey = keys.googleApiKey_8;    
+  } else {
+    googleKey = keys.googleApiKey_9;
   }
 
   try {
@@ -59,8 +80,8 @@ router.post("/book", async (req, res) => {
 router.get("/books_users_lists", async (req, res, next) => {
   const searchParams = !req.query ? res.send('searchString is blank') : req.query.searchString.split(" ").join("+");
   const searchKeyWords = req.query.searchString.toLowerCase()
-
-  const randomKey = Math.floor(Math.random() * 5)
+  
+  const randomKey = Math.floor(Math.random() * 10)
   let googleKey = keys.googleApiKey
 
   if (randomKey === 0) {
@@ -71,8 +92,18 @@ router.get("/books_users_lists", async (req, res, next) => {
     googleKey = keys.googleApiKey_2;
   } else if (randomKey === 3) {
     googleKey = keys.googleApiKey_3;
-  } else {
+  } else if (randomKey === 4){
     googleKey = keys.googleApiKey_4;
+  } else if (randomKey === 5) {
+    googleKey = keys.googleApiKey_5;
+  } else if (randomKey === 6){
+    googleKey = keys.googleApiKey_6;
+  } else if (randomKey === 7){
+    googleKey = keys.googleApiKey_7;
+  } else if (randomKey === 8) {
+    googleKey = keys.googleApiKey_8;    
+  } else {
+    googleKey = keys.googleApiKey_9;
   }
 
   try {
