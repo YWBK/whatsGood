@@ -87,6 +87,7 @@ class LoginForm extends React.Component {
                     ? true
                     : false
                 }
+                sx={{ width: 300 }}
               />
               <TextField
                 type="password"
@@ -100,6 +101,7 @@ class LoginForm extends React.Component {
                 variant="outlined"
                 size="small"
                 error={this.state.errors.password ? true : false}
+                sx={{ width: 300 }}
               />
               <Button
                 type="submit"
