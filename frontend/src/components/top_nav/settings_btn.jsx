@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
@@ -11,6 +11,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 // import { logoutUser } from "../../actions/session_actions";
 import AboutUs from "../about_us";
+
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -56,10 +57,11 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-export default function SettingsBtn(props) {
+function SettingsBtn(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
+    // debugger
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
@@ -94,20 +96,32 @@ export default function SettingsBtn(props) {
         onClose={handleClose}
         sx={{ zIndex: 10001 }}
       >
-        <MenuItem onClick={handleClose} disableRipple>
-          <PersonIcon />
-          <Link to={`/users/${props.currUserId}`}>My Profile</Link>
+        <MenuItem 
+          onClick={() => {
+            handleClose();          
+            props.history.push({
+              pathname: `/users/${props.currUserId}`
+            });
+          }}
+          disableRipple>
+            <PersonIcon />
+            My Profile
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          <SettingsIcon />
+        <div onClick={handleClose}>
           <AboutUs />
-        </MenuItem>
+        </div>
         <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem 
+          onClick={e => { 
+            handleClose();
+            logoutUser(e)}} 
+          disableRipple>
           <LogoutIcon />
-          <div onClick={logoutUser}>Logout</div>
+          <div>Logout</div>
         </MenuItem>
       </StyledMenu>
     </div>
   );
 }
+
+export default withRouter(SettingsBtn);

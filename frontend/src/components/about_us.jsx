@@ -1,4 +1,7 @@
 import * as React from "react";
+import MenuItem from "@mui/material/MenuItem";
+import SettingsIcon from "@mui/icons-material/Settings";
+
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import "./about_us.css";
@@ -17,15 +20,23 @@ const style = {
 
 export default function AboutUs() {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = (e) => {
+  const handleOpen = e => {
     e.stopPropagation();
     setOpen(true);
   };
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false)
+    // console.log(open);
+  };
 
   return (
     <div>
-      <div onClick={(e) => handleOpen(e)}>About Us</div>
+      <MenuItem 
+        onClick={e => handleOpen(e)}>
+          <SettingsIcon/>
+          About Us
+      </MenuItem>
+
       <Modal
         open={open}
         onClose={handleClose}
