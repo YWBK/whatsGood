@@ -36,7 +36,6 @@ const ListsReducer = (
       }
       return newState;
     case RECEIVE_USER:
-      // debugger
       const combinedLists = [
         ...action.user.data.myLists,
         ...action.user.data.followingLists,
@@ -50,7 +49,7 @@ const ListsReducer = (
         newList.followers = list.followers.map((user) => user._id);
         newList.name = list.name;
         newList.ownerId = list.owner._id ? list.owner._id : list.owner;
-        newList.ownerName = list.owner.username ? list.owner.username : null;
+        newList.ownerName = list.owner.username ? list.owner.username : action.user.data.username;
         newList.id = list._id;
         // debugger;
         if (!newState.all[newList.id]) newState.all[newList.id] = newList;
