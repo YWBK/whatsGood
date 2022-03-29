@@ -124,6 +124,7 @@ router.get('/popular_score', async(req, res) =>{
   })
 
   //find all users added this book to their lists
+  if (book === null) return res.json('0%');
   const bookInLists = JSON.parse(JSON.stringify(book)).inLists
   const allUsersAddedThisBook = []
 
