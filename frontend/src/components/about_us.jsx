@@ -150,7 +150,7 @@ export default function AboutUs() {
                 className="social-img"
               />
             </a>
-            <a href="https://www.linkedin.com/in/steven-wu-29814136/" target="_blank">
+            <a href="https://www.linkedin.com/in/swusteven/" target="_blank">
               <img
                 src="/linkedin_icon.svg"
                 alt="steven linkedin"
